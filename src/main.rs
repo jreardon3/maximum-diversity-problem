@@ -9,15 +9,61 @@ use solver_local_search::{LocalSearchConfig, LocalSearchMethod};
 use solver_grasp::GraspConfig;
 use solver_population::GeneticConfig;
 
+// TODO (Performance Analysis Enhancements)
+// Add more metrics beyond just diversity score and time:
+    // Solution quality gap: Compare heuristic solutions to the optimal/best known solution
+    // Time-to-target: How long to reach X% of best solution
+    // Convergence plots: Show solution quality over time/iterations
+    // Memory usage: Track RAM consumption
+    // Scalability analysis: Plot time/quality vs. instance size
+    // Success rate: Run multiple times with different seeds, report % of runs finding optimal
+// Statistical rigor:
+    // Run each solver multiple times (10-30 runs) with different random seeds
+    // Report mean, median, std dev, min, max
+    // Add confidence intervals
+
+// TODO!! (Add MaxCut)
+// It's also NP-hard and has similar algorithmic approaches
+// You can use the same heuristics (GRASP, Tabu, GA, Local Search)
+// Gurobi can solve MaxCut via QUBO or ILP formulation
+// Shows your framework generalizes beyond MDP
+// ./your_program --problem maxcut --solver grasp --input graph.txt
+
+// TODO (Instance Analysis) - Characterize why certain solvers work better on certain instances:
+// Instance features: Size, density, structure
+// Clustering analysis: Group similar instances
+// Performance profiles: Which solver is best on which type?
+// Hardness prediction: Can you predict which instances will be hard?
+
+// TODO!! (Visualization & Reporting)
+// Performance profiles (like in optimization papers)
+// Scatter plots: Quality vs Time for each solver
+// Heatmaps: Solver performance across instance types
+// Pareto frontier: Time-quality tradeoffs
+// Solution visualization: Show selected subset graphically
+
+// TODO!! (Practical Recommendations Section)
+// End with guidance like:
+// "Use Gurobi for instances n < 50 when optimality is critical"
+// "Use GRASP for instances 50 < n < 500 for best quality/time tradeoff"
+// "Use First Improvement LS for real-time applications (sub-millisecond)")
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Test on multiple instances
     let test_files = vec![
+        // TODO!! - run through all files in folder
+        // TODO!! - add a quality or time cap to bigger files 
+        // Add time limits: Kill Gurobi after 5 minutes, report best solution found
+        // Use MIP gap tolerance: Tell Gurobi to stop at 1% optimality gap
         "examples_from_mdp/GKD-a/GKD-a_9_n10_m3.txt",
-        "examples_from_mdp/MDG-c/MDG-c_2_n3000_m300.txt",
+        "examples_from_mdp/GKD-b/GKD-b_6_n25_m7.txt",
+        "examples_from_mdp/GKD-b/GKD-b_15_n50_m5.txt",
+        "examples_from_mdp/SOM-a/SOM-a_2_n25_m2.txt",
+        "examples_from_mdp/SOM-a/SOM-a_15_n50_m5.txt",
     ];
 
     for path in test_files {
-        println!("\n{'=':<60}", "");
+        // println!("\n{'=':<60}", "");
         println!("Testing: {}", path);
         println!("{:=<60}\n", "");
         
