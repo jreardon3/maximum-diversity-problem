@@ -20,6 +20,10 @@ impl Default for GraspConfig {
 pub fn solve_grasp(data: &MdpData, config: &GraspConfig) -> (Vec<usize>, f64) {
     let mut best_solution = Vec::new();
     let mut best_diversity = f64::NEG_INFINITY;
+    
+    // Early stopping: track iterations without improvement
+    let mut no_improvement_iters = 0;
+    let early_stop_threshold = 20; // Stop if no improvement for 20 iterations
 
     for _iter in 0..config.iterations {
         // Construction phase: greedy randomized
@@ -31,6 +35,16 @@ pub fn solve_grasp(data: &MdpData, config: &GraspConfig) -> (Vec<usize>, f64) {
         if diversity > best_diversity {
             best_diversity = diversity;
             best_solution = improved_solution;
+            no_improvement_iters = 0; // Reset counter on improvement
+        } else {
+            no_improvement_iters += 1;
+            
+            // Early stopping: if no improvement for a while, exit
+            if no_improvement_iters >= early_stop_threshold {
+                // Uncomment to see when early stopping triggers:
+                // println!("    GRASP converged early at iteration {}/{}", iter + 1, config.iterations);
+                break;
+            }
         }
     }
 

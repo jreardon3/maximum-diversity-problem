@@ -1,7 +1,5 @@
 use crate::parser::MdpData;
 use rand::seq::SliceRandom;
-use rand::Rng;
-use std::collections::HashSet;
 
 pub struct LocalSearchConfig {
     pub method: LocalSearchMethod,
@@ -124,7 +122,6 @@ fn tabu_search(data: &MdpData, max_iters: usize, tabu_tenure: usize) -> (Vec<usi
     for iter in 0..max_iters {
         let mut best_swap = None;
         let mut best_swap_gain = f64::NEG_INFINITY;
-        let mut best_is_tabu = false;
         
         // Find best non-tabu move (or best tabu move if it's better than best known)
         for i in 0..current_selected.len() {
@@ -145,7 +142,6 @@ fn tabu_search(data: &MdpData, max_iters: usize, tabu_tenure: usize) -> (Vec<usi
                     if gain > best_swap_gain {
                         best_swap_gain = gain;
                         best_swap = Some((i, j, elem_in, elem_out));
-                        best_is_tabu = is_tabu;
                     }
                 }
             }
