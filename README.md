@@ -44,3 +44,24 @@ Paste below lines:
 > *cargo add serde_json*
 
 > *cargo add chrono*
+
+---------------------------------------------------------------------
+
+How it works:
+
+1. Run your Rust program once - it saves results to results_YYYYMMDD_HHMMSS.json
+2. Python script auto-generates - creates visualize_results.py
+3. Generate all plots - run python visualize_results.py results_YYYYMMDD_HHMMSS.json
+
+Visualizations:
+-> Scatter plot: Quality vs Time
+-> Heatmap: Performance by category
+-> Pareto frontier: Tradeoffs
+-> Box plots: Distribution analysis
+-> Scaling: How solvers grow with problem size
+-> Win rate: Which solver wins most
+
+For presentation we can:
+1. Load old results without re-running: python visualize_results.py old_results.json
+2. Compare multiple runs side-by-side
+3. JSON is human-readable for quick grep/inspection
