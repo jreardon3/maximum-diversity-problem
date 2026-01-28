@@ -36,3 +36,11 @@ Paste below lines:
 
 > *cargo run* \
 (may have to run from /minimum_diversity_problem folder so program can capture input files)
+
+7) May have to run these commands to implement the Python / visualization section
+
+> *cargo add serde --features derive*
+
+> *cargo add serde_json*
+
+> *cargo add chrono*
