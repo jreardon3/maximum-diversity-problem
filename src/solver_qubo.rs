@@ -9,7 +9,7 @@ pub fn solve_with_qubo(
 ) -> grb::Result<(Vec<usize>, f64)> {
     let mut model = Model::new("MDP_QUBO")?;
     let n = data.n;
-    let k = data.k as f64;
+    let k = data.k;
 
     // Set Gurobi parameters for time limit and gap tolerance
     model.set_param(param::TimeLimit, time_limit)?;
@@ -20,6 +20,14 @@ pub fn solve_with_qubo(
     let x: Vec<Var> = (0..n)
         .map(|i| add_binvar!(model, name: &format!("x{}", i)))
         .collect::<grb::Result<_>>()?;
+
+    // ---------------- Hard Cardinality Constraint ----------------
+    // OPTION 1: Use this for CONSTRAINED version (recommended)
+    model.add_constr(
+        &format!("cardinality"),
+        c!(x.iter().grb_sum() == k as i32)
+    )?;
+
 
     // ---------------- Objective ----------------
     let mut obj = QuadExpr::new();
@@ -34,28 +42,48 @@ pub fn solve_with_qubo(
         }
     }
 
-    // Penalty term: -λ (sum_i x_i - k)^2
-    // Expanded explicitly for binary variables
+    // OPTION 2: If you want UNCONSTRAINED (penalty-based), comment out the
+    // constraint above and uncomment this penalty term:
+    
+    // let k_f64 = k as f64;
+    // for i in 0..n {
+    //     obj.add_term(-penalty_param, x[i]);
+    // }
+    // for i in 0..n {
+    //     for j in (i + 1)..n {
+    //         obj.add_qterm(-2.0 * penalty_param, x[i], x[j]);
+    //     }
+    // }
+    // for i in 0..n {
+    //     obj.add_term(2.0 * k_f64 * penalty_param, x[i]);
+    // }
+    // obj.add_constant(-penalty_param * k_f64 * k_f64);
 
-    // -λ * x_i^2 = -λ * x_i
-    for i in 0..n {
-        obj.add_term(-penalty_param, x[i]);
-    }
 
-    // -λ * 2 x_i x_j
-    for i in 0..n {
-        for j in (i + 1)..n {
-            obj.add_qterm(-2.0 * penalty_param, x[i], x[j]);
-        }
-    }
+    // // Penalty term: -λ (sum_i x_i - k)^2
+    // // Expanded explicitly for binary variables
 
-    // -λ * (-2k x_i) = +2kλ x_i
-    for i in 0..n {
-        obj.add_term(2.0 * k * penalty_param, x[i]);
-    }
+    // // -λ * x_i^2 = -λ * x_i
+    // for i in 0..n {
+    //     // This penalty term tries to encourage exactly k selections
+    //     // But it's "soft" - the solver can violate it if beneficial
+    //     obj.add_term(-penalty_param, x[i]);  // Penalty for selecting
+    // }
 
-    // -λ * k^2
-    obj.add_constant(-penalty_param * k * k);
+    // // -λ * 2 x_i x_j
+    // for i in 0..n {
+    //     for j in (i + 1)..n {
+    //         obj.add_qterm(-2.0 * penalty_param, x[i], x[j]);
+    //     }
+    // }
+
+    // // -λ * (-2k x_i) = +2kλ x_i
+    // for i in 0..n {
+    //     obj.add_term(2.0 * k * penalty_param, x[i]);
+    // }
+
+    // // -λ * k^2
+    // obj.add_constant(-penalty_param * k * k);
 
     // ---------------- Solve ----------------
     model.set_objective(obj, Maximize)?;
@@ -79,6 +107,14 @@ pub fn solve_with_qubo(
         }
 
         let actual_diversity = calculate_true_diversity(&selected, data);
+
+                
+        // Verify constraint is satisfied
+        if selected.len() != k {
+            eprintln!("Warning: QUBO selected {} elements, expected {}", selected.len(), k);
+        }
+        
+
         Ok((selected, actual_diversity))
     } else {
         // Return a simple error - use panic! or just return a default empty solution

@@ -1,0 +1,1326 @@
+{
+  "timestamp": "20260129_130806",
+  "category": "SOM",
+  "instances": [
+    {
+      "filename": "SOM-a_10_n25_m7.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 158.0,
+          "time_ms": 56631,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 158.0,
+          "time_ms": 21,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 144.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 158.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 158.0,
+          "time_ms": 73,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 158.0,
+          "time_ms": 54,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_11_n50_m5.txt",
+      "category": "SOM",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 84.0,
+          "time_ms": 178777,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 84.0,
+          "time_ms": 34,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 82.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 80.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 79.0,
+          "time_ms": 100,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 84.0,
+          "time_ms": 89,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_12_n50_m5.txt",
+      "category": "SOM",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 87.0,
+          "time_ms": 180065,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 87.0,
+          "time_ms": 40,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 77.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 81.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 87.0,
+          "time_ms": 94,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 84.0,
+          "time_ms": 87,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_13_n50_m5.txt",
+      "category": "SOM",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 85.0,
+          "time_ms": 96895,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 85.0,
+          "time_ms": 25,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 79.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 85.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 84.0,
+          "time_ms": 101,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 80.0,
+          "time_ms": 89,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_14_n50_m5.txt",
+      "category": "SOM",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 82.0,
+          "time_ms": 165411,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 82.0,
+          "time_ms": 25,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 80.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 76.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 82.0,
+          "time_ms": 104,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 82.0,
+          "time_ms": 91,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_15_n50_m5.txt",
+      "category": "SOM",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 84.0,
+          "time_ms": 121459,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 84.0,
+          "time_ms": 32,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 84.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 84.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 80.0,
+          "time_ms": 98,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 81.0,
+          "time_ms": 84,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_1_n25_m2.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 9.0,
+          "time_ms": 217,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 9.0,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 9.0,
+          "time_ms": 12,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 9.0,
+          "time_ms": 51,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_2_n25_m2.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 9.0,
+          "time_ms": 193,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 9.0,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 9.0,
+          "time_ms": 12,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 9.0,
+          "time_ms": 51,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_3_n25_m2.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 9.0,
+          "time_ms": 190,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 9.0,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 9.0,
+          "time_ms": 12,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 9.0,
+          "time_ms": 52,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_4_n25_m2.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 9.0,
+          "time_ms": 148,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 9.0,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 9.0,
+          "time_ms": 12,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 9.0,
+          "time_ms": 51,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_5_n25_m2.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 9.0,
+          "time_ms": 182,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 9.0,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 9.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 9.0,
+          "time_ms": 12,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 9.0,
+          "time_ms": 51,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_6_n25_m7.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 153.0,
+          "time_ms": 59775,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 153.0,
+          "time_ms": 18,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 147.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 153.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 153.0,
+          "time_ms": 73,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 147.0,
+          "time_ms": 58,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_7_n25_m7.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 150.0,
+          "time_ms": 60592,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 150.0,
+          "time_ms": 16,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 148.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 150.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 150.0,
+          "time_ms": 72,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 150.0,
+          "time_ms": 56,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_8_n25_m7.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 144.0,
+          "time_ms": 59107,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 144.0,
+          "time_ms": 22,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 130.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 138.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 141.0,
+          "time_ms": 73,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 137.0,
+          "time_ms": 62,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-a_9_n25_m7.txt",
+      "category": "SOM",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 147.0,
+          "time_ms": 62489,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 147.0,
+          "time_ms": 18,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 147.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 143.0,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 147.0,
+          "time_ms": 73,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 143.0,
+          "time_ms": 56,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_10_n300_m60.txt",
+      "category": "SOM",
+      "n": 300,
+      "k": 60,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 9689.0,
+          "time_ms": 180232,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 9640.0,
+          "time_ms": 23028,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 9558.0,
+          "time_ms": 2380,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 9559.0,
+          "time_ms": 913,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 9609.0,
+          "time_ms": 21361,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 9579.0,
+          "time_ms": 1376,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_11_n300_m90.txt",
+      "category": "SOM",
+      "n": 300,
+      "k": 90,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 20743.0,
+          "time_ms": 180176,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 20699.0,
+          "time_ms": 48541,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 20716.0,
+          "time_ms": 8109,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 20514.0,
+          "time_ms": 2915,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 20597.0,
+          "time_ms": 40056,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 20482.0,
+          "time_ms": 2823,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_12_n300_m120.txt",
+      "category": "SOM",
+      "n": 300,
+      "k": 120,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 35881.0,
+          "time_ms": 180177,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 35881.0,
+          "time_ms": 146741,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 35768.0,
+          "time_ms": 16616,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 35812.0,
+          "time_ms": 5670,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 35816.0,
+          "time_ms": 67008,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 35881.0,
+          "time_ms": 5677,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_13_n400_m40.txt",
+      "category": "SOM",
+      "n": 400,
+      "k": 40,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 4658.0,
+          "time_ms": 180164,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 4633.0,
+          "time_ms": 16166,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 4567.0,
+          "time_ms": 1139,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 4527.0,
+          "time_ms": 419,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 4542.0,
+          "time_ms": 14779,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 4602.0,
+          "time_ms": 952,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_14_n400_m80.txt",
+      "category": "SOM",
+      "n": 400,
+      "k": 80,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 16956.0,
+          "time_ms": 180168,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 16904.0,
+          "time_ms": 74264,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 16922.0,
+          "time_ms": 9923,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 16711.0,
+          "time_ms": 3373,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 16610.0,
+          "time_ms": 48963,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 16782.0,
+          "time_ms": 4145,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_15_n400_m120.txt",
+      "category": "SOM",
+      "n": 400,
+      "k": 120,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 36317.0,
+          "time_ms": 180179,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 36244.0,
+          "time_ms": 243799,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 36206.0,
+          "time_ms": 30084,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 36001.0,
+          "time_ms": 8511,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 36107.0,
+          "time_ms": 92436,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 36145.0,
+          "time_ms": 8327,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_1_n100_m10.txt",
+      "category": "SOM",
+      "n": 100,
+      "k": 10,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 333.0,
+          "time_ms": 181026,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 333.0,
+          "time_ms": 113,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 322.0,
+          "time_ms": 4,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 297.0,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 323.0,
+          "time_ms": 302,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 316.0,
+          "time_ms": 95,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_2_n100_m20.txt",
+      "category": "SOM",
+      "n": 100,
+      "k": 20,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1195.0,
+          "time_ms": 180593,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 1185.0,
+          "time_ms": 360,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 1195.0,
+          "time_ms": 20,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 1163.0,
+          "time_ms": 9,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 1168.0,
+          "time_ms": 730,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 1175.0,
+          "time_ms": 89,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_3_n100_m30.txt",
+      "category": "SOM",
+      "n": 100,
+      "k": 30,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 2457.0,
+          "time_ms": 181137,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 2457.0,
+          "time_ms": 574,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 2408.0,
+          "time_ms": 58,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 2411.0,
+          "time_ms": 24,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 2390.0,
+          "time_ms": 1291,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 2319.0,
+          "time_ms": 97,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_4_n100_m40.txt",
+      "category": "SOM",
+      "n": 100,
+      "k": 40,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 4142.0,
+          "time_ms": 180775,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 4142.0,
+          "time_ms": 792,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 4131.0,
+          "time_ms": 68,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 4142.0,
+          "time_ms": 37,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 4139.0,
+          "time_ms": 1841,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 4084.0,
+          "time_ms": 130,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_5_n200_m20.txt",
+      "category": "SOM",
+      "n": 200,
+      "k": 20,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1247.0,
+          "time_ms": 93778,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 1239.0,
+          "time_ms": 969,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 1221.0,
+          "time_ms": 55,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 1202.0,
+          "time_ms": 30,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 1211.0,
+          "time_ms": 1602,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 1197.0,
+          "time_ms": 183,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_6_n200_m40.txt",
+      "category": "SOM",
+      "n": 200,
+      "k": 40,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 4450.0,
+          "time_ms": 180316,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 4448.0,
+          "time_ms": 11525,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 4350.0,
+          "time_ms": 788,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 4411.0,
+          "time_ms": 383,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 4368.0,
+          "time_ms": 9409,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 4352.0,
+          "time_ms": 535,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_7_n200_m60.txt",
+      "category": "SOM",
+      "n": 200,
+      "k": 60,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 9437.0,
+          "time_ms": 80687,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 9401.0,
+          "time_ms": 9635,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 9388.0,
+          "time_ms": 1571,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 9413.0,
+          "time_ms": 783,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 9315.0,
+          "time_ms": 12344,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 9327.0,
+          "time_ms": 726,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_8_n200_m80.txt",
+      "category": "SOM",
+      "n": 200,
+      "k": 80,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 16225.0,
+          "time_ms": 180361,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 16219.0,
+          "time_ms": 20118,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 16222.0,
+          "time_ms": 3134,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 16116.0,
+          "time_ms": 1050,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 16159.0,
+          "time_ms": 21129,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 16209.0,
+          "time_ms": 1099,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "SOM-b_9_n300_m30.txt",
+      "category": "SOM",
+      "n": 300,
+      "k": 30,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 2694.0,
+          "time_ms": 40023,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 2691.0,
+          "time_ms": 3755,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 2674.0,
+          "time_ms": 335,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 2637.0,
+          "time_ms": 239,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 2642.0,
+          "time_ms": 7373,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 2623.0,
+          "time_ms": 557,
+          "success": true
+        }
+      ]
+    }
+  ]
+}

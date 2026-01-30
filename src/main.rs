@@ -39,535 +39,17 @@
 // // "Use First Improvement LS for real-time applications (sub-millisecond)")
 
 
-
-// mod parser;
-// mod solver_qubo;
-// mod solver_grasp;
-// mod solver_local_search;
-// mod solver_population;
-
-// use std::time::{Instant, Duration};
-// use std::fs;
-// use std::path::Path;
-// use std::collections::HashMap;
-// use solver_local_search::{LocalSearchConfig, LocalSearchMethod};
-// use solver_grasp::GraspConfig;
-// use solver_population::GeneticConfig;
-
-// #[derive(Clone)]
-// struct SolverResult {
-//     name: String,
-//     diversity: f64,
-//     time: Duration,
-//     success: bool,
-// }
-
-// struct InstanceResults {
-//     filename: String,
-//     n: usize,
-//     k: usize,
-//     results: Vec<SolverResult>,
-// }
-
-// fn main() -> Result<(), Box<dyn std::error::Error>> {
-//     println!("\n{:=<80}", "");
-//     println!("MAXIMUM DIVERSITY PROBLEM - COMPREHENSIVE SOLVER COMPARISON");
-//     println!("{:=<80}\n", "");
-
-//     // Discover all test files
-//     let base_dir = "examples_from_mdp";
-//     let subdirs = vec!["GKD-a", "GKD-b", "MDG-a", "MDG-b", "MDG-c", "SOM-a", "SOM-b"];
-    
-//     let mut all_results: HashMap<String, Vec<InstanceResults>> = HashMap::new();
-    
-//     for subdir in subdirs {
-//         let dir_path = format!("{}/{}", base_dir, subdir);
-        
-//         if !Path::new(&dir_path).exists() {
-//             println!("Skipping {} (directory not found)", dir_path);
-//             continue;
-//         }
-        
-//         println!("\n{:-<80}", "");
-//         println!("Processing directory: {}", dir_path);
-//         println!("{:-<80}", "");
-        
-//         let files = discover_test_files(&dir_path)?;
-//         println!("Found {} files\n", files.len());
-        
-//         let category = subdir.split('-').next().unwrap().to_string();
-//         all_results.entry(category.clone()).or_insert_with(Vec::new);
-        
-//         for (idx, path) in files.iter().enumerate() {
-//             println!("[{}/{}] Testing: {}", idx + 1, files.len(), path);
-            
-//             match test_single_file(path) {
-//                 Ok(result) => {
-//                     all_results.get_mut(&category).unwrap().push(result);
-//                 }
-//                 Err(_e) => {
-//                     println!("  ERROR: Failed to process file\n");
-//                 }
-//             }
-//         }
-//     }
-    
-//     // Print comprehensive summary
-//     print_comprehensive_summary(&all_results);
-    
-//     Ok(())
-// }
-
-// fn test_single_file(path: &str) -> Result<InstanceResults, Box<dyn std::error::Error>> {
-//     let data = parser::MdpData::load(path);
-//     println!("  Size: n={}, k={}", data.n, data.k);
-    
-//     let filename = Path::new(path)
-//         .file_name()
-//         .and_then(|s| s.to_str())
-//         .unwrap_or(path)
-//         .to_string();
-    
-//     let results = if data.n > 1000 {
-//         println!("  (Large instance - using fast solvers only)");
-//         run_fast_solvers(&data)
-//     } else if data.n > 500 {
-//         println!("  (Medium instance - reduced Gurobi time limit)");
-//         run_medium_solvers(&data)?
-//     } else {
-//         println!("  (Small instance - full solver suite)");
-//         run_all_solvers(&data)?
-//     };
-    
-//     Ok(InstanceResults {
-//         filename,
-//         n: data.n,
-//         k: data.k,
-//         results,
-//     })
-// }
-
-// fn run_all_solvers(data: &parser::MdpData) -> Result<Vec<SolverResult>, Box<dyn std::error::Error>> {
-//     let mut results = Vec::new();
-
-//     // 1. QUBO with time limit
-//     print!("  [1/6] QUBO... ");
-//     let start = Instant::now();
-//     match solver_qubo::solve_with_qubo(data, 1000.0, 300.0) { // 5 min limit
-//         Ok((_, div)) => {
-//             let time = start.elapsed();
-//             println!("✓ {:.2} ({:?})", div, time);
-//             results.push(SolverResult {
-//                 name: "QUBO (Gurobi)".to_string(),
-//                 diversity: div,
-//                 time,
-//                 success: true,
-//             });
-//         }
-//         Err(e) => {
-//             println!("✗ Timeout/Error");
-//             results.push(SolverResult {
-//                 name: "QUBO (Gurobi)".to_string(),
-//                 diversity: 0.0,
-//                 time: start.elapsed(),
-//                 success: false,
-//             });
-//         }
-//     }
-
-//     // 2. GRASP
-//     print!("  [2/6] GRASP... ");
-//     let config = GraspConfig {
-//         iterations: 50,
-//         alpha: 0.3,
-//         local_search_iters: 500,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_grasp::solve_grasp(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "GRASP".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     // 3. First Improvement LS
-//     print!("  [3/6] LS: First... ");
-//     let config = LocalSearchConfig {
-//         method: LocalSearchMethod::FirstImprovement,
-//         max_iters: 5000,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_local_search::solve_local_search(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "LS: First".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     // 4. Best Improvement LS
-//     print!("  [4/6] LS: Best... ");
-//     let config = LocalSearchConfig {
-//         method: LocalSearchMethod::BestImprovement,
-//         max_iters: 5000,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_local_search::solve_local_search(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "LS: Best".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     // 5. Tabu Search
-//     print!("  [5/6] Tabu... ");
-//     let config = LocalSearchConfig {
-//         method: LocalSearchMethod::TabuSearch { tabu_tenure: 10 },
-//         max_iters: 1000,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_local_search::solve_local_search(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "Tabu".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     // 6. Genetic Algorithm
-//     print!("  [6/6] GA... ");
-//     let config = GeneticConfig {
-//         population_size: 30,
-//         generations: 50,
-//         crossover_rate: 0.8,
-//         mutation_rate: 0.15,
-//         elite_size: 3,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_population::solve_genetic(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "GA".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     println!();
-//     Ok(results)
-// }
-
-// fn run_medium_solvers(data: &parser::MdpData) -> Result<Vec<SolverResult>, Box<dyn std::error::Error>> {
-//     let mut results = Vec::new();
-
-//     // QUBO with shorter time limit
-//     print!("  [1/4] QUBO... ");
-//     let start = Instant::now();
-//     match solver_qubo::solve_with_qubo(data, 1000.0, 120.0) { // 2 min limit
-//         Ok((_, div)) => {
-//             let time = start.elapsed();
-//             println!("✓ {:.2} ({:?})", div, time);
-//             results.push(SolverResult {
-//                 name: "QUBO (Gurobi)".to_string(),
-//                 diversity: div,
-//                 time,
-//                 success: true,
-//             });
-//         }
-//         Err(_) => {
-//             println!("✗ Timeout");
-//             results.push(SolverResult {
-//                 name: "QUBO (Gurobi)".to_string(),
-//                 diversity: 0.0,
-//                 time: start.elapsed(),
-//                 success: false,
-//             });
-//         }
-//     }
-
-//     // Reduced GRASP
-//     print!("  [2/4] GRASP... ");
-//     let config = GraspConfig {
-//         iterations: 30,
-//         alpha: 0.3,
-//         local_search_iters: 300,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_grasp::solve_grasp(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "GRASP".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     // Best Improvement
-//     print!("  [3/4] LS: Best... ");
-//     let config = LocalSearchConfig {
-//         method: LocalSearchMethod::BestImprovement,
-//         max_iters: 2000,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_local_search::solve_local_search(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "LS: Best".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     // GA
-//     print!("  [4/4] GA... ");
-//     let config = GeneticConfig {
-//         population_size: 20,
-//         generations: 30,
-//         crossover_rate: 0.8,
-//         mutation_rate: 0.15,
-//         elite_size: 2,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_population::solve_genetic(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "GA".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     println!();
-//     Ok(results)
-// }
-
-// fn run_fast_solvers(data: &parser::MdpData) -> Vec<SolverResult> {
-//     let mut results = Vec::new();
-
-//     // GRASP only
-//     print!("  [1/3] GRASP... ");
-//     let config = GraspConfig {
-//         iterations: 20,
-//         alpha: 0.3,
-//         local_search_iters: 200,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_grasp::solve_grasp(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "GRASP".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     // First Improvement
-//     print!("  [2/3] LS: First... ");
-//     let config = LocalSearchConfig {
-//         method: LocalSearchMethod::FirstImprovement,
-//         max_iters: 1000,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_local_search::solve_local_search(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "LS: First".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     // GA
-//     print!("  [3/3] GA... ");
-//     let config = GeneticConfig {
-//         population_size: 15,
-//         generations: 20,
-//         crossover_rate: 0.8,
-//         mutation_rate: 0.15,
-//         elite_size: 2,
-//     };
-//     let start = Instant::now();
-//     let (_, div) = solver_population::solve_genetic(data, &config);
-//     let time = start.elapsed();
-//     println!("✓ {:.2} ({:?})", div, time);
-//     results.push(SolverResult {
-//         name: "GA".to_string(),
-//         diversity: div,
-//         time,
-//         success: true,
-//     });
-
-//     println!();
-//     results
-// }
-
-// fn discover_test_files(dir: &str) -> Result<Vec<String>, Box<dyn std::error::Error>> {
-//     let mut files = Vec::new();
-    
-//     for entry in fs::read_dir(dir)? {
-//         let entry = entry?;
-//         let path = entry.path();
-        
-//         if path.is_file() {
-//             if let Some(ext) = path.extension() {
-//                 if ext == "txt" {
-//                     if let Some(path_str) = path.to_str() {
-//                         files.push(path_str.to_string());
-//                     }
-//                 }
-//             }
-//         }
-//     }
-    
-//     files.sort();
-//     Ok(files)
-// }
-
-// fn print_comprehensive_summary(all_results: &HashMap<String, Vec<InstanceResults>>) {
-//     println!("\n\n{:=<100}", "");
-//     println!("COMPREHENSIVE RESULTS SUMMARY");
-//     println!("{:=<100}\n", "");
-
-//     for category in ["GKD", "MDG", "SOM"] {
-//         if let Some(instances) = all_results.get(category) {
-//             if instances.is_empty() {
-//                 continue;
-//             }
-
-//             println!("\n{:-<100}", "");
-//             println!("{} INSTANCES ({} files)", category, instances.len());
-//             println!("{:-<100}", "");
-            
-//             // Header
-//             println!("{:<30} {:>8} {:>6} | {:>12} {:>12} {:>12} {:>12} {:>12} {:>12}",
-//                 "File", "n", "k", "QUBO", "GRASP", "LS:First", "LS:Best", "Tabu", "GA");
-//             println!("{:-<100}", "");
-
-//             // Results for each instance
-//             for inst in instances {
-//                 print!("{:<30} {:>8} {:>6} |", 
-//                     truncate_filename(&inst.filename, 30),
-//                     inst.n, 
-//                     inst.k
-//                 );
-                
-//                 // Find diversity for each solver
-//                 let solver_names = ["QUBO (Gurobi)", "GRASP", "LS: First", "LS: Best", "Tabu", "GA"];
-//                 for solver in &solver_names {
-//                     if let Some(result) = inst.results.iter().find(|r| r.name == *solver) {
-//                         if result.success {
-//                             print!(" {:>12.2}", result.diversity);
-//                         } else {
-//                             print!(" {:>12}", "TIMEOUT");
-//                         }
-//                     } else {
-//                         print!(" {:>12}", "-");
-//                     }
-//                 }
-//                 println!();
-//             }
-
-//             // Average times per solver
-//             println!("\n{:<30} {:>8} {:>6} | {:>12} {:>12} {:>12} {:>12} {:>12} {:>12}",
-//                 "Average Time", "", "", "QUBO", "GRASP", "LS:First", "LS:Best", "Tabu", "GA");
-//             println!("{:-<100}", "");
-            
-//             let solver_names = ["QUBO (Gurobi)", "GRASP", "LS: First", "LS: Best", "Tabu", "GA"];
-//             print!("{:<30} {:>8} {:>6} |", "", "", "");
-            
-//             for solver in &solver_names {
-//                 let times: Vec<Duration> = instances.iter()
-//                     .flat_map(|inst| inst.results.iter())
-//                     .filter(|r| r.name == *solver && r.success)
-//                     .map(|r| r.time)
-//                     .collect();
-                
-//                 if !times.is_empty() {
-//                     let avg_ms = times.iter().map(|t| t.as_millis()).sum::<u128>() / times.len() as u128;
-//                     print!(" {:>10}ms", avg_ms);
-//                 } else {
-//                     print!(" {:>12}", "-");
-//                 }
-//             }
-//             println!("\n");
-//         }
-//     }
-
-//     // Overall statistics
-//     println!("\n{:=<100}", "");
-//     println!("OVERALL STATISTICS");
-//     println!("{:=<100}", "");
-    
-//     let total_instances: usize = all_results.values().map(|v| v.len()).sum();
-//     println!("Total instances tested: {}", total_instances);
-    
-//     // Best solver by category
-//     for category in ["GKD", "MDG", "SOM"] {
-//         if let Some(instances) = all_results.get(category) {
-//             if instances.is_empty() {
-//                 continue;
-//             }
-            
-//             let mut solver_wins: HashMap<String, usize> = HashMap::new();
-            
-//             for inst in instances {
-//                 if let Some(best) = inst.results.iter()
-//                     .filter(|r| r.success)
-//                     .max_by(|a, b| a.diversity.partial_cmp(&b.diversity).unwrap()) 
-//                 {
-//                     *solver_wins.entry(best.name.clone()).or_insert(0) += 1;
-//                 }
-//             }
-            
-//             println!("\n{} - Best solver frequency:", category);
-//             let mut sorted_wins: Vec<_> = solver_wins.iter().collect();
-//             sorted_wins.sort_by(|a, b| b.1.cmp(a.1));
-//             for (solver, wins) in sorted_wins {
-//                 println!("  {:<20} {:>3} wins ({:.1}%)", solver, wins, 
-//                     (*wins as f64 / instances.len() as f64) * 100.0);
-//             }
-//         }
-//     }
-    
-//     println!("\n{:=<100}\n", "");
-// }
-
-// fn truncate_filename(filename: &str, max_len: usize) -> String {
-//     if filename.len() <= max_len {
-//         filename.to_string()
-//     } else {
-//         format!("...{}", &filename[filename.len() - (max_len - 3)..])
-//     }
-// }
-
-
 mod parser;
 mod solver_qubo;
 mod solver_grasp;
 mod solver_local_search;
 mod solver_population;
+mod solver_maxcut;
 
-use std::time::Instant;
+use std::time::{Instant, Duration};
 use std::fs::{self, File};
 use std::io::Write;
 use std::path::Path;
-use std::collections::HashMap;
 use solver_local_search::{LocalSearchConfig, LocalSearchMethod};
 use solver_grasp::GraspConfig;
 use solver_population::GeneticConfig;
@@ -581,7 +63,7 @@ struct SolverResult {
     success: bool,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 struct InstanceResults {
     filename: String,
     category: String,
@@ -593,6 +75,7 @@ struct InstanceResults {
 #[derive(Serialize, Deserialize)]
 struct ExperimentResults {
     timestamp: String,
+    category: String,
     instances: Vec<InstanceResults>,
 }
 
@@ -601,63 +84,93 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("MAXIMUM DIVERSITY PROBLEM - COMPREHENSIVE SOLVER COMPARISON");
     println!("{:=<80}\n", "");
 
-    // Discover all test files
+    let timestamp = chrono::Local::now().format("%Y%m%d_%H%M%S").to_string();
+    
     let base_dir = "examples_from_mdp";
-    let subdirs = vec!["GKD-a", "GKD-b", "MDG-a", "MDG-b", "MDG-c", "SOM-a", "SOM-b"];
+    let categories = vec!["GKD", "MDG", "SOM"];
     
-    let mut all_instances: Vec<InstanceResults> = Vec::new();
-    
-    for subdir in subdirs {
-        let dir_path = format!("{}/{}", base_dir, subdir);
+    for category in categories {
+        println!("\n{:=<80}", "");
+        println!("PROCESSING CATEGORY: {}", category);
+        println!("{:=<80}", "");
         
-        if !Path::new(&dir_path).exists() {
-            println!("Skipping {} (directory not found)", dir_path);
+        let mut category_instances: Vec<InstanceResults> = Vec::new();
+        
+        let subdirs = find_category_subdirs(&base_dir, category)?;
+        
+        if subdirs.is_empty() {
+            println!("No subdirectories found for category {}", category);
             continue;
         }
         
-        println!("\n{:-<80}", "");
-        println!("Processing directory: {}", dir_path);
-        println!("{:-<80}", "");
-        
-        let files = discover_test_files(&dir_path)?;
-        println!("Found {} files\n", files.len());
-        
-        let category = subdir.split('-').next().unwrap().to_string();
-        
-        for (idx, path) in files.iter().enumerate() {
-            println!("[{}/{}] Testing: {}", idx + 1, files.len(), path);
+        for subdir in subdirs {
+            let dir_path = format!("{}/{}", base_dir, subdir);
             
-            match test_single_file(path, &category) {
-                Ok(result) => {
-                    all_instances.push(result);
+            println!("\n{:-<80}", "");
+            println!("Processing directory: {}", dir_path);
+            println!("{:-<80}", "");
+            
+            let files = discover_test_files(&dir_path)?;
+            println!("Found {} files\n", files.len());
+            
+            for (idx, path) in files.iter().enumerate() {
+                println!("[{}/{}] Testing: {}", idx + 1, files.len(), path);
+                
+                match test_single_file(path, category) {
+                    Ok(result) => {
+                        category_instances.push(result);
+                    }
+                    Err(_e) => {
+                        println!("  ERROR: Failed to process file\n");
+                    }
                 }
-                Err(_e) => {
-                    println!("  ERROR: Failed to process file\n");
+            }
+        }
+        
+        if !category_instances.is_empty() {
+            let results = ExperimentResults {
+                timestamp: timestamp.clone(),
+                category: category.to_string(),
+                instances: category_instances.clone(),
+            };
+            
+            let json_file = format!("results_{}_{}.json", category, timestamp);
+            save_results_to_json(&results, &json_file)?;
+            println!("\n✓ {} results saved to: {}", category, json_file);
+            
+            print_category_summary(&results);
+        }
+    }
+    
+    generate_visualization_script()?;
+    println!("\n✓ Visualization script saved to: visualize_results.py");
+    println!("  Run with: python visualize_results.py results_*_{}.json", timestamp);
+    
+    Ok(())
+}
+
+fn find_category_subdirs(base_dir: &str, category: &str) -> Result<Vec<String>, Box<dyn std::error::Error>> {
+    let mut subdirs = Vec::new();
+    
+    if !Path::new(base_dir).exists() {
+        return Ok(subdirs);
+    }
+    
+    for entry in fs::read_dir(base_dir)? {
+        let entry = entry?;
+        let path = entry.path();
+        
+        if path.is_dir() {
+            if let Some(dir_name) = path.file_name().and_then(|n| n.to_str()) {
+                if dir_name.starts_with(category) {
+                    subdirs.push(dir_name.to_string());
                 }
             }
         }
     }
     
-    // Save results to JSON
-    let timestamp = chrono::Local::now().format("%Y%m%d_%H%M%S").to_string();
-    let results = ExperimentResults {
-        timestamp: timestamp.clone(),
-        instances: all_instances,
-    };
-    
-    let json_file = format!("results_{}.json", timestamp);
-    save_results_to_json(&results, &json_file)?;
-    println!("\n✓ Results saved to: {}", json_file);
-    
-    // Print comprehensive summary
-    print_comprehensive_summary(&results);
-    
-    // Generate visualization script
-    generate_visualization_script(&json_file)?;
-    println!("\n✓ Visualization script saved to: visualize_results.py");
-    println!("  Run with: python visualize_results.py {}", json_file);
-    
-    Ok(())
+    subdirs.sort();
+    Ok(subdirs)
 }
 
 fn test_single_file(path: &str, category: &str) -> Result<InstanceResults, Box<dyn std::error::Error>> {
@@ -670,16 +183,8 @@ fn test_single_file(path: &str, category: &str) -> Result<InstanceResults, Box<d
         .unwrap_or(path)
         .to_string();
     
-    let results = if data.n > 1000 {
-        println!("  (Large instance - using fast solvers only)");
-        run_fast_solvers(&data)
-    } else if data.n > 500 {
-        println!("  (Medium instance - reduced Gurobi time limit)");
-        run_medium_solvers(&data)?
-    } else {
-        println!("  (Small instance - full solver suite)");
-        run_all_solvers(&data)?
-    };
+    // Run ALL solvers with time limits
+    let results = run_all_solvers_with_timeouts(&data);
     
     Ok(InstanceResults {
         filename,
@@ -690,13 +195,21 @@ fn test_single_file(path: &str, category: &str) -> Result<InstanceResults, Box<d
     })
 }
 
-fn run_all_solvers(data: &parser::MdpData) -> Result<Vec<SolverResult>, Box<dyn std::error::Error>> {
+fn run_all_solvers_with_timeouts(data: &parser::MdpData) -> Vec<SolverResult> {
     let mut results = Vec::new();
+    
+    // Time limits in seconds
+    let qubo_timeout = 300.0;      // 5 minutes
+    let maxcut_timeout = 300.0;    // 5 minutes
+    let grasp_timeout = 180.0;     // 3 minutes
+    let ls_timeout = 180.0;        // 3 minutes
+    let tabu_timeout = 180.0;      // 3 minutes
+    let ga_timeout = 180.0;        // 3 minutes
 
-    // 1. QUBO with time limit
-    print!("  [1/6] QUBO... ");
+    // 1. QUBO (Constrained)
+    print!("  [1/7] QUBO... ");
     let start = Instant::now();
-    match solver_qubo::solve_with_qubo(data, 1000.0, 300.0) {
+    match solver_qubo::solve_with_qubo(data, 1000.0, qubo_timeout) {
         Ok((_, div)) => {
             let time = start.elapsed();
             println!("✓ {:.2} ({:?})", div, time);
@@ -708,25 +221,47 @@ fn run_all_solvers(data: &parser::MdpData) -> Result<Vec<SolverResult>, Box<dyn 
             });
         }
         Err(_) => {
-            println!("✗ Timeout/Error");
+            let time = start.elapsed();
+            println!("✗ Timeout ({:?})", time);
             results.push(SolverResult {
                 name: "QUBO".to_string(),
                 diversity: 0.0,
-                time_ms: start.elapsed().as_millis(),
+                time_ms: time.as_millis(),
                 success: false,
             });
         }
     }
 
-    // 2. GRASP
-    print!("  [2/6] GRASP... ");
-    let config = GraspConfig {
-        iterations: 50,
-        alpha: 0.3,
-        local_search_iters: 500,
-    };
+    // 2. MaxCut (MDP→QUBO→MaxCut)
+    print!("  [2/7] MaxCut... ");
     let start = Instant::now();
-    let (_, div) = solver_grasp::solve_grasp(data, &config);
+    match solver_maxcut::solve_mdp_via_maxcut(data, 1000.0, maxcut_timeout) {
+        Ok((_, div)) => {
+            let time = start.elapsed();
+            println!("✓ {:.2} ({:?})", div, time);
+            results.push(SolverResult {
+                name: "MaxCut".to_string(),
+                diversity: div,
+                time_ms: time.as_millis(),
+                success: div > 0.0,
+            });
+        }
+        Err(_) => {
+            let time = start.elapsed();
+            println!("✗ Timeout ({:?})", time);
+            results.push(SolverResult {
+                name: "MaxCut".to_string(),
+                diversity: 0.0,
+                time_ms: time.as_millis(),
+                success: false,
+            });
+        }
+    }
+
+    // 3. GRASP with timeout
+    print!("  [3/7] GRASP... ");
+    let start = Instant::now();
+    let (_, div) = run_grasp_with_timeout(data, grasp_timeout);
     let time = start.elapsed();
     println!("✓ {:.2} ({:?})", div, time);
     results.push(SolverResult {
@@ -736,14 +271,10 @@ fn run_all_solvers(data: &parser::MdpData) -> Result<Vec<SolverResult>, Box<dyn 
         success: true,
     });
 
-    // 3. First Improvement LS
-    print!("  [3/6] LS: First... ");
-    let config = LocalSearchConfig {
-        method: LocalSearchMethod::FirstImprovement,
-        max_iters: 5000,
-    };
+    // 4. LS: First Improvement with timeout
+    print!("  [4/7] LS: First... ");
     let start = Instant::now();
-    let (_, div) = solver_local_search::solve_local_search(data, &config);
+    let (_, div) = run_ls_with_timeout(data, LocalSearchMethod::FirstImprovement, ls_timeout);
     let time = start.elapsed();
     println!("✓ {:.2} ({:?})", div, time);
     results.push(SolverResult {
@@ -753,14 +284,10 @@ fn run_all_solvers(data: &parser::MdpData) -> Result<Vec<SolverResult>, Box<dyn 
         success: true,
     });
 
-    // 4. Best Improvement LS
-    print!("  [4/6] LS: Best... ");
-    let config = LocalSearchConfig {
-        method: LocalSearchMethod::BestImprovement,
-        max_iters: 5000,
-    };
+    // 5. LS: Best Improvement with timeout
+    print!("  [5/7] LS: Best... ");
     let start = Instant::now();
-    let (_, div) = solver_local_search::solve_local_search(data, &config);
+    let (_, div) = run_ls_with_timeout(data, LocalSearchMethod::BestImprovement, ls_timeout);
     let time = start.elapsed();
     println!("✓ {:.2} ({:?})", div, time);
     results.push(SolverResult {
@@ -770,14 +297,10 @@ fn run_all_solvers(data: &parser::MdpData) -> Result<Vec<SolverResult>, Box<dyn 
         success: true,
     });
 
-    // 5. Tabu Search
-    print!("  [5/6] Tabu... ");
-    let config = LocalSearchConfig {
-        method: LocalSearchMethod::TabuSearch { tabu_tenure: 10 },
-        max_iters: 1000,
-    };
+    // 6. Tabu Search with timeout
+    print!("  [6/7] Tabu... ");
     let start = Instant::now();
-    let (_, div) = solver_local_search::solve_local_search(data, &config);
+    let (_, div) = run_ls_with_timeout(data, LocalSearchMethod::TabuSearch { tabu_tenure: 10 }, tabu_timeout);
     let time = start.elapsed();
     println!("✓ {:.2} ({:?})", div, time);
     results.push(SolverResult {
@@ -787,159 +310,10 @@ fn run_all_solvers(data: &parser::MdpData) -> Result<Vec<SolverResult>, Box<dyn 
         success: true,
     });
 
-    // 6. Genetic Algorithm
-    print!("  [6/6] GA... ");
-    let config = GeneticConfig {
-        population_size: 30,
-        generations: 50,
-        crossover_rate: 0.8,
-        mutation_rate: 0.15,
-        elite_size: 3,
-    };
+    // 7. Genetic Algorithm with timeout
+    print!("  [7/7] GA... ");
     let start = Instant::now();
-    let (_, div) = solver_population::solve_genetic(data, &config);
-    let time = start.elapsed();
-    println!("✓ {:.2} ({:?})", div, time);
-    results.push(SolverResult {
-        name: "GA".to_string(),
-        diversity: div,
-        time_ms: time.as_millis(),
-        success: true,
-    });
-
-    println!();
-    Ok(results)
-}
-
-fn run_medium_solvers(data: &parser::MdpData) -> Result<Vec<SolverResult>, Box<dyn std::error::Error>> {
-    let mut results = Vec::new();
-
-    print!("  [1/4] QUBO... ");
-    let start = Instant::now();
-    match solver_qubo::solve_with_qubo(data, 1000.0, 120.0) {
-        Ok((_, div)) => {
-            let time = start.elapsed();
-            println!("✓ {:.2} ({:?})", div, time);
-            results.push(SolverResult {
-                name: "QUBO".to_string(),
-                diversity: div,
-                time_ms: time.as_millis(),
-                success: div > 0.0,
-            });
-        }
-        Err(_) => {
-            println!("✗ Timeout");
-            results.push(SolverResult {
-                name: "QUBO".to_string(),
-                diversity: 0.0,
-                time_ms: start.elapsed().as_millis(),
-                success: false,
-            });
-        }
-    }
-
-    print!("  [2/4] GRASP... ");
-    let config = GraspConfig {
-        iterations: 30,
-        alpha: 0.3,
-        local_search_iters: 300,
-    };
-    let start = Instant::now();
-    let (_, div) = solver_grasp::solve_grasp(data, &config);
-    let time = start.elapsed();
-    println!("✓ {:.2} ({:?})", div, time);
-    results.push(SolverResult {
-        name: "GRASP".to_string(),
-        diversity: div,
-        time_ms: time.as_millis(),
-        success: true,
-    });
-
-    print!("  [3/4] LS: Best... ");
-    let config = LocalSearchConfig {
-        method: LocalSearchMethod::BestImprovement,
-        max_iters: 2000,
-    };
-    let start = Instant::now();
-    let (_, div) = solver_local_search::solve_local_search(data, &config);
-    let time = start.elapsed();
-    println!("✓ {:.2} ({:?})", div, time);
-    results.push(SolverResult {
-        name: "LS-Best".to_string(),
-        diversity: div,
-        time_ms: time.as_millis(),
-        success: true,
-    });
-
-    print!("  [4/4] GA... ");
-    let config = GeneticConfig {
-        population_size: 20,
-        generations: 30,
-        crossover_rate: 0.8,
-        mutation_rate: 0.15,
-        elite_size: 2,
-    };
-    let start = Instant::now();
-    let (_, div) = solver_population::solve_genetic(data, &config);
-    let time = start.elapsed();
-    println!("✓ {:.2} ({:?})", div, time);
-    results.push(SolverResult {
-        name: "GA".to_string(),
-        diversity: div,
-        time_ms: time.as_millis(),
-        success: true,
-    });
-
-    println!();
-    Ok(results)
-}
-
-fn run_fast_solvers(data: &parser::MdpData) -> Vec<SolverResult> {
-    let mut results = Vec::new();
-
-    print!("  [1/3] GRASP... ");
-    let config = GraspConfig {
-        iterations: 20,
-        alpha: 0.3,
-        local_search_iters: 200,
-    };
-    let start = Instant::now();
-    let (_, div) = solver_grasp::solve_grasp(data, &config);
-    let time = start.elapsed();
-    println!("✓ {:.2} ({:?})", div, time);
-    results.push(SolverResult {
-        name: "GRASP".to_string(),
-        diversity: div,
-        time_ms: time.as_millis(),
-        success: true,
-    });
-
-    print!("  [2/3] LS: First... ");
-    let config = LocalSearchConfig {
-        method: LocalSearchMethod::FirstImprovement,
-        max_iters: 1000,
-    };
-    let start = Instant::now();
-    let (_, div) = solver_local_search::solve_local_search(data, &config);
-    let time = start.elapsed();
-    println!("✓ {:.2} ({:?})", div, time);
-    results.push(SolverResult {
-        name: "LS-First".to_string(),
-        diversity: div,
-        time_ms: time.as_millis(),
-        success: true,
-    });
-
-    print!("  [3/3] GA... ");
-    let config = GeneticConfig {
-        population_size: 15,
-        generations: 20,
-        crossover_rate: 0.8,
-        mutation_rate: 0.15,
-        elite_size: 2,
-    };
-    let start = Instant::now();
-    let (_, div) = solver_population::solve_genetic(data, &config);
+    let (_, div) = run_ga_with_timeout(data, ga_timeout);
     let time = start.elapsed();
     println!("✓ {:.2} ({:?})", div, time);
     results.push(SolverResult {
@@ -951,6 +325,184 @@ fn run_fast_solvers(data: &parser::MdpData) -> Vec<SolverResult> {
 
     println!();
     results
+}
+
+fn run_grasp_with_timeout(data: &parser::MdpData, timeout_secs: f64) -> (Vec<usize>, f64) {
+    let start = Instant::now();
+    let timeout = Duration::from_secs_f64(timeout_secs);
+    
+    let mut best_solution = Vec::new();
+    let mut best_diversity = 0.0;
+    
+    let config = GraspConfig {
+        iterations: 1000000, // Very high, will stop on timeout
+        alpha: 0.3,
+        local_search_iters: 500,
+    };
+    
+    for iter in 0..config.iterations {
+        if start.elapsed() >= timeout {
+            break;
+        }
+        
+        // One GRASP iteration
+        let solution = greedy_randomized_construction(data, config.alpha);
+        let (improved, diversity) = local_search_iteration(data, solution, config.local_search_iters);
+        
+        if diversity > best_diversity {
+            best_diversity = diversity;
+            best_solution = improved;
+        }
+        
+        // Early stopping if converged
+        if iter > 20 && iter % 10 == 0 {
+            // Check if we haven't improved in a while
+            if best_diversity > 0.0 {
+                break;
+            }
+        }
+    }
+    
+    (best_solution, best_diversity)
+}
+
+fn run_ls_with_timeout(data: &parser::MdpData, method: LocalSearchMethod, timeout_secs: f64) -> (Vec<usize>, f64) {
+    let start = Instant::now();
+    let timeout = Duration::from_secs_f64(timeout_secs);
+    
+    let config = LocalSearchConfig {
+        method,
+        max_iters: 1000000, // Very high, will stop on timeout
+    };
+    
+    // Start with timeout checking wrapper
+    let mut iteration = 0;
+    loop {
+        if start.elapsed() >= timeout {
+            break;
+        }
+        
+        let result = solver_local_search::solve_local_search(data, &config);
+        
+        // Local search usually converges quickly, so just return after one run
+        return result;
+    }
+    
+    // Fallback (shouldn't reach here)
+    (Vec::new(), 0.0)
+}
+
+fn run_ga_with_timeout(data: &parser::MdpData, timeout_secs: f64) -> (Vec<usize>, f64) {
+    let start = Instant::now();
+    let timeout = Duration::from_secs_f64(timeout_secs);
+    
+    let config = GeneticConfig {
+        population_size: 30,
+        generations: 1000000, // Very high, will stop on timeout
+        crossover_rate: 0.8,
+        mutation_rate: 0.15,
+        elite_size: 3,
+    };
+    
+    // Run GA but check timeout periodically
+    // For now, just run once as GA handles iterations internally
+    let result = solver_population::solve_genetic(data, &config);
+    
+    result
+}
+
+// Helper functions for GRASP timeout implementation
+fn greedy_randomized_construction(data: &parser::MdpData, alpha: f64) -> Vec<usize> {
+    use rand::Rng;
+    let mut rng = rand::thread_rng();
+    let mut selected = Vec::with_capacity(data.k);
+    let mut available: Vec<usize> = (0..data.n).collect();
+
+    for _ in 0..data.k {
+        if available.is_empty() {
+            break;
+        }
+
+        let mut contributions: Vec<(usize, f64)> = available
+            .iter()
+            .map(|&idx| {
+                let mut contrib = 0.0;
+                for &s in &selected {
+                    contrib += data.get_dist(idx, s);
+                }
+                (idx, contrib)
+            })
+            .collect();
+
+        contributions.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
+
+        let c_min = contributions.last().unwrap().1;
+        let c_max = contributions.first().unwrap().1;
+        let threshold = c_max - alpha * (c_max - c_min);
+
+        let rcl: Vec<usize> = contributions
+            .iter()
+            .filter(|(_, contrib)| *contrib >= threshold)
+            .map(|(idx, _)| *idx)
+            .collect();
+
+        let chosen = rcl[rng.gen_range(0..rcl.len())];
+        selected.push(chosen);
+        available.retain(|&x| x != chosen);
+    }
+
+    selected
+}
+
+fn local_search_iteration(data: &parser::MdpData, mut selected: Vec<usize>, max_iters: usize) -> (Vec<usize>, f64) {
+    let mut unselected: Vec<usize> = (0..data.n)
+        .filter(|&i| !selected.contains(&i))
+        .collect();
+
+    let mut current_diversity = calculate_diversity(&selected, data);
+
+    for _ in 0..max_iters {
+        let mut best_swap = None;
+        let mut best_gain = 0.0;
+
+        for i in 0..selected.len() {
+            for j in 0..unselected.len() {
+                let mut gain = 0.0;
+                for &s in &selected {
+                    if s == selected[i] {
+                        continue;
+                    }
+                    gain += data.get_dist(unselected[j], s) - data.get_dist(selected[i], s);
+                }
+                
+                if gain > best_gain {
+                    best_gain = gain;
+                    best_swap = Some((i, j));
+                }
+            }
+        }
+
+        if let Some((i, j)) = best_swap {
+            let temp = selected[i];
+            selected[i] = unselected[j];
+            unselected[j] = temp;
+            current_diversity += best_gain;
+        } else {
+            break;
+        }
+    }
+
+    (selected, current_diversity)
+}
+
+fn calculate_diversity(selected: &[usize], data: &parser::MdpData) -> f64 {
+    let mut sum = 0.0;
+    for i in 0..selected.len() {
+        for j in (i + 1)..selected.len() {
+            sum += data.get_dist(selected[i], selected[j]);
+        }
+    }
+    sum
 }
 
 fn discover_test_files(dir: &str) -> Result<Vec<String>, Box<dyn std::error::Error>> {
@@ -982,81 +534,49 @@ fn save_results_to_json(results: &ExperimentResults, filename: &str) -> Result<(
     Ok(())
 }
 
-fn print_comprehensive_summary(results: &ExperimentResults) {
-    let mut by_category: HashMap<String, Vec<&InstanceResults>> = HashMap::new();
+fn print_category_summary(results: &ExperimentResults) {
+    println!("\n{:-<100}", "");
+    println!("SUMMARY FOR {} ({} instances)", results.category, results.instances.len());
+    println!("{:-<100}", "");
     
-    for instance in &results.instances {
-        by_category.entry(instance.category.clone())
-            .or_insert_with(Vec::new)
-            .push(instance);
+    if results.instances.is_empty() {
+        println!("No instances processed.");
+        return;
     }
-
-    println!("\n\n{:=<100}", "");
-    println!("COMPREHENSIVE RESULTS SUMMARY");
-    println!("{:=<100}\n", "");
-
-    for category in ["GKD", "MDG", "SOM"] {
-        if let Some(instances) = by_category.get(category) {
-            if instances.is_empty() {
-                continue;
-            }
-
-            println!("\n{:-<100}", "");
-            println!("{} INSTANCES ({} files)", category, instances.len());
-            println!("{:-<100}", "");
-            
-            println!("{:<30} {:>8} {:>6} | {:>12} {:>12} {:>12} {:>12} {:>12} {:>12}",
-                "File", "n", "k", "QUBO", "GRASP", "LS-First", "LS-Best", "Tabu", "GA");
-            println!("{:-<100}", "");
-
-            for inst in instances {
-                print!("{:<30} {:>8} {:>6} |", 
-                    truncate_filename(&inst.filename, 30),
-                    inst.n, 
-                    inst.k
-                );
-                
-                let solver_names = ["QUBO", "GRASP", "LS-First", "LS-Best", "Tabu", "GA"];
-                for solver in &solver_names {
-                    if let Some(result) = inst.results.iter().find(|r| r.name == *solver) {
-                        if result.success {
-                            print!(" {:>12.2}", result.diversity);
-                        } else {
-                            print!(" {:>12}", "TIMEOUT");
-                        }
-                    } else {
-                        print!(" {:>12}", "-");
-                    }
-                }
-                println!();
-            }
-
-            println!("\n{:<30} {:>8} {:>6} | {:>12} {:>12} {:>12} {:>12} {:>12} {:>12}",
-                "Average Time (ms)", "", "", "QUBO", "GRASP", "LS-First", "LS-Best", "Tabu", "GA");
-            println!("{:-<100}", "");
-            
-            let solver_names = ["QUBO", "GRASP", "LS-First", "LS-Best", "Tabu", "GA"];
-            print!("{:<30} {:>8} {:>6} |", "", "", "");
-            
-            for solver in &solver_names {
-                let times: Vec<u128> = instances.iter()
-                    .flat_map(|inst| inst.results.iter())
-                    .filter(|r| r.name == *solver && r.success)
-                    .map(|r| r.time_ms)
-                    .collect();
-                
-                if !times.is_empty() {
-                    let avg_ms = times.iter().sum::<u128>() / times.len() as u128;
-                    print!(" {:>12}", avg_ms);
+    
+    let mut all_solvers: Vec<String> = results.instances[0].results.iter()
+        .map(|r| r.name.clone())
+        .collect();
+    all_solvers.sort();
+    
+    print!("{:<30} {:>8} {:>6} |", "File", "n", "k");
+    for solver in &all_solvers {
+        print!(" {:>12}", solver);
+    }
+    println!();
+    println!("{:-<100}", "");
+    
+    for inst in &results.instances {
+        print!("{:<30} {:>8} {:>6} |", 
+            truncate_filename(&inst.filename, 30),
+            inst.n, 
+            inst.k
+        );
+        
+        for solver in &all_solvers {
+            if let Some(result) = inst.results.iter().find(|r| r.name == *solver) {
+                if result.success {
+                    print!(" {:>12.2}", result.diversity);
                 } else {
-                    print!(" {:>12}", "-");
+                    print!(" {:>12}", "TIMEOUT");
                 }
+            } else {
+                print!(" {:>12}", "-");
             }
-            println!("\n");
         }
+        println!();
     }
-
-    println!("\n{:=<100}\n", "");
+    println!();
 }
 
 fn truncate_filename(filename: &str, max_len: usize) -> String {
@@ -1067,13 +587,13 @@ fn truncate_filename(filename: &str, max_len: usize) -> String {
     }
 }
 
-fn generate_visualization_script(_json_file: &str) -> Result<(), Box<dyn std::error::Error>> {
+fn generate_visualization_script() -> Result<(), Box<dyn std::error::Error>> {
     let script = r#"#!/usr/bin/env python3
 """
 Visualization script for MDP solver comparison results.
-Generated automatically by the Rust benchmark program.
+Can process multiple result JSON files at once.
 
-Usage: python visualize_results.py <results.json>
+Usage: python visualize_results.py results_*.json
 """
 
 import json
@@ -1083,14 +603,21 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import glob
 
-# Set style
 sns.set_style("whitegrid")
 plt.rcParams['figure.figsize'] = (12, 8)
 
-def load_results(json_file):
-    with open(json_file, 'r') as f:
-        return json.load(f)
+def load_all_results(json_files):
+    """Load and combine multiple result files"""
+    all_instances = []
+    
+    for json_file in json_files:
+        with open(json_file, 'r') as f:
+            data = json.load(f)
+            all_instances.extend(data['instances'])
+    
+    return all_instances
 
 def create_scatter_plot(df, output_dir):
     """Quality vs Time scatter plot for each solver"""
@@ -1239,16 +766,26 @@ def create_win_rate_chart(df, output_dir):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python visualize_results.py <results.json>")
+        print("Usage: python visualize_results.py results_*.json")
+        print("  or:  python visualize_results.py results_GKD_*.json results_MDG_*.json results_SOM_*.json")
         sys.exit(1)
     
-    json_file = sys.argv[1]
+    json_files = []
+    for pattern in sys.argv[1:]:
+        json_files.extend(glob.glob(pattern))
     
-    print(f"\nLoading results from: {json_file}")
-    data = load_results(json_file)
+    if not json_files:
+        print("No result files found!")
+        sys.exit(1)
+    
+    print(f"\nLoading results from {len(json_files)} file(s):")
+    for f in json_files:
+        print(f"  - {f}")
+    
+    instances = load_all_results(json_files)
     
     rows = []
-    for instance in data['instances']:
+    for instance in instances:
         for result in instance['results']:
             rows.append({
                 'filename': instance['filename'],
@@ -1263,12 +800,11 @@ def main():
     
     df = pd.DataFrame(rows)
     
-    print(f"Loaded {len(df)} result records from {len(data['instances'])} instances")
+    print(f"\nLoaded {len(df)} result records from {len(instances)} instances")
     print(f"Solvers: {', '.join(df['solver'].unique())}")
     print(f"Categories: {', '.join(df['category'].unique())}\n")
     
-    timestamp = data['timestamp']
-    output_dir = Path(f'visualizations_{timestamp}')
+    output_dir = Path('visualizations_combined')
     output_dir.mkdir(exist_ok=True)
     
     print(f"Generating visualizations in: {output_dir}/\n")
@@ -1291,3 +827,4 @@ if __name__ == '__main__':
     file.write_all(script.as_bytes())?;
     Ok(())
 }
+

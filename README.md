@@ -65,3 +65,30 @@ For presentation we can:
 1. Load old results without re-running: python visualize_results.py old_results.json
 2. Compare multiple runs side-by-side
 3. JSON is human-readable for quick grep/inspection
+
+---------------------------------------------------------------------
+
+** RUNNING PYTHON **
+
+-- Multiple JSON files at once
+
+#bash 
+python visualize_results.py results_*_20250128.json
+
+---------------------------------------
+
+cargo run     # Creates 3 separate result files as it goes
+# Check results_GKD_20250128.json while MDG is still running!
+
+python visualize_results.py results_*_20250128.json  # Combines all
+
+---------------------------------------------------------------------
+
+** Time Limits for Running Test Files **
+
+Added a 4-tier system based on problem size:
+Size                Category        Solvers         QUBO Timeout    Notes
+n ≤ 500             Small           All             63  min         Full suite
+500 < n ≤ 1000      Medium          4 solvers       1 min           Skip slow ones
+1000 < n ≤ 2000     Large           3 solvers       None            Fast heuristics only
+n > 2000            Very Large      2 solvers       None            Minimal + fast

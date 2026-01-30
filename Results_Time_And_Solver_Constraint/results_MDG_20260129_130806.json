@@ -1,0 +1,546 @@
+{
+  "timestamp": "20260129_130806",
+  "category": "MDG",
+  "instances": [
+    {
+      "filename": "MDG-a_1_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 7833.829999999991,
+          "time_ms": 180190,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 7759.030000000003,
+          "time_ms": 17137,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 7708.020000000006,
+          "time_ms": 3155,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 7696.57000000001,
+          "time_ms": 1247,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 7774.3699999999935,
+          "time_ms": 21528,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 7659.759999999999,
+          "time_ms": 1469,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-a_2_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 7771.6600000000135,
+          "time_ms": 180192,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 7691.9800000000005,
+          "time_ms": 31232,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 7620.989999999994,
+          "time_ms": 3048,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 7620.800000000004,
+          "time_ms": 855,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 7581.88000000029,
+          "time_ms": 21450,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 7585.689999999992,
+          "time_ms": 1355,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-a_3_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 7759.360000000007,
+          "time_ms": 180184,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 7686.800000000011,
+          "time_ms": 26797,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 7654.619999999987,
+          "time_ms": 3213,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 7644.9499999999925,
+          "time_ms": 895,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 7686.2399999999925,
+          "time_ms": 21259,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 7596.270000000002,
+          "time_ms": 1361,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-a_4_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 7770.239999999991,
+          "time_ms": 180202,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 7711.579999999986,
+          "time_ms": 25742,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 7582.699999999999,
+          "time_ms": 2430,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 7649.389999999997,
+          "time_ms": 899,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 7595.700000000003,
+          "time_ms": 21287,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 7620.619999999994,
+          "time_ms": 1388,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-a_5_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 7755.229999999989,
+          "time_ms": 180183,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 7636.819999999999,
+          "time_ms": 18269,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 7617.930000000002,
+          "time_ms": 3323,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 7570.269999999999,
+          "time_ms": 1029,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 7667.890000000281,
+          "time_ms": 21461,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 7543.120000000003,
+          "time_ms": 1077,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-b_1_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1464093.2000000014,
+          "time_ms": 180185,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 772276.8799999985,
+          "time_ms": 37276,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 761543.9700000004,
+          "time_ms": 2631,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 757205.9699999995,
+          "time_ms": 847,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 768880.1999999991,
+          "time_ms": 21732,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 765929.2100000008,
+          "time_ms": 1483,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-b_2_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1422533.619999999,
+          "time_ms": 180189,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 768700.6199999998,
+          "time_ms": 22176,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 758202.8100000006,
+          "time_ms": 2578,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 760066.6700000002,
+          "time_ms": 916,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 758824.2500000006,
+          "time_ms": 21476,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 751009.3200000015,
+          "time_ms": 1032,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-b_3_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1421790.0499999986,
+          "time_ms": 180180,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 773962.8699999999,
+          "time_ms": 25059,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 772588.1299999995,
+          "time_ms": 3423,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 769062.75,
+          "time_ms": 1052,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 766555.4799999993,
+          "time_ms": 21237,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 753675.9399999996,
+          "time_ms": 1285,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-b_4_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1457905.1499999985,
+          "time_ms": 48390,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 772094.1200000008,
+          "time_ms": 34061,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 762423.2999999989,
+          "time_ms": 2796,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 752230.8700000009,
+          "time_ms": 956,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 768006.1600000006,
+          "time_ms": 21229,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 752110.8800000008,
+          "time_ms": 1251,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-b_5_n500_m50.txt",
+      "category": "MDG",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1457281.1600000018,
+          "time_ms": 180190,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 769579.1400000004,
+          "time_ms": 25174,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 769597.0100000002,
+          "time_ms": 3265,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 751174.5899999997,
+          "time_ms": 798,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 761780.0099999993,
+          "time_ms": 21181,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 760191.4699999996,
+          "time_ms": 1239,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-c_1_n3000_m300.txt",
+      "category": "MDG",
+      "n": 3000,
+      "k": 300,
+      "results": [
+        {
+          "name": "LS-First",
+          "diversity": 22532773.0,
+          "time_ms": 3466,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 24481891.0,
+          "time_ms": 2775718,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-c_2_n3000_m300.txt",
+      "category": "MDG",
+      "n": 3000,
+      "k": 300,
+      "results": [
+        {
+          "name": "LS-First",
+          "diversity": 22455708.0,
+          "time_ms": 4237,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 24510601.0,
+          "time_ms": 2647080,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-c_3_n3000_m300.txt",
+      "category": "MDG",
+      "n": 3000,
+      "k": 300,
+      "results": [
+        {
+          "name": "LS-First",
+          "diversity": 22420384.0,
+          "time_ms": 4798,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 24496438.0,
+          "time_ms": 2833490,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-c_4_n3000_m300.txt",
+      "category": "MDG",
+      "n": 3000,
+      "k": 300,
+      "results": [
+        {
+          "name": "LS-First",
+          "diversity": 22522542.0,
+          "time_ms": 6110,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 24534108.0,
+          "time_ms": 2855552,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "MDG-c_5_n3000_m300.txt",
+      "category": "MDG",
+      "n": 3000,
+      "k": 300,
+      "results": [
+        {
+          "name": "LS-First",
+          "diversity": 22529500.0,
+          "time_ms": 5461,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 24505105.0,
+          "time_ms": 3175838,
+          "success": true
+        }
+      ]
+    }
+  ]
+}

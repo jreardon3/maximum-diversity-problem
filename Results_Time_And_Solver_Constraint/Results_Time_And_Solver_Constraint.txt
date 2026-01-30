@@ -1,0 +1,1237 @@
+================================================================================
+MAXIMUM DIVERSITY PROBLEM - COMPREHENSIVE SOLVER COMPARISON
+================================================================================
+
+
+================================================================================
+PROCESSING CATEGORY: GKD
+================================================================================
+
+--------------------------------------------------------------------------------
+Processing directory: examples_from_mdp/GKD-a
+--------------------------------------------------------------------------------
+Found 15 files
+
+[1/15] Testing: examples_from_mdp/GKD-a/GKD-a_10_n10_m3.txt
+  Size: n=10, k=3
+  (Small instance - full solver suite)
+Set parameter Username
+Set parameter LicenseID to value 2767187
+Academic license - for non-commercial use only - expires 2027-01-18
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 435.71 (27.770958ms)
+  [2/6] GRASP... ✓ 435.71 (1.041333ms)
+  [3/6] LS: First... ✓ 435.71 (28.5µs)
+  [4/6] LS: Best... ✓ 435.71 (7.875µs)
+  [5/6] Tabu... ✓ 435.71 (3.900084ms)
+  [6/6] GA... ✓ 435.71 (16.223666ms)
+
+[2/15] Testing: examples_from_mdp/GKD-a/GKD-a_11_n10_m4.txt
+  Size: n=10, k=4
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 649.72 (22.219583ms)
+  [2/6] GRASP... ✓ 649.72 (817.25µs)
+  [3/6] LS: First... ✓ 649.72 (20.708µs)
+  [4/6] LS: Best... ✓ 649.72 (28.041µs)
+  [5/6] Tabu... ✓ 649.72 (3.947625ms)
+  [6/6] GA... ✓ 649.72 (13.542833ms)
+
+[3/15] Testing: examples_from_mdp/GKD-a/GKD-a_12_n10_m4.txt
+  Size: n=10, k=4
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1181.47 (11.993334ms)
+  [2/6] GRASP... ✓ 1181.47 (785.541µs)
+  [3/6] LS: First... ✓ 1181.47 (29.167µs)
+  [4/6] LS: Best... ✓ 1181.47 (9.875µs)
+  [5/6] Tabu... ✓ 1181.47 (3.9855ms)
+  [6/6] GA... ✓ 1181.47 (13.507583ms)
+
+[4/15] Testing: examples_from_mdp/GKD-a/GKD-a_13_n10_m4.txt
+  Size: n=10, k=4
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 733.43 (15.747667ms)
+  [2/6] GRASP... ✓ 733.43 (842.375µs)
+  [3/6] LS: First... ✓ 733.43 (33.916µs)
+  [4/6] LS: Best... ✓ 733.43 (9.042µs)
+  [5/6] Tabu... ✓ 733.43 (3.972333ms)
+  [6/6] GA... ✓ 733.43 (13.508834ms)
+
+[5/15] Testing: examples_from_mdp/GKD-a/GKD-a_14_n10_m4.txt
+  Size: n=10, k=4
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 999.47 (20.864625ms)
+  [2/6] GRASP... ✓ 999.47 (847.25µs)
+  [3/6] LS: First... ✓ 999.47 (9.833µs)
+  [4/6] LS: Best... ✓ 966.98 (10.625µs)
+  [5/6] Tabu... ✓ 999.47 (3.991083ms)
+  [6/6] GA... ✓ 999.47 (13.65125ms)
+
+[6/15] Testing: examples_from_mdp/GKD-a/GKD-a_15_n10_m4.txt
+  Size: n=10, k=4
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1206.12 (16.138875ms)
+  [2/6] GRASP... ✓ 1206.12 (994.166µs)
+  [3/6] LS: First... ✓ 1206.12 (30.625µs)
+  [4/6] LS: Best... ✓ 1206.12 (12.875µs)
+  [5/6] Tabu... ✓ 1206.12 (3.98275ms)
+  [6/6] GA... ✓ 1206.12 (13.806417ms)
+
+[7/15] Testing: examples_from_mdp/GKD-a/GKD-a_1_n10_m2.txt
+  Size: n=10, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 243.97 (6.595541ms)
+  [2/6] GRASP... ✓ 243.97 (333.625µs)
+  [3/6] LS: First... ✓ 243.97 (25.542µs)
+  [4/6] LS: Best... ✓ 243.97 (3.792µs)
+  [5/6] Tabu... ✓ 243.97 (2.079583ms)
+  [6/6] GA... ✓ 243.97 (14.110917ms)
+
+[8/15] Testing: examples_from_mdp/GKD-a/GKD-a_2_n10_m2.txt
+  Size: n=10, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 210.65 (6.112666ms)
+  [2/6] GRASP... ✓ 210.65 (330.084µs)
+  [3/6] LS: First... ✓ 210.65 (5.25µs)
+  [4/6] LS: Best... ✓ 191.44 (4.792µs)
+  [5/6] Tabu... ✓ 210.65 (2.090083ms)
+  [6/6] GA... ✓ 210.65 (13.818334ms)
+
+[9/15] Testing: examples_from_mdp/GKD-a/GKD-a_3_n10_m2.txt
+  Size: n=10, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 146.62 (7.243292ms)
+  [2/6] GRASP... ✓ 146.62 (339.75µs)
+  [3/6] LS: First... ✓ 146.62 (3.625µs)
+  [4/6] LS: Best... ✓ 146.62 (5.959µs)
+  [5/6] Tabu... ✓ 146.62 (2.064458ms)
+  [6/6] GA... ✓ 146.62 (13.851208ms)
+
+[10/15] Testing: examples_from_mdp/GKD-a/GKD-a_4_n10_m2.txt
+  Size: n=10, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 186.18 (5.011125ms)
+  [2/6] GRASP... ✓ 186.18 (327.375µs)
+  [3/6] LS: First... ✓ 186.18 (20.958µs)
+  [4/6] LS: Best... ✓ 186.18 (4.084µs)
+  [5/6] Tabu... ✓ 186.18 (2.101583ms)
+  [6/6] GA... ✓ 186.18 (13.998875ms)
+
+[11/15] Testing: examples_from_mdp/GKD-a/GKD-a_5_n10_m2.txt
+  Size: n=10, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 209.62 (6.147917ms)
+  [2/6] GRASP... ✓ 209.62 (349.167µs)
+  [3/6] LS: First... ✓ 207.36 (2.375µs)
+  [4/6] LS: Best... ✓ 209.62 (2.959µs)
+  [5/6] Tabu... ✓ 209.62 (2.123958ms)
+  [6/6] GA... ✓ 209.62 (13.815083ms)
+
+[12/15] Testing: examples_from_mdp/GKD-a/GKD-a_6_n10_m3.txt
+  Size: n=10, k=3
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 254.13 (9.668292ms)
+  [2/6] GRASP... ✓ 254.13 (776.75µs)
+  [3/6] LS: First... ✓ 254.13 (8.541µs)
+  [4/6] LS: Best... ✓ 254.13 (24.667µs)
+  [5/6] Tabu... ✓ 254.13 (3.11575ms)
+  [6/6] GA... ✓ 254.13 (14.063458ms)
+
+[13/15] Testing: examples_from_mdp/GKD-a/GKD-a_7_n10_m3.txt
+  Size: n=10, k=3
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 470.05 (9.256791ms)
+  [2/6] GRASP... ✓ 470.05 (567.208µs)
+  [3/6] LS: First... ✓ 470.05 (7.75µs)
+  [4/6] LS: Best... ✓ 470.05 (5.208µs)
+  [5/6] Tabu... ✓ 470.05 (3.119667ms)
+  [6/6] GA... ✓ 470.05 (13.953833ms)
+
+[14/15] Testing: examples_from_mdp/GKD-a/GKD-a_8_n10_m3.txt
+  Size: n=10, k=3
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 363.25 (13.306125ms)
+  [2/6] GRASP... ✓ 363.25 (619.167µs)
+  [3/6] LS: First... ✓ 357.38 (4.709µs)
+  [4/6] LS: Best... ✓ 357.38 (7.125µs)
+  [5/6] Tabu... ✓ 363.25 (3.146542ms)
+  [6/6] GA... ✓ 363.25 (14.00875ms)
+
+[15/15] Testing: examples_from_mdp/GKD-a/GKD-a_9_n10_m3.txt
+  Size: n=10, k=3
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 541.09 (8.301167ms)
+  [2/6] GRASP... ✓ 541.09 (539.459µs)
+  [3/6] LS: First... ✓ 541.09 (12.959µs)
+  [4/6] LS: Best... ✓ 541.09 (7.292µs)
+  [5/6] Tabu... ✓ 541.09 (3.102667ms)
+  [6/6] GA... ✓ 541.09 (13.994125ms)
+
+
+--------------------------------------------------------------------------------
+Processing directory: examples_from_mdp/GKD-b
+--------------------------------------------------------------------------------
+Found 15 files
+
+[1/15] Testing: examples_from_mdp/GKD-b/GKD-b_10_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 4484.46 (28.300400333s)
+  [2/6] GRASP... ✓ 3418.31 (6.613208ms)
+  [3/6] LS: First... ✓ 3409.91 (67.667µs)
+  [4/6] LS: Best... ✓ 3409.91 (127.916µs)
+  [5/6] Tabu... ✓ 3418.31 (30.688541ms)
+  [6/6] GA... ✓ 3418.31 (25.611875ms)
+
+[2/15] Testing: examples_from_mdp/GKD-b/GKD-b_11_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1795.21 (103.439686625s)
+  [2/6] GRASP... ✓ 1795.21 (14.755958ms)
+  [3/6] LS: First... ✓ 1790.95 (379.542µs)
+  [4/6] LS: Best... ✓ 1795.21 (265.917µs)
+  [5/6] Tabu... ✓ 1795.21 (48.302042ms)
+  [6/6] GA... ✓ 1790.95 (43.600708ms)
+
+[3/15] Testing: examples_from_mdp/GKD-b/GKD-b_12_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 3219.15 (142.807628708s)
+  [2/6] GRASP... ✓ 2182.37 (17.478917ms)
+  [3/6] LS: First... ✓ 2182.37 (238.667µs)
+  [4/6] LS: Best... ✓ 2182.37 (285.125µs)
+  [5/6] Tabu... ✓ 2182.37 (58.132083ms)
+  [6/6] GA... ✓ 2182.37 (50.642458ms)
+
+[4/15] Testing: examples_from_mdp/GKD-b/GKD-b_13_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1365.70 (100.909708ms)
+  [2/6] GRASP... ✓ 1365.70 (16.121334ms)
+  [3/6] LS: First... ✓ 1365.70 (334.875µs)
+  [4/6] LS: Best... ✓ 1365.70 (212.833µs)
+  [5/6] Tabu... ✓ 1365.70 (47.583625ms)
+  [6/6] GA... ✓ 1365.70 (45.611792ms)
+
+[5/15] Testing: examples_from_mdp/GKD-b/GKD-b_14_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1291.36 (69.194291ms)
+  [2/6] GRASP... ✓ 1291.36 (9.97625ms)
+  [3/6] LS: First... ✓ 1291.36 (429.542µs)
+  [4/6] LS: Best... ✓ 1291.36 (170.417µs)
+  [5/6] Tabu... ✓ 1291.36 (44.719958ms)
+  [6/6] GA... ✓ 1275.18 (43.432416ms)
+
+[6/15] Testing: examples_from_mdp/GKD-b/GKD-b_15_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1890.26 (164.261221375s)
+  [2/6] GRASP... ✓ 1890.26 (16.475708ms)
+  [3/6] LS: First... ✓ 1890.26 (367µs)
+  [4/6] LS: Best... ✓ 1866.75 (271.5µs)
+  [5/6] Tabu... ✓ 1890.26 (63.293917ms)
+  [6/6] GA... ✓ 1890.26 (57.949917ms)
+
+[7/15] Testing: examples_from_mdp/GKD-b/GKD-b_1_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 121.25 (128.751333ms)
+  [2/6] GRASP... ✓ 121.25 (1.178042ms)
+  [3/6] LS: First... ✓ 109.98 (36.5µs)
+  [4/6] LS: Best... ✓ 109.98 (10.625µs)
+  [5/6] Tabu... ✓ 115.66 (7.66175ms)
+  [6/6] GA... ✓ 121.25 (32.197125ms)
+
+[8/15] Testing: examples_from_mdp/GKD-b/GKD-b_2_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 247.40 (135.568875ms)
+  [2/6] GRASP... ✓ 247.40 (1.320666ms)
+  [3/6] LS: First... ✓ 247.40 (16.375µs)
+  [4/6] LS: Best... ✓ 222.35 (41.125µs)
+  [5/6] Tabu... ✓ 247.40 (8.107416ms)
+  [6/6] GA... ✓ 247.40 (32.304333ms)
+
+[9/15] Testing: examples_from_mdp/GKD-b/GKD-b_3_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 131.36 (124.822083ms)
+  [2/6] GRASP... ✓ 131.36 (1.271042ms)
+  [3/6] LS: First... ✓ 120.37 (10µs)
+  [4/6] LS: Best... ✓ 131.36 (37.334µs)
+  [5/6] Tabu... ✓ 131.36 (7.733084ms)
+  [6/6] GA... ✓ 131.36 (32.4725ms)
+
+[10/15] Testing: examples_from_mdp/GKD-b/GKD-b_4_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 215.30 (109.255667ms)
+  [2/6] GRASP... ✓ 215.30 (1.20325ms)
+  [3/6] LS: First... ✓ 215.30 (41.208µs)
+  [4/6] LS: Best... ✓ 199.42 (10.542µs)
+  [5/6] Tabu... ✓ 215.30 (7.722167ms)
+  [6/6] GA... ✓ 215.30 (31.412166ms)
+
+[11/15] Testing: examples_from_mdp/GKD-b/GKD-b_5_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 254.72 (126.823834ms)
+  [2/6] GRASP... ✓ 254.72 (1.175625ms)
+  [3/6] LS: First... ✓ 236.41 (12.25µs)
+  [4/6] LS: Best... ✓ 254.72 (37.625µs)
+  [5/6] Tabu... ✓ 244.58 (7.700125ms)
+  [6/6] GA... ✓ 245.61 (31.821125ms)
+
+[12/15] Testing: examples_from_mdp/GKD-b/GKD-b_6_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 5498.66 (41.368243208s)
+  [2/6] GRASP... ✓ 4165.53 (12.152875ms)
+  [3/6] LS: First... ✓ 4165.53 (338.958µs)
+  [4/6] LS: Best... ✓ 4165.53 (289.667µs)
+  [5/6] Tabu... ✓ 4160.67 (45.524625ms)
+  [6/6] GA... ✓ 4160.67 (37.473083ms)
+
+[13/15] Testing: examples_from_mdp/GKD-b/GKD-b_7_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 5659.34 (40.988671833s)
+  [2/6] GRASP... ✓ 4285.73 (16.258916ms)
+  [3/6] LS: First... ✓ 4285.73 (580.958µs)
+  [4/6] LS: Best... ✓ 4285.73 (164.75µs)
+  [5/6] Tabu... ✓ 4285.73 (45.788291ms)
+  [6/6] GA... ✓ 4285.73 (36.608917ms)
+
+[14/15] Testing: examples_from_mdp/GKD-b/GKD-b_8_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 5116.27 (43.465638167s)
+  [2/6] GRASP... ✓ 3873.51 (10.810834ms)
+  [3/6] LS: First... ✓ 3873.51 (338.333µs)
+  [4/6] LS: Best... ✓ 3865.11 (291.166µs)
+  [5/6] Tabu... ✓ 3865.11 (45.494ms)
+  [6/6] GA... ✓ 3865.11 (37.093958ms)
+
+[15/15] Testing: examples_from_mdp/GKD-b/GKD-b_9_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1813.78 (29.421158792s)
+  [2/6] GRASP... ✓ 1813.78 (14.365084ms)
+  [3/6] LS: First... ✓ 1813.78 (688.375µs)
+  [4/6] LS: Best... ✓ 1813.78 (165.208µs)
+  [5/6] Tabu... ✓ 1813.78 (46.221416ms)
+  [6/6] GA... ✓ 1813.78 (36.60025ms)
+
+
+--------------------------------------------------------------------------------
+Processing directory: examples_from_mdp/GKD-c
+--------------------------------------------------------------------------------
+Found 15 files
+
+[1/15] Testing: examples_from_mdp/GKD-c/GKD-c_10_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19703.34 (896.67675ms)
+  [2/6] GRASP... ✓ 19703.34 (14.99299075s)
+  [3/6] LS: First... ✓ 19701.50 (13.276811167s)
+  [4/6] LS: Best... ✓ 19702.01 (875.509083ms)
+  [5/6] Tabu... ✓ 19703.34 (21.4764085s)
+  [6/6] GA... ✓ 19703.01 (1.345652917s)
+
+[2/15] Testing: examples_from_mdp/GKD-c/GKD-c_11_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19587.12 (740.186917ms)
+  [2/6] GRASP... ✓ 19587.12 (18.08442275s)
+  [3/6] LS: First... ✓ 19584.65 (12.140430708s)
+  [4/6] LS: Best... ✓ 19585.98 (949.899833ms)
+  [5/6] Tabu... ✓ 19587.12 (21.475782417s)
+  [6/6] GA... ✓ 19584.65 (1.346948875s)
+
+[3/15] Testing: examples_from_mdp/GKD-c/GKD-c_12_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19360.06 (796.708292ms)
+  [2/6] GRASP... ✓ 19360.22 (24.238450166s)
+  [3/6] LS: First... ✓ 19360.22 (15.10855775s)
+  [4/6] LS: Best... ✓ 19360.22 (915.89725ms)
+  [5/6] Tabu... ✓ 19360.22 (21.664326209s)
+  [6/6] GA... ✓ 19360.22 (1.340039s)
+
+[4/15] Testing: examples_from_mdp/GKD-c/GKD-c_13_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19366.70 (789.505375ms)
+  [2/6] GRASP... ✓ 19366.70 (14.009942917s)
+  [3/6] LS: First... ✓ 19366.15 (12.939747416s)
+  [4/6] LS: Best... ✓ 19366.70 (918.528292ms)
+  [5/6] Tabu... ✓ 19366.70 (21.321138458s)
+  [6/6] GA... ✓ 19366.70 (1.306775959s)
+
+[5/15] Testing: examples_from_mdp/GKD-c/GKD-c_14_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19458.56 (539.053292ms)
+  [2/6] GRASP... ✓ 19458.56 (30.383385875s)
+  [3/6] LS: First... ✓ 19458.56 (14.334313417s)
+  [4/6] LS: Best... ✓ 19458.56 (982.505125ms)
+  [5/6] Tabu... ✓ 19458.56 (21.451889625s)
+  [6/6] GA... ✓ 19458.56 (1.301992417s)
+
+[6/15] Testing: examples_from_mdp/GKD-c/GKD-c_15_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19422.05 (816.510834ms)
+  [2/6] GRASP... ✓ 19422.15 (29.182150209s)
+  [3/6] LS: First... ✓ 19422.05 (12.599063375s)
+  [4/6] LS: Best... ✓ 19422.15 (920.160667ms)
+  [5/6] Tabu... ✓ 19422.15 (21.67366625s)
+  [6/6] GA... ✓ 19422.15 (1.291193209s)
+
+[7/15] Testing: examples_from_mdp/GKD-c/GKD-c_1_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19485.19 (912.140833ms)
+  [2/6] GRASP... ✓ 19485.19 (20.501736834s)
+  [3/6] LS: First... ✓ 19485.19 (12.487990583s)
+  [4/6] LS: Best... ✓ 19481.39 (891.682625ms)
+  [5/6] Tabu... ✓ 19485.19 (21.69122s)
+  [6/6] GA... ✓ 19481.69 (1.329687291s)
+
+[8/15] Testing: examples_from_mdp/GKD-c/GKD-c_2_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19701.53 (606.986042ms)
+  [2/6] GRASP... ✓ 19701.53 (29.445044292s)
+  [3/6] LS: First... ✓ 19701.53 (13.340320084s)
+  [4/6] LS: Best... ✓ 19699.86 (915.342125ms)
+  [5/6] Tabu... ✓ 19700.37 (21.510301583s)
+  [6/6] GA... ✓ 19700.37 (1.235875667s)
+
+[9/15] Testing: examples_from_mdp/GKD-c/GKD-c_3_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19547.21 (818.765875ms)
+  [2/6] GRASP... ✓ 19547.21 (15.349248917s)
+  [3/6] LS: First... ✓ 19547.21 (14.55239575s)
+  [4/6] LS: Best... ✓ 19547.21 (908.747875ms)
+  [5/6] Tabu... ✓ 19547.21 (21.633687s)
+  [6/6] GA... ✓ 19543.93 (1.250779s)
+
+[10/15] Testing: examples_from_mdp/GKD-c/GKD-c_4_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19596.47 (882.718416ms)
+  [2/6] GRASP... ✓ 19596.47 (25.865366417s)
+  [3/6] LS: First... ✓ 19594.12 (13.919835875s)
+  [4/6] LS: Best... ✓ 19594.12 (915.25775ms)
+  [5/6] Tabu... ✓ 19596.47 (21.661322167s)
+  [6/6] GA... ✓ 19596.47 (1.413893416s)
+
+[11/15] Testing: examples_from_mdp/GKD-c/GKD-c_5_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19602.62 (700.106792ms)
+  [2/6] GRASP... ✓ 19602.62 (21.062088417s)
+  [3/6] LS: First... ✓ 19602.62 (11.198886625s)
+  [4/6] LS: Best... ✓ 19602.62 (956.283417ms)
+  [5/6] Tabu... ✓ 19602.62 (21.356473s)
+  [6/6] GA... ✓ 19602.62 (1.300485042s)
+
+[12/15] Testing: examples_from_mdp/GKD-c/GKD-c_6_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19421.54 (697.340625ms)
+  [2/6] GRASP... ✓ 19421.54 (25.537257584s)
+  [3/6] LS: First... ✓ 19421.54 (12.393604208s)
+  [4/6] LS: Best... ✓ 19421.54 (955.7395ms)
+  [5/6] Tabu... ✓ 19421.54 (21.30780325s)
+  [6/6] GA... ✓ 19421.54 (1.320831792s)
+
+[13/15] Testing: examples_from_mdp/GKD-c/GKD-c_7_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19534.30 (852.993208ms)
+  [2/6] GRASP... ✓ 19534.30 (26.265009167s)
+  [3/6] LS: First... ✓ 19532.54 (13.065180041s)
+  [4/6] LS: Best... ✓ 19534.30 (1.036155125s)
+  [5/6] Tabu... ✓ 19534.30 (21.503426458s)
+  [6/6] GA... ✓ 19531.80 (1.377831833s)
+
+[14/15] Testing: examples_from_mdp/GKD-c/GKD-c_8_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19486.68 (836.721709ms)
+  [2/6] GRASP... ✓ 19487.32 (36.917157209s)
+  [3/6] LS: First... ✓ 19484.69 (13.294759417s)
+  [4/6] LS: Best... ✓ 19486.68 (943.790125ms)
+  [5/6] Tabu... ✓ 19487.32 (21.581686208s)
+  [6/6] GA... ✓ 19486.43 (1.340572s)
+
+[15/15] Testing: examples_from_mdp/GKD-c/GKD-c_9_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 19221.63 (730.687459ms)
+  [2/6] GRASP... ✓ 19221.63 (36.504640584s)
+  [3/6] LS: First... ✓ 19221.63 (12.404718875s)
+  [4/6] LS: Best... ✓ 19221.63 (978.901ms)
+  [5/6] Tabu... ✓ 19221.63 (21.345900583s)
+  [6/6] GA... ✓ 19221.63 (1.32461925s)
+
+
+✓ GKD results saved to: results_GKD_20260129_130806.json
+
+--------------------------------------------------------------------------------
+SUMMARY FOR GKD (45 instances)
+--------------------------------------------------------------------------------
+File                                  n      k |           GA        GRASP      LS-Best     LS-First         QUBO         Tabu
+--------------------------------------------------------------------------------
+GKD-a_10_n10_m3.txt                  10      3 |       435.71       435.71       435.71       435.71       435.71       435.71
+GKD-a_11_n10_m4.txt                  10      4 |       649.72       649.72       649.72       649.72       649.72       649.72
+GKD-a_12_n10_m4.txt                  10      4 |      1181.47      1181.47      1181.47      1181.47      1181.47      1181.47
+GKD-a_13_n10_m4.txt                  10      4 |       733.43       733.43       733.43       733.43       733.43       733.43
+GKD-a_14_n10_m4.txt                  10      4 |       999.47       999.47       966.98       999.47       999.47       999.47
+GKD-a_15_n10_m4.txt                  10      4 |      1206.12      1206.12      1206.12      1206.12      1206.12      1206.12
+GKD-a_1_n10_m2.txt                   10      2 |       243.97       243.97       243.97       243.97       243.97       243.97
+GKD-a_2_n10_m2.txt                   10      2 |       210.65       210.65       191.44       210.65       210.65       210.65
+GKD-a_3_n10_m2.txt                   10      2 |       146.62       146.62       146.62       146.62       146.62       146.62
+GKD-a_4_n10_m2.txt                   10      2 |       186.18       186.18       186.18       186.18       186.18       186.18
+GKD-a_5_n10_m2.txt                   10      2 |       209.62       209.62       209.62       207.36       209.62       209.62
+GKD-a_6_n10_m3.txt                   10      3 |       254.13       254.13       254.13       254.13       254.13       254.13
+GKD-a_7_n10_m3.txt                   10      3 |       470.05       470.05       470.05       470.05       470.05       470.05
+GKD-a_8_n10_m3.txt                   10      3 |       363.25       363.25       357.38       357.38       363.25       363.25
+GKD-a_9_n10_m3.txt                   10      3 |       541.09       541.09       541.09       541.09       541.09       541.09
+GKD-b_10_n25_m7.txt                  25      7 |      3418.31      3418.31      3409.91      3409.91      4484.46      3418.31
+GKD-b_11_n50_m5.txt                  50      5 |      1790.95      1795.21      1795.21      1790.95      1795.21      1795.21
+GKD-b_12_n50_m5.txt                  50      5 |      2182.37      2182.37      2182.37      2182.37      3219.15      2182.37
+GKD-b_13_n50_m5.txt                  50      5 |      1365.70      1365.70      1365.70      1365.70      1365.70      1365.70
+GKD-b_14_n50_m5.txt                  50      5 |      1275.18      1291.36      1291.36      1291.36      1291.36      1291.36
+GKD-b_15_n50_m5.txt                  50      5 |      1890.26      1890.26      1866.75      1890.26      1890.26      1890.26
+GKD-b_1_n25_m2.txt                   25      2 |       121.25       121.25       109.98       109.98       121.25       115.66
+GKD-b_2_n25_m2.txt                   25      2 |       247.40       247.40       222.35       247.40       247.40       247.40
+GKD-b_3_n25_m2.txt                   25      2 |       131.36       131.36       131.36       120.37       131.36       131.36
+GKD-b_4_n25_m2.txt                   25      2 |       215.30       215.30       199.42       215.30       215.30       215.30
+GKD-b_5_n25_m2.txt                   25      2 |       245.61       254.72       254.72       236.41       254.72       244.58
+GKD-b_6_n25_m7.txt                   25      7 |      4160.67      4165.53      4165.53      4165.53      5498.66      4160.67
+GKD-b_7_n25_m7.txt                   25      7 |      4285.73      4285.73      4285.73      4285.73      5659.34      4285.73
+GKD-b_8_n25_m7.txt                   25      7 |      3865.11      3873.51      3865.11      3873.51      5116.27      3865.11
+GKD-b_9_n25_m7.txt                   25      7 |      1813.78      1813.78      1813.78      1813.78      1813.78      1813.78
+GKD-c_10_n500_m50.txt               500     50 |     19703.01     19703.34     19702.01     19701.50     19703.34     19703.34
+GKD-c_11_n500_m50.txt               500     50 |     19584.65     19587.12     19585.98     19584.65     19587.12     19587.12
+GKD-c_12_n500_m50.txt               500     50 |     19360.22     19360.22     19360.22     19360.22     19360.06     19360.22
+GKD-c_13_n500_m50.txt               500     50 |     19366.70     19366.70     19366.70     19366.15     19366.70     19366.70
+GKD-c_14_n500_m50.txt               500     50 |     19458.56     19458.56     19458.56     19458.56     19458.56     19458.56
+GKD-c_15_n500_m50.txt               500     50 |     19422.15     19422.15     19422.15     19422.05     19422.05     19422.15
+GKD-c_1_n500_m50.txt                500     50 |     19481.69     19485.19     19481.39     19485.19     19485.19     19485.19
+GKD-c_2_n500_m50.txt                500     50 |     19700.37     19701.53     19699.86     19701.53     19701.53     19700.37
+GKD-c_3_n500_m50.txt                500     50 |     19543.93     19547.21     19547.21     19547.21     19547.21     19547.21
+GKD-c_4_n500_m50.txt                500     50 |     19596.47     19596.47     19594.12     19594.12     19596.47     19596.47
+GKD-c_5_n500_m50.txt                500     50 |     19602.62     19602.62     19602.62     19602.62     19602.62     19602.62
+GKD-c_6_n500_m50.txt                500     50 |     19421.54     19421.54     19421.54     19421.54     19421.54     19421.54
+GKD-c_7_n500_m50.txt                500     50 |     19531.80     19534.30     19534.30     19532.54     19534.30     19534.30
+GKD-c_8_n500_m50.txt                500     50 |     19486.43     19487.32     19486.68     19484.69     19486.68     19487.32
+GKD-c_9_n500_m50.txt                500     50 |     19221.63     19221.63     19221.63     19221.63     19221.63     19221.63
+
+
+================================================================================
+PROCESSING CATEGORY: MDG
+================================================================================
+
+--------------------------------------------------------------------------------
+Processing directory: examples_from_mdp/MDG-a
+--------------------------------------------------------------------------------
+Found 5 files
+
+[1/5] Testing: examples_from_mdp/MDG-a/MDG-a_1_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 7833.83 (180.19040475s)
+  [2/6] GRASP... ✓ 7759.03 (17.137480792s)
+  [3/6] LS: First... ✓ 7708.02 (3.155061083s)
+  [4/6] LS: Best... ✓ 7696.57 (1.247364417s)
+  [5/6] Tabu... ✓ 7774.37 (21.528651167s)
+  [6/6] GA... ✓ 7659.76 (1.469478834s)
+
+[2/5] Testing: examples_from_mdp/MDG-a/MDG-a_2_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 7771.66 (180.192536584s)
+  [2/6] GRASP... ✓ 7691.98 (31.232443042s)
+  [3/6] LS: First... ✓ 7620.99 (3.048218875s)
+  [4/6] LS: Best... ✓ 7620.80 (855.551917ms)
+  [5/6] Tabu... ✓ 7581.88 (21.450079708s)
+  [6/6] GA... ✓ 7585.69 (1.355356542s)
+
+[3/5] Testing: examples_from_mdp/MDG-a/MDG-a_3_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 7759.36 (180.184237292s)
+  [2/6] GRASP... ✓ 7686.80 (26.797091166s)
+  [3/6] LS: First... ✓ 7654.62 (3.213801209s)
+  [4/6] LS: Best... ✓ 7644.95 (895.357625ms)
+  [5/6] Tabu... ✓ 7686.24 (21.259581542s)
+  [6/6] GA... ✓ 7596.27 (1.361080083s)
+
+[4/5] Testing: examples_from_mdp/MDG-a/MDG-a_4_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 7770.24 (180.202548208s)
+  [2/6] GRASP... ✓ 7711.58 (25.742835s)
+  [3/6] LS: First... ✓ 7582.70 (2.430748125s)
+  [4/6] LS: Best... ✓ 7649.39 (899.090333ms)
+  [5/6] Tabu... ✓ 7595.70 (21.287244167s)
+  [6/6] GA... ✓ 7620.62 (1.388050666s)
+
+[5/5] Testing: examples_from_mdp/MDG-a/MDG-a_5_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 7755.23 (180.183413916s)
+  [2/6] GRASP... ✓ 7636.82 (18.269906291s)
+  [3/6] LS: First... ✓ 7617.93 (3.323116708s)
+  [4/6] LS: Best... ✓ 7570.27 (1.0296905s)
+  [5/6] Tabu... ✓ 7667.89 (21.461543542s)
+  [6/6] GA... ✓ 7543.12 (1.077270375s)
+
+
+--------------------------------------------------------------------------------
+Processing directory: examples_from_mdp/MDG-b
+--------------------------------------------------------------------------------
+Found 5 files
+
+[1/5] Testing: examples_from_mdp/MDG-b/MDG-b_1_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1464093.20 (180.185953833s)
+  [2/6] GRASP... ✓ 772276.88 (37.27658475s)
+  [3/6] LS: First... ✓ 761543.97 (2.631611208s)
+  [4/6] LS: Best... ✓ 757205.97 (847.465ms)
+  [5/6] Tabu... ✓ 768880.20 (21.732951208s)
+  [6/6] GA... ✓ 765929.21 (1.483176167s)
+
+[2/5] Testing: examples_from_mdp/MDG-b/MDG-b_2_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1422533.62 (180.1892195s)
+  [2/6] GRASP... ✓ 768700.62 (22.176910917s)
+  [3/6] LS: First... ✓ 758202.81 (2.578186167s)
+  [4/6] LS: Best... ✓ 760066.67 (916.145875ms)
+  [5/6] Tabu... ✓ 758824.25 (21.476651125s)
+  [6/6] GA... ✓ 751009.32 (1.032867917s)
+
+[3/5] Testing: examples_from_mdp/MDG-b/MDG-b_3_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1421790.05 (180.1801535s)
+  [2/6] GRASP... ✓ 773962.87 (25.059547708s)
+  [3/6] LS: First... ✓ 772588.13 (3.423030375s)
+  [4/6] LS: Best... ✓ 769062.75 (1.052701042s)
+  [5/6] Tabu... ✓ 766555.48 (21.237581917s)
+  [6/6] GA... ✓ 753675.94 (1.28570125s)
+
+[4/5] Testing: examples_from_mdp/MDG-b/MDG-b_4_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1457905.15 (48.390535791s)
+  [2/6] GRASP... ✓ 772094.12 (34.061252834s)
+  [3/6] LS: First... ✓ 762423.30 (2.796998834s)
+  [4/6] LS: Best... ✓ 752230.87 (956.627042ms)
+  [5/6] Tabu... ✓ 768006.16 (21.229145875s)
+  [6/6] GA... ✓ 752110.88 (1.251664709s)
+
+[5/5] Testing: examples_from_mdp/MDG-b/MDG-b_5_n500_m50.txt
+  Size: n=500, k=50
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1457281.16 (180.190586667s)
+  [2/6] GRASP... ✓ 769579.14 (25.1740535s)
+  [3/6] LS: First... ✓ 769597.01 (3.265299917s)
+  [4/6] LS: Best... ✓ 751174.59 (798.548333ms)
+  [5/6] Tabu... ✓ 761780.01 (21.181661083s)
+  [6/6] GA... ✓ 760191.47 (1.239478041s)
+
+
+--------------------------------------------------------------------------------
+Processing directory: examples_from_mdp/MDG-c
+--------------------------------------------------------------------------------
+Found 5 files
+
+[1/5] Testing: examples_from_mdp/MDG-c/MDG-c_1_n3000_m300.txt
+  Size: n=3000, k=300
+  (Very large instance - minimal solvers, very short time)
+  [1/2] LS: First... ✓ 22532773.00 (3.466009584s)
+  [2/2] GRASP (minimal)... ✓ 24481891.00 (2775.71883675s)
+
+[2/5] Testing: examples_from_mdp/MDG-c/MDG-c_2_n3000_m300.txt
+  Size: n=3000, k=300
+  (Very large instance - minimal solvers, very short time)
+  [1/2] LS: First... ✓ 22455708.00 (4.237134792s)
+  [2/2] GRASP (minimal)... ✓ 24510601.00 (2647.080447333s)
+
+[3/5] Testing: examples_from_mdp/MDG-c/MDG-c_3_n3000_m300.txt
+  Size: n=3000, k=300
+  (Very large instance - minimal solvers, very short time)
+  [1/2] LS: First... ✓ 22420384.00 (4.79844775s)
+  [2/2] GRASP (minimal)... ✓ 24496438.00 (2833.490208583s)
+
+[4/5] Testing: examples_from_mdp/MDG-c/MDG-c_4_n3000_m300.txt
+  Size: n=3000, k=300
+  (Very large instance - minimal solvers, very short time)
+  [1/2] LS: First... ✓ 22522542.00 (6.110878541s)
+  [2/2] GRASP (minimal)... ✓ 24534108.00 (2855.552861417s)
+
+[5/5] Testing: examples_from_mdp/MDG-c/MDG-c_5_n3000_m300.txt
+  Size: n=3000, k=300
+  (Very large instance - minimal solvers, very short time)
+  [1/2] LS: First... ✓ 22529500.00 (5.461438042s)
+  [2/2] GRASP (minimal)... ✓ 24505105.00 (3175.838583041s)
+
+
+✓ MDG results saved to: results_MDG_20260129_130806.json
+
+--------------------------------------------------------------------------------
+SUMMARY FOR MDG (15 instances)
+--------------------------------------------------------------------------------
+File                                  n      k |           GA        GRASP      LS-Best     LS-First         QUBO         Tabu
+--------------------------------------------------------------------------------
+MDG-a_1_n500_m50.txt                500     50 |      7659.76      7759.03      7696.57      7708.02      7833.83      7774.37
+MDG-a_2_n500_m50.txt                500     50 |      7585.69      7691.98      7620.80      7620.99      7771.66      7581.88
+MDG-a_3_n500_m50.txt                500     50 |      7596.27      7686.80      7644.95      7654.62      7759.36      7686.24
+MDG-a_4_n500_m50.txt                500     50 |      7620.62      7711.58      7649.39      7582.70      7770.24      7595.70
+MDG-a_5_n500_m50.txt                500     50 |      7543.12      7636.82      7570.27      7617.93      7755.23      7667.89
+MDG-b_1_n500_m50.txt                500     50 |    765929.21    772276.88    757205.97    761543.97   1464093.20    768880.20
+MDG-b_2_n500_m50.txt                500     50 |    751009.32    768700.62    760066.67    758202.81   1422533.62    758824.25
+MDG-b_3_n500_m50.txt                500     50 |    753675.94    773962.87    769062.75    772588.13   1421790.05    766555.48
+MDG-b_4_n500_m50.txt                500     50 |    752110.88    772094.12    752230.87    762423.30   1457905.15    768006.16
+MDG-b_5_n500_m50.txt                500     50 |    760191.47    769579.14    751174.59    769597.01   1457281.16    761780.01
+MDG-c_1_n3000_m300.txt             3000    300 |            -  24481891.00            -  22532773.00            -            -
+MDG-c_2_n3000_m300.txt             3000    300 |            -  24510601.00            -  22455708.00            -            -
+MDG-c_3_n3000_m300.txt             3000    300 |            -  24496438.00            -  22420384.00            -            -
+MDG-c_4_n3000_m300.txt             3000    300 |            -  24534108.00            -  22522542.00            -            -
+MDG-c_5_n3000_m300.txt             3000    300 |            -  24505105.00            -  22529500.00            -            -
+
+
+================================================================================
+PROCESSING CATEGORY: SOM
+================================================================================
+
+--------------------------------------------------------------------------------
+Processing directory: examples_from_mdp/SOM-a
+--------------------------------------------------------------------------------
+Found 15 files
+
+[1/15] Testing: examples_from_mdp/SOM-a/SOM-a_10_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 158.00 (56.631403542s)
+  [2/6] GRASP... ✓ 158.00 (21.263833ms)
+  [3/6] LS: First... ✓ 144.00 (191.75µs)
+  [4/6] LS: Best... ✓ 158.00 (363.125µs)
+  [5/6] Tabu... ✓ 158.00 (73.128291ms)
+  [6/6] GA... ✓ 158.00 (54.540833ms)
+
+[2/15] Testing: examples_from_mdp/SOM-a/SOM-a_11_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 84.00 (178.777588417s)
+  [2/6] GRASP... ✓ 84.00 (34.565625ms)
+  [3/6] LS: First... ✓ 82.00 (401.292µs)
+  [4/6] LS: Best... ✓ 80.00 (370.583µs)
+  [5/6] Tabu... ✓ 79.00 (100.336667ms)
+  [6/6] GA... ✓ 84.00 (89.683083ms)
+
+[3/15] Testing: examples_from_mdp/SOM-a/SOM-a_12_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 87.00 (180.065904875s)
+  [2/6] GRASP... ✓ 87.00 (40.118167ms)
+  [3/6] LS: First... ✓ 77.00 (219.625µs)
+  [4/6] LS: Best... ✓ 81.00 (245.792µs)
+  [5/6] Tabu... ✓ 87.00 (94.89875ms)
+  [6/6] GA... ✓ 84.00 (87.7915ms)
+
+[4/15] Testing: examples_from_mdp/SOM-a/SOM-a_13_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 85.00 (96.895869416s)
+  [2/6] GRASP... ✓ 85.00 (25.571125ms)
+  [3/6] LS: First... ✓ 79.00 (406.125µs)
+  [4/6] LS: Best... ✓ 85.00 (372.458µs)
+  [5/6] Tabu... ✓ 84.00 (101.686917ms)
+  [6/6] GA... ✓ 80.00 (89.247125ms)
+
+[5/15] Testing: examples_from_mdp/SOM-a/SOM-a_14_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 82.00 (165.411504208s)
+  [2/6] GRASP... ✓ 82.00 (25.421792ms)
+  [3/6] LS: First... ✓ 80.00 (215.167µs)
+  [4/6] LS: Best... ✓ 76.00 (375µs)
+  [5/6] Tabu... ✓ 82.00 (104.900333ms)
+  [6/6] GA... ✓ 82.00 (91.321958ms)
+
+[6/15] Testing: examples_from_mdp/SOM-a/SOM-a_15_n50_m5.txt
+  Size: n=50, k=5
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 84.00 (121.459903417s)
+  [2/6] GRASP... ✓ 84.00 (32.297875ms)
+  [3/6] LS: First... ✓ 84.00 (445.5µs)
+  [4/6] LS: Best... ✓ 84.00 (500.792µs)
+  [5/6] Tabu... ✓ 80.00 (98.308791ms)
+  [6/6] GA... ✓ 81.00 (84.995458ms)
+
+[7/15] Testing: examples_from_mdp/SOM-a/SOM-a_1_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 9.00 (217.222417ms)
+  [2/6] GRASP... ✓ 9.00 (1.768083ms)
+  [3/6] LS: First... ✓ 9.00 (16.541µs)
+  [4/6] LS: Best... ✓ 9.00 (53.75µs)
+  [5/6] Tabu... ✓ 9.00 (12.191875ms)
+  [6/6] GA... ✓ 9.00 (51.341917ms)
+
+[8/15] Testing: examples_from_mdp/SOM-a/SOM-a_2_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 9.00 (193.584209ms)
+  [2/6] GRASP... ✓ 9.00 (1.820417ms)
+  [3/6] LS: First... ✓ 9.00 (52.833µs)
+  [4/6] LS: Best... ✓ 9.00 (16.916µs)
+  [5/6] Tabu... ✓ 9.00 (12.437792ms)
+  [6/6] GA... ✓ 9.00 (51.506959ms)
+
+[9/15] Testing: examples_from_mdp/SOM-a/SOM-a_3_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 9.00 (190.41625ms)
+  [2/6] GRASP... ✓ 9.00 (1.721417ms)
+  [3/6] LS: First... ✓ 9.00 (53.875µs)
+  [4/6] LS: Best... ✓ 9.00 (52.917µs)
+  [5/6] Tabu... ✓ 9.00 (12.19675ms)
+  [6/6] GA... ✓ 9.00 (52.042792ms)
+
+[10/15] Testing: examples_from_mdp/SOM-a/SOM-a_4_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 9.00 (148.173292ms)
+  [2/6] GRASP... ✓ 9.00 (1.778417ms)
+  [3/6] LS: First... ✓ 9.00 (51.375µs)
+  [4/6] LS: Best... ✓ 9.00 (16.958µs)
+  [5/6] Tabu... ✓ 9.00 (12.220041ms)
+  [6/6] GA... ✓ 9.00 (51.829292ms)
+
+[11/15] Testing: examples_from_mdp/SOM-a/SOM-a_5_n25_m2.txt
+  Size: n=25, k=2
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 9.00 (182.668958ms)
+  [2/6] GRASP... ✓ 9.00 (1.756667ms)
+  [3/6] LS: First... ✓ 9.00 (53.042µs)
+  [4/6] LS: Best... ✓ 9.00 (16.667µs)
+  [5/6] Tabu... ✓ 9.00 (12.267125ms)
+  [6/6] GA... ✓ 9.00 (51.053667ms)
+
+[12/15] Testing: examples_from_mdp/SOM-a/SOM-a_6_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 153.00 (59.775942333s)
+  [2/6] GRASP... ✓ 153.00 (18.466458ms)
+  [3/6] LS: First... ✓ 147.00 (481.125µs)
+  [4/6] LS: Best... ✓ 153.00 (367.417µs)
+  [5/6] Tabu... ✓ 153.00 (73.418541ms)
+  [6/6] GA... ✓ 147.00 (58.651417ms)
+
+[13/15] Testing: examples_from_mdp/SOM-a/SOM-a_7_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 150.00 (60.592173875s)
+  [2/6] GRASP... ✓ 150.00 (16.317875ms)
+  [3/6] LS: First... ✓ 148.00 (455.25µs)
+  [4/6] LS: Best... ✓ 150.00 (514.542µs)
+  [5/6] Tabu... ✓ 150.00 (72.746042ms)
+  [6/6] GA... ✓ 150.00 (56.651791ms)
+
+[14/15] Testing: examples_from_mdp/SOM-a/SOM-a_8_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 144.00 (59.107681833s)
+  [2/6] GRASP... ✓ 144.00 (22.254583ms)
+  [3/6] LS: First... ✓ 130.00 (410.625µs)
+  [4/6] LS: Best... ✓ 138.00 (263.792µs)
+  [5/6] Tabu... ✓ 141.00 (73.010292ms)
+  [6/6] GA... ✓ 137.00 (62.972958ms)
+
+[15/15] Testing: examples_from_mdp/SOM-a/SOM-a_9_n25_m7.txt
+  Size: n=25, k=7
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 147.00 (62.489657459s)
+  [2/6] GRASP... ✓ 147.00 (18.880166ms)
+  [3/6] LS: First... ✓ 147.00 (407.458µs)
+  [4/6] LS: Best... ✓ 143.00 (316.625µs)
+  [5/6] Tabu... ✓ 147.00 (73.184708ms)
+  [6/6] GA... ✓ 143.00 (56.500792ms)
+
+
+--------------------------------------------------------------------------------
+Processing directory: examples_from_mdp/SOM-b
+--------------------------------------------------------------------------------
+Found 15 files
+
+[1/15] Testing: examples_from_mdp/SOM-b/SOM-b_10_n300_m60.txt
+  Size: n=300, k=60
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 9689.00 (180.232568083s)
+  [2/6] GRASP... ✓ 9640.00 (23.028758s)
+  [3/6] LS: First... ✓ 9558.00 (2.380086375s)
+  [4/6] LS: Best... ✓ 9559.00 (913.350167ms)
+  [5/6] Tabu... ✓ 9609.00 (21.361825333s)
+  [6/6] GA... ✓ 9579.00 (1.376628167s)
+
+[2/15] Testing: examples_from_mdp/SOM-b/SOM-b_11_n300_m90.txt
+  Size: n=300, k=90
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 20743.00 (180.176136666s)
+  [2/6] GRASP... ✓ 20699.00 (48.541966208s)
+  [3/6] LS: First... ✓ 20716.00 (8.109713416s)
+  [4/6] LS: Best... ✓ 20514.00 (2.915715292s)
+  [5/6] Tabu... ✓ 20597.00 (40.05683275s)
+  [6/6] GA... ✓ 20482.00 (2.823683208s)
+
+[3/15] Testing: examples_from_mdp/SOM-b/SOM-b_12_n300_m120.txt
+  Size: n=300, k=120
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 35881.00 (180.177558458s)
+  [2/6] GRASP... ✓ 35881.00 (146.741861834s)
+  [3/6] LS: First... ✓ 35768.00 (16.616152458s)
+  [4/6] LS: Best... ✓ 35812.00 (5.67064575s)
+  [5/6] Tabu... ✓ 35816.00 (67.008010334s)
+  [6/6] GA... ✓ 35881.00 (5.677134917s)
+
+[4/15] Testing: examples_from_mdp/SOM-b/SOM-b_13_n400_m40.txt
+  Size: n=400, k=40
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 4658.00 (180.164165167s)
+  [2/6] GRASP... ✓ 4633.00 (16.166920125s)
+  [3/6] LS: First... ✓ 4567.00 (1.139811041s)
+  [4/6] LS: Best... ✓ 4527.00 (419.572542ms)
+  [5/6] Tabu... ✓ 4542.00 (14.779629167s)
+  [6/6] GA... ✓ 4602.00 (952.254167ms)
+
+[5/15] Testing: examples_from_mdp/SOM-b/SOM-b_14_n400_m80.txt
+  Size: n=400, k=80
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 16956.00 (180.16857425s)
+  [2/6] GRASP... ✓ 16904.00 (74.264309542s)
+  [3/6] LS: First... ✓ 16922.00 (9.923911542s)
+  [4/6] LS: Best... ✓ 16711.00 (3.373752625s)
+  [5/6] Tabu... ✓ 16610.00 (48.963722625s)
+  [6/6] GA... ✓ 16782.00 (4.14551s)
+
+[6/15] Testing: examples_from_mdp/SOM-b/SOM-b_15_n400_m120.txt
+  Size: n=400, k=120
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 36317.00 (180.17986425s)
+  [2/6] GRASP... ✓ 36244.00 (243.799085667s)
+  [3/6] LS: First... ✓ 36206.00 (30.084482666s)
+  [4/6] LS: Best... ✓ 36001.00 (8.511766875s)
+  [5/6] Tabu... ✓ 36107.00 (92.436314958s)
+  [6/6] GA... ✓ 36145.00 (8.327514166s)
+
+[7/15] Testing: examples_from_mdp/SOM-b/SOM-b_1_n100_m10.txt
+  Size: n=100, k=10
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 333.00 (181.026324708s)
+  [2/6] GRASP... ✓ 333.00 (113.083042ms)
+  [3/6] LS: First... ✓ 322.00 (4.158417ms)
+  [4/6] LS: Best... ✓ 297.00 (1.666959ms)
+  [5/6] Tabu... ✓ 323.00 (302.544792ms)
+  [6/6] GA... ✓ 316.00 (95.904167ms)
+
+[8/15] Testing: examples_from_mdp/SOM-b/SOM-b_2_n100_m20.txt
+  Size: n=100, k=20
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1195.00 (180.593896875s)
+  [2/6] GRASP... ✓ 1185.00 (360.501625ms)
+  [3/6] LS: First... ✓ 1195.00 (20.867667ms)
+  [4/6] LS: Best... ✓ 1163.00 (9.61675ms)
+  [5/6] Tabu... ✓ 1168.00 (730.544875ms)
+  [6/6] GA... ✓ 1175.00 (89.519292ms)
+
+[9/15] Testing: examples_from_mdp/SOM-b/SOM-b_3_n100_m30.txt
+  Size: n=100, k=30
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 2457.00 (181.137819375s)
+  [2/6] GRASP... ✓ 2457.00 (574.369625ms)
+  [3/6] LS: First... ✓ 2408.00 (58.996333ms)
+  [4/6] LS: Best... ✓ 2411.00 (24.249375ms)
+  [5/6] Tabu... ✓ 2390.00 (1.2912175s)
+  [6/6] GA... ✓ 2319.00 (97.736459ms)
+
+[10/15] Testing: examples_from_mdp/SOM-b/SOM-b_4_n100_m40.txt
+  Size: n=100, k=40
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 4142.00 (180.775060583s)
+  [2/6] GRASP... ✓ 4142.00 (792.107916ms)
+  [3/6] LS: First... ✓ 4131.00 (68.735375ms)
+  [4/6] LS: Best... ✓ 4142.00 (37.342083ms)
+  [5/6] Tabu... ✓ 4139.00 (1.841147375s)
+  [6/6] GA... ✓ 4084.00 (130.072542ms)
+
+[11/15] Testing: examples_from_mdp/SOM-b/SOM-b_5_n200_m20.txt
+  Size: n=200, k=20
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 1247.00 (93.778137875s)
+  [2/6] GRASP... ✓ 1239.00 (969.582584ms)
+  [3/6] LS: First... ✓ 1221.00 (55.831083ms)
+  [4/6] LS: Best... ✓ 1202.00 (30.555917ms)
+  [5/6] Tabu... ✓ 1211.00 (1.602391s)
+  [6/6] GA... ✓ 1197.00 (183.545625ms)
+
+[12/15] Testing: examples_from_mdp/SOM-b/SOM-b_6_n200_m40.txt
+  Size: n=200, k=40
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 4450.00 (180.316738166s)
+  [2/6] GRASP... ✓ 4448.00 (11.5255335s)
+  [3/6] LS: First... ✓ 4350.00 (788.651167ms)
+  [4/6] LS: Best... ✓ 4411.00 (383.553958ms)
+  [5/6] Tabu... ✓ 4368.00 (9.4092565s)
+  [6/6] GA... ✓ 4352.00 (535.760417ms)
+
+[13/15] Testing: examples_from_mdp/SOM-b/SOM-b_7_n200_m60.txt
+  Size: n=200, k=60
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 9437.00 (80.687118958s)
+  [2/6] GRASP... ✓ 9401.00 (9.635171541s)
+  [3/6] LS: First... ✓ 9388.00 (1.571010333s)
+  [4/6] LS: Best... ✓ 9413.00 (783.032166ms)
+  [5/6] Tabu... ✓ 9315.00 (12.344391625s)
+  [6/6] GA... ✓ 9327.00 (726.568ms)
+
+[14/15] Testing: examples_from_mdp/SOM-b/SOM-b_8_n200_m80.txt
+  Size: n=200, k=80
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 16225.00 (180.361358958s)
+  [2/6] GRASP... ✓ 16219.00 (20.118876833s)
+  [3/6] LS: First... ✓ 16222.00 (3.13446525s)
+  [4/6] LS: Best... ✓ 16116.00 (1.05007675s)
+  [5/6] Tabu... ✓ 16159.00 (21.129442792s)
+  [6/6] GA... ✓ 16209.00 (1.099892s)
+
+[15/15] Testing: examples_from_mdp/SOM-b/SOM-b_9_n300_m30.txt
+  Size: n=300, k=30
+  (Small instance - full solver suite)
+Set parameter TimeLimit to value 180
+Set parameter MIPGap to value 0.01
+  [1/6] QUBO... ✓ 2694.00 (40.023472958s)
+  [2/6] GRASP... ✓ 2691.00 (3.755646167s)
+  [3/6] LS: First... ✓ 2674.00 (335.933666ms)
+  [4/6] LS: Best... ✓ 2637.00 (239.752083ms)
+  [5/6] Tabu... ✓ 2642.00 (7.373369958s)
+  [6/6] GA... ✓ 2623.00 (557.685792ms)
+
+
+✓ SOM results saved to: results_SOM_20260129_130806.json
+
+--------------------------------------------------------------------------------
+SUMMARY FOR SOM (30 instances)
+--------------------------------------------------------------------------------
+File                                  n      k |           GA        GRASP      LS-Best     LS-First         QUBO         Tabu
+--------------------------------------------------------------------------------
+SOM-a_10_n25_m7.txt                  25      7 |       158.00       158.00       158.00       144.00       158.00       158.00
+SOM-a_11_n50_m5.txt                  50      5 |        84.00        84.00        80.00        82.00        84.00        79.00
+SOM-a_12_n50_m5.txt                  50      5 |        84.00        87.00        81.00        77.00        87.00        87.00
+SOM-a_13_n50_m5.txt                  50      5 |        80.00        85.00        85.00        79.00        85.00        84.00
+SOM-a_14_n50_m5.txt                  50      5 |        82.00        82.00        76.00        80.00        82.00        82.00
+SOM-a_15_n50_m5.txt                  50      5 |        81.00        84.00        84.00        84.00        84.00        80.00
+SOM-a_1_n25_m2.txt                   25      2 |         9.00         9.00         9.00         9.00         9.00         9.00
+SOM-a_2_n25_m2.txt                   25      2 |         9.00         9.00         9.00         9.00         9.00         9.00
+SOM-a_3_n25_m2.txt                   25      2 |         9.00         9.00         9.00         9.00         9.00         9.00
+SOM-a_4_n25_m2.txt                   25      2 |         9.00         9.00         9.00         9.00         9.00         9.00
+SOM-a_5_n25_m2.txt                   25      2 |         9.00         9.00         9.00         9.00         9.00         9.00
+SOM-a_6_n25_m7.txt                   25      7 |       147.00       153.00       153.00       147.00       153.00       153.00
+SOM-a_7_n25_m7.txt                   25      7 |       150.00       150.00       150.00       148.00       150.00       150.00
+SOM-a_8_n25_m7.txt                   25      7 |       137.00       144.00       138.00       130.00       144.00       141.00
+SOM-a_9_n25_m7.txt                   25      7 |       143.00       147.00       143.00       147.00       147.00       147.00
+SOM-b_10_n300_m60.txt               300     60 |      9579.00      9640.00      9559.00      9558.00      9689.00      9609.00
+SOM-b_11_n300_m90.txt               300     90 |     20482.00     20699.00     20514.00     20716.00     20743.00     20597.00
+SOM-b_12_n300_m120.txt              300    120 |     35881.00     35881.00     35812.00     35768.00     35881.00     35816.00
+SOM-b_13_n400_m40.txt               400     40 |      4602.00      4633.00      4527.00      4567.00      4658.00      4542.00
+SOM-b_14_n400_m80.txt               400     80 |     16782.00     16904.00     16711.00     16922.00     16956.00     16610.00
+SOM-b_15_n400_m120.txt              400    120 |     36145.00     36244.00     36001.00     36206.00     36317.00     36107.00
+SOM-b_1_n100_m10.txt                100     10 |       316.00       333.00       297.00       322.00       333.00       323.00
+SOM-b_2_n100_m20.txt                100     20 |      1175.00      1185.00      1163.00      1195.00      1195.00      1168.00
+SOM-b_3_n100_m30.txt                100     30 |      2319.00      2457.00      2411.00      2408.00      2457.00      2390.00
+SOM-b_4_n100_m40.txt                100     40 |      4084.00      4142.00      4142.00      4131.00      4142.00      4139.00
+SOM-b_5_n200_m20.txt                200     20 |      1197.00      1239.00      1202.00      1221.00      1247.00      1211.00
+SOM-b_6_n200_m40.txt                200     40 |      4352.00      4448.00      4411.00      4350.00      4450.00      4368.00
+SOM-b_7_n200_m60.txt                200     60 |      9327.00      9401.00      9413.00      9388.00      9437.00      9315.00
+SOM-b_8_n200_m80.txt                200     80 |     16209.00     16219.00     16116.00     16222.00     16225.00     16159.00
+SOM-b_9_n300_m30.txt                300     30 |      2623.00      2691.00      2637.00      2674.00      2694.00      2642.00
+
+
+✓ Visualization script saved to: visualize_results.py
+  Run with: python visualize_results.py results_*_20260129_130806.json

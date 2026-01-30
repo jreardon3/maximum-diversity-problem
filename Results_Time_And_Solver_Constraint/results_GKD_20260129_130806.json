@@ -1,0 +1,1986 @@
+{
+  "timestamp": "20260129_130806",
+  "category": "GKD",
+  "instances": [
+    {
+      "filename": "GKD-a_10_n10_m3.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 3,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 435.71251000000007,
+          "time_ms": 27,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 435.71251000000007,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 435.71251,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 435.71251,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 435.71251000000007,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 435.71251000000007,
+          "time_ms": 16,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_11_n10_m4.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 4,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 649.72168,
+          "time_ms": 22,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 649.7216800000001,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 649.7216800000001,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 649.72168,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 649.7216800000001,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 649.7216800000001,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_12_n10_m4.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 4,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1181.47302,
+          "time_ms": 11,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 1181.4730200000004,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 1181.47302,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 1181.4730200000001,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 1181.4730200000001,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 1181.4730200000001,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_13_n10_m4.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 4,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 733.4334000000001,
+          "time_ms": 15,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 733.4334000000001,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 733.4334000000001,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 733.4334000000001,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 733.4334,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 733.4334000000001,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_14_n10_m4.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 4,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 999.4698900000001,
+          "time_ms": 20,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 999.4698900000001,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 999.46989,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 966.9815199999999,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 999.4698900000001,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 999.4698900000001,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_15_n10_m4.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 4,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1206.12429,
+          "time_ms": 16,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 1206.1242900000002,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 1206.1242900000002,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 1206.12429,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 1206.12429,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 1206.1242900000002,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_1_n10_m2.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 243.97252,
+          "time_ms": 6,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 243.97252,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 243.97252,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 243.97252,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 243.97252,
+          "time_ms": 2,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 243.97252,
+          "time_ms": 14,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_2_n10_m2.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 210.65042,
+          "time_ms": 6,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 210.65042,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 210.65042,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 191.44179,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 210.65042,
+          "time_ms": 2,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 210.65042,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_3_n10_m2.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 146.61536,
+          "time_ms": 7,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 146.61536,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 146.61536,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 146.61536,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 146.61536,
+          "time_ms": 2,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 146.61536,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_4_n10_m2.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 186.18103,
+          "time_ms": 5,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 186.18103,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 186.18103,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 186.18103,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 186.18103,
+          "time_ms": 2,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 186.18103,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_5_n10_m2.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 209.61568,
+          "time_ms": 6,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 209.61568,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 207.35699,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 209.61568,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 209.61568,
+          "time_ms": 2,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 209.61568,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_6_n10_m3.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 3,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 254.13277,
+          "time_ms": 9,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 254.13277000000002,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 254.13277,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 254.13277,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 254.13277,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 254.13277000000002,
+          "time_ms": 14,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_7_n10_m3.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 3,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 470.04624,
+          "time_ms": 9,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 470.04624000000007,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 470.04624,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 470.04624,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 470.04624,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 470.04624,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_8_n10_m3.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 3,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 363.24583,
+          "time_ms": 13,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 363.24583,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 357.38491,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 357.38491,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 363.24583,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 363.24583,
+          "time_ms": 14,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-a_9_n10_m3.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 3,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 541.08961,
+          "time_ms": 8,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 541.08961,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 541.0896099999998,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 541.08961,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 541.08961,
+          "time_ms": 3,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 541.08961,
+          "time_ms": 13,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_10_n25_m7.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 4484.46088,
+          "time_ms": 28300,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 3418.3096400000004,
+          "time_ms": 6,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 3409.9076299999992,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 3409.9076299999997,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 3418.3096399999995,
+          "time_ms": 30,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 3418.30964,
+          "time_ms": 25,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_11_n50_m5.txt",
+      "category": "GKD",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1795.20603,
+          "time_ms": 103439,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 1795.2060300000003,
+          "time_ms": 14,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 1790.9544999999998,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 1795.20603,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 1795.206030000075,
+          "time_ms": 48,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 1790.9545,
+          "time_ms": 43,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_12_n50_m5.txt",
+      "category": "GKD",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 3219.1509500000006,
+          "time_ms": 142807,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 2182.365130000001,
+          "time_ms": 17,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 2182.36513,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 2182.36513,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 2182.36513,
+          "time_ms": 58,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 2182.36513,
+          "time_ms": 50,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_13_n50_m5.txt",
+      "category": "GKD",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1365.7020400000001,
+          "time_ms": 100,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 1365.7020400000004,
+          "time_ms": 16,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 1365.7020399999994,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 1365.70204,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 1365.7020400000001,
+          "time_ms": 47,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 1365.7020400000001,
+          "time_ms": 45,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_14_n50_m5.txt",
+      "category": "GKD",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1291.36132,
+          "time_ms": 69,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 1291.3613200000002,
+          "time_ms": 9,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 1291.3613199999998,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 1291.3613200000002,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 1291.3613200000004,
+          "time_ms": 44,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 1275.1821,
+          "time_ms": 43,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_15_n50_m5.txt",
+      "category": "GKD",
+      "n": 50,
+      "k": 5,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1890.2576599999998,
+          "time_ms": 164261,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 1890.2576600000004,
+          "time_ms": 16,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 1890.25766,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 1866.7452300000002,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 1890.2576600000004,
+          "time_ms": 63,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 1890.2576600000002,
+          "time_ms": 57,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_1_n25_m2.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 121.24863,
+          "time_ms": 128,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 121.24863,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 109.9808,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 109.9808,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 115.66267000000002,
+          "time_ms": 7,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 121.24863,
+          "time_ms": 32,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_2_n25_m2.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 247.39558,
+          "time_ms": 135,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 247.39558,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 247.39558,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 222.35118,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 247.39558,
+          "time_ms": 8,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 247.39558,
+          "time_ms": 32,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_3_n25_m2.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 131.36134,
+          "time_ms": 124,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 131.36134,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 120.36586,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 131.36134,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 131.36133999999998,
+          "time_ms": 7,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 131.36134,
+          "time_ms": 32,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_4_n25_m2.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 215.29823,
+          "time_ms": 109,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 215.29823,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 215.29823,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 199.42474,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 215.29823,
+          "time_ms": 7,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 215.29823,
+          "time_ms": 31,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_5_n25_m2.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 254.7215,
+          "time_ms": 126,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 254.7215,
+          "time_ms": 1,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 236.41415,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 254.7215,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 244.58276,
+          "time_ms": 7,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 245.61133,
+          "time_ms": 31,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_6_n25_m7.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 5498.657200000001,
+          "time_ms": 41368,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 4165.5340400000005,
+          "time_ms": 12,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 4165.534039999999,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 4165.5340400000005,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 4160.66891,
+          "time_ms": 45,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 4160.66891,
+          "time_ms": 37,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_7_n25_m7.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 5659.33898,
+          "time_ms": 40988,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 4285.734040000001,
+          "time_ms": 16,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 4285.734040000002,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 4285.734039999999,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 4285.734040000223,
+          "time_ms": 45,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 4285.73404,
+          "time_ms": 36,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_8_n25_m7.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 5116.27176,
+          "time_ms": 43465,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 3873.5119500000005,
+          "time_ms": 10,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 3873.5119500000005,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 3865.107450000001,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 3865.10745,
+          "time_ms": 45,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 3865.10745,
+          "time_ms": 37,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-b_9_n25_m7.txt",
+      "category": "GKD",
+      "n": 25,
+      "k": 7,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 1813.7823599999997,
+          "time_ms": 29421,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 1813.7823600000004,
+          "time_ms": 14,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 1813.78236,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 1813.7823599999997,
+          "time_ms": 0,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 1813.78236,
+          "time_ms": 46,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 1813.7823600000002,
+          "time_ms": 36,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_10_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19703.33991000001,
+          "time_ms": 896,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19703.339910000042,
+          "time_ms": 14992,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19701.502830000005,
+          "time_ms": 13276,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19702.01122999996,
+          "time_ms": 875,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19703.339909999995,
+          "time_ms": 21476,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19703.00529000005,
+          "time_ms": 1345,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_11_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19587.120179999994,
+          "time_ms": 740,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19587.12018000004,
+          "time_ms": 18084,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19584.648459999997,
+          "time_ms": 12140,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19585.980309999995,
+          "time_ms": 949,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19587.120179999984,
+          "time_ms": 21475,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19584.648460000033,
+          "time_ms": 1346,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_12_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19360.057359999984,
+          "time_ms": 796,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19360.223930000044,
+          "time_ms": 24238,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19360.22392999996,
+          "time_ms": 15108,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19360.22393000002,
+          "time_ms": 915,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19360.223930000022,
+          "time_ms": 21664,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19360.22392999999,
+          "time_ms": 1340,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_13_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19366.69851999997,
+          "time_ms": 789,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19366.69852000003,
+          "time_ms": 14009,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19366.14942000009,
+          "time_ms": 12939,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19366.69852000002,
+          "time_ms": 918,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19366.698520000005,
+          "time_ms": 21321,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19366.69852000001,
+          "time_ms": 1306,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_14_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19458.564660000025,
+          "time_ms": 539,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19458.564660000044,
+          "time_ms": 30383,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19458.564659999967,
+          "time_ms": 14334,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19458.564659999975,
+          "time_ms": 982,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19458.564660000004,
+          "time_ms": 21451,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19458.564660000004,
+          "time_ms": 1301,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_15_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19422.050630000023,
+          "time_ms": 816,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19422.146400000045,
+          "time_ms": 29182,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19422.05062999998,
+          "time_ms": 12599,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19422.146400000016,
+          "time_ms": 920,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19422.14640000001,
+          "time_ms": 21673,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19422.14640000003,
+          "time_ms": 1291,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_1_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19485.18697000005,
+          "time_ms": 912,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19485.18697000006,
+          "time_ms": 20501,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19485.186969999988,
+          "time_ms": 12487,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19481.391009999978,
+          "time_ms": 891,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19485.186970001127,
+          "time_ms": 21691,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19481.69128000003,
+          "time_ms": 1329,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_2_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19701.534769999995,
+          "time_ms": 606,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19701.53477000005,
+          "time_ms": 29445,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19701.53476999995,
+          "time_ms": 13340,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19699.861320000015,
+          "time_ms": 915,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19700.36635999997,
+          "time_ms": 21510,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19700.366360000007,
+          "time_ms": 1235,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_3_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19547.206849999995,
+          "time_ms": 818,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19547.20685000004,
+          "time_ms": 15349,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19547.206849999944,
+          "time_ms": 14552,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19547.20685000002,
+          "time_ms": 908,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19547.206849999988,
+          "time_ms": 21633,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19543.927290000014,
+          "time_ms": 1250,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_4_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19596.468379999988,
+          "time_ms": 882,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19596.468380000035,
+          "time_ms": 25865,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19594.118089999967,
+          "time_ms": 13919,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19594.11809000002,
+          "time_ms": 915,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19596.468379999984,
+          "time_ms": 21661,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19596.46838000001,
+          "time_ms": 1413,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_5_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19602.621989999978,
+          "time_ms": 700,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19602.621990000065,
+          "time_ms": 21062,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19602.621990000043,
+          "time_ms": 11198,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19602.62199000001,
+          "time_ms": 956,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19602.621990000003,
+          "time_ms": 21356,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19602.621990000003,
+          "time_ms": 1300,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_6_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19421.539079999984,
+          "time_ms": 697,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19421.539080000042,
+          "time_ms": 25537,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19421.539080000046,
+          "time_ms": 12393,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19421.539079999984,
+          "time_ms": 955,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19421.539080000017,
+          "time_ms": 21307,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19421.539080000024,
+          "time_ms": 1320,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_7_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19534.303580000003,
+          "time_ms": 852,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19534.303580000054,
+          "time_ms": 26265,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19532.541669999955,
+          "time_ms": 13065,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19534.30358000001,
+          "time_ms": 1036,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19534.303580001135,
+          "time_ms": 21503,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19531.800430000007,
+          "time_ms": 1377,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_8_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19486.677550000008,
+          "time_ms": 836,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19487.32053000003,
+          "time_ms": 36917,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19484.693460000046,
+          "time_ms": 13294,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19486.677550000008,
+          "time_ms": 943,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19487.32053000001,
+          "time_ms": 21581,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19486.432840000016,
+          "time_ms": 1340,
+          "success": true
+        }
+      ]
+    },
+    {
+      "filename": "GKD-c_9_n500_m50.txt",
+      "category": "GKD",
+      "n": 500,
+      "k": 50,
+      "results": [
+        {
+          "name": "QUBO",
+          "diversity": 19221.628779999995,
+          "time_ms": 730,
+          "success": true
+        },
+        {
+          "name": "GRASP",
+          "diversity": 19221.628780000043,
+          "time_ms": 36504,
+          "success": true
+        },
+        {
+          "name": "LS-First",
+          "diversity": 19221.62878000004,
+          "time_ms": 12404,
+          "success": true
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 19221.62878000001,
+          "time_ms": 978,
+          "success": true
+        },
+        {
+          "name": "Tabu",
+          "diversity": 19221.628780000006,
+          "time_ms": 21345,
+          "success": true
+        },
+        {
+          "name": "GA",
+          "diversity": 19221.62878000003,
+          "time_ms": 1324,
+          "success": true
+        }
+      ]
+    }
+  ]
+}
