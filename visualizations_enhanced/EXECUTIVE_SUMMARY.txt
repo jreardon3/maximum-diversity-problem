@@ -1,0 +1,15 @@
+================================================================================
+EXECUTIVE SUMMARY - MDP SOLVER COMPARISON
+================================================================================
+
+🏆 BEST QUALITY: MaxCut (Avg: 2190323.82)
+⚡ FASTEST: LS-Best (Median: 158.00ms)
+📊 MOST CONSISTENT: LS-First (CV: 316.01%)
+🎯 MOST WINS: QUBO (25 instances, 43.1%)
+
+RECOMMENDATIONS:
+  • For best quality: Use MaxCut
+  • For speed: Use LS-Best
+  • For reliability: Use LS-First
+
+================================================================================

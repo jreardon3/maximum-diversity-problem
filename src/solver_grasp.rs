@@ -1,5 +1,6 @@
 use crate::parser::MdpData;
 use rand::Rng;
+use std::time::Instant;
 
 pub struct GraspConfig {
     pub iterations: usize,
@@ -17,7 +18,12 @@ impl Default for GraspConfig {
     }
 }
 
-pub fn solve_grasp(data: &MdpData, config: &GraspConfig) -> (Vec<usize>, f64) {
+// pub fn solve_grasp(data: &MdpData, config: &GraspConfig) -> (Vec<usize>, f64) {
+pub fn solve_grasp(
+    data: &MdpData,
+    config: &GraspConfig,
+    deadline: Instant,
+) -> (Vec<usize>, f64) {
     let mut best_solution = Vec::new();
     let mut best_diversity = f64::NEG_INFINITY;
     
@@ -26,11 +32,14 @@ pub fn solve_grasp(data: &MdpData, config: &GraspConfig) -> (Vec<usize>, f64) {
     let early_stop_threshold = 20; // Stop if no improvement for 20 iterations
 
     for _iter in 0..config.iterations {
+        if Instant::now() >= deadline {
+            break;
+        }
         // Construction phase: greedy randomized
         let solution = greedy_randomized_construction(data, config.alpha);
         
         // Local search phase
-        let (improved_solution, diversity) = local_search(data, solution, config.local_search_iters);
+        let (improved_solution, diversity) = local_search(data, solution, config.local_search_iters, deadline);
         
         if diversity > best_diversity {
             best_diversity = diversity;
@@ -101,7 +110,7 @@ fn calculate_marginal_contribution(candidate: usize, selected: &[usize], data: &
     contribution
 }
 
-fn local_search(data: &MdpData, mut selected: Vec<usize>, max_iters: usize) -> (Vec<usize>, f64) {
+fn local_search(data: &MdpData, mut selected: Vec<usize>, max_iters: usize, deadline: Instant,) -> (Vec<usize>, f64) {
     let mut unselected: Vec<usize> = (0..data.n)
         .filter(|&i| !selected.contains(&i))
         .collect();
@@ -110,6 +119,9 @@ fn local_search(data: &MdpData, mut selected: Vec<usize>, max_iters: usize) -> (
     let mut no_improvement_count = 0;
 
     for _ in 0..max_iters {
+        if Instant::now() >= deadline {
+            break;
+        }
         let mut best_swap = None;
         let mut best_gain = 0.0;
 

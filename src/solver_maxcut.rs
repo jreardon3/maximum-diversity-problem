@@ -1,6 +1,7 @@
 use grb::prelude::*;
 use grb::expr::QuadExpr;
 use crate::parser::MdpData;
+use std::collections::HashSet;
 
 /// Represents a QUBO problem in standard form: minimize x^T Q x
 /// where Q is an upper triangular matrix
@@ -204,8 +205,8 @@ pub fn solve_maxcut(
 }
 
 fn calculate_cut_value(part0: &[usize], part1: &[usize], graph: &MaxCutGraph) -> f64 {
-    let set0: std::collections::HashSet<_> = part0.iter().copied().collect();
-    let set1: std::collections::HashSet<_> = part1.iter().copied().collect();
+    let set0: HashSet<_> = part0.iter().copied().collect();
+    let set1: HashSet<_> = part1.iter().copied().collect();
     
     let mut cut = 0.0;
     for i in 0..graph.n {
@@ -234,29 +235,68 @@ pub fn solve_mdp_via_maxcut(
     // Step 2: QUBO → MaxCut
     let (maxcut_graph, var_flipped) = qubo_to_maxcut(&qubo);
     
-    // Step 3: Solve MaxCut
+    // Step 3: Solve MaxCut - try both partitions
     let (part0, part1, _cut_value) = solve_maxcut(&maxcut_graph, time_limit)?;
     
     // Step 4: Extract MDP solution from MaxCut solution
-    // Variables are in partition 1, but we need to account for flipped variables
+    // We need to try both partitions and see which gives a valid solution
     let n = data.n;
-    let mut selected = Vec::new();
     
-    let set1: std::collections::HashSet<_> = part1.iter().copied().collect();
+    // Try partition 1 as selected
+    let (selected1, div1) = extract_solution(data, &part1, &var_flipped, n);
+    
+    // Try partition 0 as selected
+    let (selected0, div0) = extract_solution(data, &part0, &var_flipped, n);
+    
+    // Choose the better valid solution (closer to k items)
+    let (mut selected, mut diversity) = if (selected1.len() as i32 - data.k as i32).abs() 
+                                             <= (selected0.len() as i32 - data.k as i32).abs() {
+        (selected1, div1)
+    } else {
+        (selected0, div0)
+    };
+    
+    // If constraint is violated, repair the solution
+    if selected.len() != data.k {
+        eprintln!("Warning: MaxCut selected {} items (need {}), applying repair", 
+                  selected.len(), data.k);
+        selected = repair_solution(data, selected);
+        
+        // Recalculate diversity
+        diversity = 0.0;
+        for i in 0..selected.len() {
+            for j in (i + 1)..selected.len() {
+                diversity += data.get_dist(selected[i], selected[j]);
+            }
+        }
+    }
+    
+    Ok((selected, diversity))
+}
+
+/// Extract solution from a partition
+fn extract_solution(
+    data: &MdpData,
+    partition: &[usize],
+    var_flipped: &[bool],
+    n: usize,
+) -> (Vec<usize>, f64) {
+    let mut selected = Vec::new();
+    let set: HashSet<_> = partition.iter().copied().collect();
     
     for i in 0..n {
-        let in_part1 = set1.contains(&i);
+        let in_partition = set.contains(&i);
         let flipped = var_flipped[i];
         
         // If variable was flipped, we need to invert the result
-        let selected_var = if flipped { !in_part1 } else { in_part1 };
+        let selected_var = if flipped { !in_partition } else { in_partition };
         
         if selected_var {
             selected.push(i);
         }
     }
     
-    // Calculate actual diversity
+    // Calculate diversity
     let mut diversity = 0.0;
     for i in 0..selected.len() {
         for j in (i + 1)..selected.len() {
@@ -264,7 +304,71 @@ pub fn solve_mdp_via_maxcut(
         }
     }
     
-    Ok((selected, diversity))
+    (selected, diversity)
+}
+
+/// Repair solution to have exactly k items
+fn repair_solution(data: &MdpData, mut selected: Vec<usize>) -> Vec<usize> {
+    let k = data.k;
+    
+    if selected.len() > k {
+        // Remove items with lowest marginal contribution
+        while selected.len() > k {
+            let worst_idx = find_worst_item(data, &selected);
+            selected.remove(worst_idx);
+        }
+    } else if selected.len() < k {
+        // Add items with highest marginal contribution
+        let mut unselected: Vec<usize> = (0..data.n)
+            .filter(|i| !selected.contains(i))
+            .collect();
+        
+        while selected.len() < k && !unselected.is_empty() {
+            let best = find_best_item(data, &selected, &unselected);
+            selected.push(best);
+            unselected.retain(|&x| x != best);
+        }
+    }
+    
+    selected
+}
+
+fn find_worst_item(data: &MdpData, selected: &[usize]) -> usize {
+    let mut worst_idx = 0;
+    let mut min_contrib = f64::INFINITY;
+    
+    for (idx, &item) in selected.iter().enumerate() {
+        let contrib: f64 = selected.iter()
+            .enumerate()
+            .filter(|(i, _)| *i != idx)
+            .map(|(_, &other)| data.get_dist(item, other))
+            .sum();
+        
+        if contrib < min_contrib {
+            min_contrib = contrib;
+            worst_idx = idx;
+        }
+    }
+    
+    worst_idx
+}
+
+fn find_best_item(data: &MdpData, selected: &[usize], unselected: &[usize]) -> usize {
+    let mut best_item = unselected[0];
+    let mut max_contrib = f64::NEG_INFINITY;
+    
+    for &item in unselected {
+        let contrib: f64 = selected.iter()
+            .map(|&other| data.get_dist(item, other))
+            .sum();
+        
+        if contrib > max_contrib {
+            max_contrib = contrib;
+            best_item = item;
+        }
+    }
+    
+    best_item
 }
 
 /// Heuristic MaxCut solver (greedy randomized, for comparison)

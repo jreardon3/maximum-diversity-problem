@@ -1,6 +1,7 @@
 use crate::parser::MdpData;
 use rand::seq::SliceRandom;
 use rand::Rng;
+use std::time::Instant;
 
 pub struct GeneticConfig {
     pub population_size: usize,
@@ -28,7 +29,7 @@ struct Individual {
     fitness: f64,
 }
 
-pub fn solve_genetic(data: &MdpData, config: &GeneticConfig) -> (Vec<usize>, f64) {
+pub fn solve_genetic(data: &MdpData, config: &GeneticConfig, deadline: Instant) -> (Vec<usize>, f64) {
     let mut rng = rand::thread_rng();
     
     // Initialize population
@@ -36,6 +37,9 @@ pub fn solve_genetic(data: &MdpData, config: &GeneticConfig) -> (Vec<usize>, f64
     evaluate_population(&mut population, data);
     
     for generation in 0..config.generations {
+        if Instant::now() >= deadline {
+            break;
+        }
         // Sort by fitness (descending)
         population.sort_by(|a, b| b.fitness.partial_cmp(&a.fitness).unwrap());
         
@@ -72,7 +76,7 @@ pub fn solve_genetic(data: &MdpData, config: &GeneticConfig) -> (Vec<usize>, f64
         // Optional: local search on best individual every N generations
         if generation % 10 == 0 {
             let best = &population[0];
-            let (improved, fitness) = local_improvement(&best.selected, data);
+            let (improved, fitness) = local_improvement(&best.selected, data, deadline);
             if fitness > best.fitness {
                 population[0] = Individual {
                     selected: improved,
@@ -182,7 +186,11 @@ fn mutate(solution: &mut Vec<usize>, data: &MdpData, rng: &mut impl Rng) {
     solution.push(candidates[0]);
 }
 
-fn local_improvement(solution: &[usize], data: &MdpData) -> (Vec<usize>, f64) {
+fn local_improvement(
+    solution: &[usize],
+    data: &MdpData,
+    deadline: Instant,
+) -> (Vec<usize>, f64) {
     let mut selected = solution.to_vec();
     let mut unselected: Vec<usize> = (0..data.n)
         .filter(|&i| !selected.contains(&i))
@@ -192,6 +200,9 @@ fn local_improvement(solution: &[usize], data: &MdpData) -> (Vec<usize>, f64) {
     let mut improved = true;
     
     while improved {
+        if Instant::now() >= deadline {
+            break;
+        }
         improved = false;
         let mut best_gain = 0.0;
         let mut best_swap = None;
