@@ -116,7 +116,12 @@ def robustness_testing(results_df):
 
 if __name__ == '__main__':
     # Load your results
-    instances = load_results('results_combined.json')
+    # change to be dynamic i.e. result_*.json
+    import sys
+    if len(sys.argv) > 1:
+        instances = load_results(sys.argv[1])
+    else:
+        instances = load_results('results_combined.json')
     
     rows = []
     for instance in instances:
