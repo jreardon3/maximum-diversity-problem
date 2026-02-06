@@ -1,0 +1,104 @@
+{
+  "timestamp": "20260205_145255",
+  "category": "GKD",
+  "instances": [
+    {
+      "filename": "GKD-a_1_n10_m2.txt",
+      "category": "GKD",
+      "n": 10,
+      "k": 2,
+      "results": [
+        {
+          "name": "QUBO-Constrained",
+          "diversity": 243.97252,
+          "time_ms": 57,
+          "success": true,
+          "solution": [
+            8,
+            9
+          ]
+        },
+        {
+          "name": "QUBO-Penalty",
+          "diversity": 243.97252,
+          "time_ms": 74,
+          "success": true,
+          "solution": [
+            8,
+            9
+          ]
+        },
+        {
+          "name": "MaxCut",
+          "diversity": 243.97252,
+          "time_ms": 8,
+          "success": true,
+          "solution": [
+            8,
+            9
+          ]
+        },
+        {
+          "name": "GRASP",
+          "diversity": 243.97252,
+          "time_ms": 0,
+          "success": true,
+          "solution": [
+            8,
+            9
+          ]
+        },
+        {
+          "name": "LS-First",
+          "diversity": 243.97252,
+          "time_ms": 0,
+          "success": true,
+          "solution": [
+            8,
+            9
+          ]
+        },
+        {
+          "name": "LS-Best",
+          "diversity": 243.97252,
+          "time_ms": 0,
+          "success": true,
+          "solution": [
+            9,
+            8
+          ]
+        },
+        {
+          "name": "Tabu",
+          "diversity": 243.97252,
+          "time_ms": 180000,
+          "success": true,
+          "solution": [
+            8,
+            9
+          ]
+        },
+        {
+          "name": "GA",
+          "diversity": 243.97252,
+          "time_ms": 180000,
+          "success": true,
+          "solution": [
+            9,
+            8
+          ]
+        },
+        {
+          "name": "OBMA",
+          "diversity": 243.9725200000728,
+          "time_ms": 180000,
+          "success": true,
+          "solution": [
+            8,
+            9
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -2,14 +2,14 @@
 EXECUTIVE SUMMARY - MDP SOLVER COMPARISON
 ================================================================================
 
-🏆 BEST QUALITY: OBMA (Avg: 2205625.09)
-⚡ FASTEST: LS-Best (Median: 181.50ms)
-📊 MOST CONSISTENT: QUBO-Penalty (CV: 137.04%)
-🎯 MOST WINS: OBMA (30 instances, 51.7%)
+🏆 BEST QUALITY: MaxCut (Avg: 2190323.82)
+⚡ FASTEST: LS-Best (Median: 158.00ms)
+📊 MOST CONSISTENT: LS-First (CV: 316.01%)
+🎯 MOST WINS: QUBO (25 instances, 43.1%)
 
 RECOMMENDATIONS:
-  • For best quality: Use OBMA
+  • For best quality: Use MaxCut
   • For speed: Use LS-Best
-  • For reliability: Use QUBO-Penalty
+  • For reliability: Use LS-First
 
 ================================================================================
