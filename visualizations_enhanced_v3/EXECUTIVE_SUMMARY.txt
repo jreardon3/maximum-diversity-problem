@@ -1,0 +1,4 @@
+EXECUTIVE SUMMARY
+====================
+🏆 BEST QUALITY (Lowest APD): QUBO (0.00%)
+⚡ FASTEST: Breakpoint (78.00ms)
