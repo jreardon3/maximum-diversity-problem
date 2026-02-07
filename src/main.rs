@@ -1,12 +1,20 @@
 // src/main.rs
 
 mod parser;
-mod solver_qubo;
-mod solver_grasp;
+
+mod solver_grasp;                   // this one matched the description in the write-up, I didn't adjust it 
+mod adj_solver_local_search_its;    // adjusted Local Search (this new one is Iterated Tabu Search, the other local solvers don't keep tabu lists)
+mod adj_solver_obma;                // adjusted OBMA (the other one didn't use opposition based learning)
+mod adj_solver_breakpoint;          // adjusted BreakPoint solver (added it, mentioned in Tu's email)
+mod adj_solver_population_ma;       // adjusted Population (this new one is the Memetic Algorithm that matches the textbook)
+mod adj_solver_maxcut;              // adjusted MaxCut solver (maxcut definition now matches the definition in the write-up)
+mod adj_solver_qubo;                // adjusted the penalty -> it had to be contained in the objective function
+
 mod solver_local_search;
 mod solver_population;
-mod solver_maxcut;
 mod solver_obma;
+mod solver_qubo;
+mod solver_maxcut;
 
 use std::time::{Instant, Duration};
 use std::fs::{self, File};
@@ -16,7 +24,9 @@ use std::process::Command;
 use solver_local_search::{LocalSearchConfig, LocalSearchMethod};
 use solver_grasp::GraspConfig;
 use solver_population::GeneticConfig;
-use solver_obma::ObmaConfig;
+use adj_solver_obma::ObmaConfig;
+use adj_solver_local_search_its::ItsConfig;
+use adj_solver_breakpoint::BreakpointConfig;
 use serde::{Serialize, Deserialize};
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -321,6 +331,37 @@ fn test_single_file(path: &str, category: &str, num_runs: usize) -> Result<Insta
     })
 }
 
+fn record_success(results: &mut Vec<SolverResult>, name: &str, div: f64, solution: Vec<usize>, start: Instant, k: usize) {
+    let time = start.elapsed();
+    println!("✓ {:.2} ({:?})", div, time);
+    
+    // Check constraint satisfaction
+    let constraint_satisfied = solution.len() == k;
+    if !constraint_satisfied {
+        eprintln!("    ⚠️  WARNING: {} selected {} items, expected {}", name, solution.len(), k);
+    }
+    
+    results.push(SolverResult {
+        name: name.to_string(),
+        diversity: div,
+        time_ms: time.as_millis(),
+        success: div > 0.0, // We mark it successful if it returns diversity, even if constraint is slightly off (repair usually fixes this inside the solver)
+        solution: Some(solution),
+    });
+}
+
+fn record_timeout(results: &mut Vec<SolverResult>, name: &str, start: Instant) {
+    let time = start.elapsed();
+    println!("✗ Timeout ({:?})", time);
+    results.push(SolverResult {
+        name: name.to_string(),
+        diversity: 0.0,
+        time_ms: time.as_millis(),
+        success: false,
+        solution: None,
+    });
+}
+
 fn aggregate_multiple_runs(all_runs: Vec<Vec<SolverResult>>) -> Vec<SolverResult> {
     use std::collections::HashMap;
     
@@ -355,20 +396,78 @@ fn aggregate_multiple_runs(all_runs: Vec<Vec<SolverResult>>) -> Vec<SolverResult
 
 fn run_all_solvers_with_timeouts(data: &parser::MdpData) -> Vec<SolverResult> {
     let mut results = Vec::new();
+
+    // ---- Set to 'false' to deselect solver ------
+    let run_qubo    = false; 
+    let run_maxcut  = true; 
+    let run_grasp   = true;
+    let run_ls      = true;
+    let run_ga      = false;
+    let run_obma    = true;
+    let run_bp      = true;
+    let run_mamdp   = true;
+    let run_qubo_adjusted = true;
+    // ---------------------------------------------
+
+    // Determine time limit based on instance size N
+    let timeout_seconds = if data.n < 100 {
+        1.0   // 1 second for tiny instances (N=10, 25, 50)
+    } else if data.n < 1000 {
+        60.0  // 1 minute for medium (N=500)
+    } else {
+        300.0 // 5 minutes for large (N=2000+)
+    };
+    println!("  -> Size N={}, using Time Limit: {:.1}s", data.n, timeout_seconds);
     
     // Time limits in seconds
-    let qubo_timeout = 300.0;      // 5 minutes
-    let maxcut_timeout = 300.0;    // 5 minutes
-    let grasp_timeout = 180.0;     // 3 minutes
-    let ls_timeout = 180.0;        // 3 minutes
-    let tabu_timeout = 180.0;      // 3 minutes
-    let ga_timeout = 180.0;        // 3 minutes
-    let obma_timeout = 180.0;      // 3 minutes
+    let qubo_timeout = timeout_seconds;
+    let maxcut_timeout = timeout_seconds;
+    let grasp_timeout = timeout_seconds;
+    let ls_timeout = timeout_seconds;
+    let tabu_timeout = timeout_seconds;
+    let ga_timeout = timeout_seconds;
+    let obma_timeout = timeout_seconds;
+    let bp_timeout = timeout_seconds;
+    let mamdp_timeout = timeout_seconds;
+
+    // 0. QUBO (Transformation #1 + Penalty + Repair)
+    if run_qubo_adjusted {
+        print!("  [0/10] QUBO... ");
+        let start = Instant::now();
+        
+        // Removed the target_objective argument
+        match adj_solver_qubo::solve(data, qubo_timeout) {
+            Ok((solution, div)) => {
+                let time = start.elapsed();
+                println!("✓ {:.2} ({:?})", div, time);
+                
+                results.push(SolverResult {
+                    name: "QUBO".to_string(),
+                    diversity: div,
+                    time_ms: time.as_millis(),
+                    success: true, 
+                    solution: Some(solution),
+                });
+            }
+            Err(_) => {
+                let time = start.elapsed();
+                println!("✗ Timeout/Error ({:?})", time);
+                results.push(SolverResult {
+                    name: "QUBO".to_string(),
+                    diversity: 0.0,
+                    time_ms: time.as_millis(),
+                    success: false,
+                    solution: None,
+                });
+            }
+        }
+    }
 
     // 1. QUBO Constrained (Hard Constraint)
-    print!("  [1/9] QUBO-C... ");
-    let start = Instant::now();
-    match solver_qubo::solve_with_qubo_constrained(data, qubo_timeout) {
+    if run_qubo {
+        print!("  [1/10] QUBO-C... ");
+        let start = Instant::now();
+        match solver_qubo::solve_with_qubo_constrained(data, qubo_timeout) {
         Ok((solution, div)) => {
             let time = start.elapsed();
             println!("✓ {:.2} ({:?})", div, time);
@@ -397,12 +496,15 @@ fn run_all_solvers_with_timeouts(data: &parser::MdpData) -> Vec<SolverResult> {
                 solution: None,
             });
         }
+        }
     }
+    
 
     // 2. QUBO Penalty (Soft Constraint)
-    print!("  [2/9] QUBO-P... ");
-    let start = Instant::now();
-    match solver_qubo::solve_with_qubo_penalty(data, 1000.0, qubo_timeout) {
+    if run_qubo {
+        print!("  [2/10] QUBO-P... ");
+        let start = Instant::now();
+        match solver_qubo::solve_with_qubo_penalty(data, 1000.0, qubo_timeout) {
         Ok((solution, div)) => {
             let time = start.elapsed();
             println!("✓ {:.2} ({:?})", div, time);
@@ -432,43 +534,24 @@ fn run_all_solvers_with_timeouts(data: &parser::MdpData) -> Vec<SolverResult> {
             });
         }
     }
+    }
+    
 
     // 3. MaxCut (MDP→QUBO→MaxCut)
-    print!("  [3/9] MaxCut... ");
-    let start = Instant::now();
-    match solver_maxcut::solve_mdp_via_maxcut(data, 1000.0, maxcut_timeout) {
-        Ok((solution, div)) => {
-            let time = start.elapsed();
-            println!("✓ {:.2} ({:?})", div, time);
-            
-            let constraint_satisfied = solution.len() == data.k;
-            if !constraint_satisfied {
-                eprintln!("    ⚠️  WARNING: MaxCut selected {} items, expected {}", solution.len(), data.k);
-            }
-            
-            results.push(SolverResult {
-                name: "MaxCut".to_string(),
-                diversity: div,
-                time_ms: time.as_millis(),
-                success: div > 0.0 && constraint_satisfied,
-                solution: Some(solution),
-            });
-        }
-        Err(_) => {
-            let time = start.elapsed();
-            println!("✗ Timeout ({:?})", time);
-            results.push(SolverResult {
-                name: "MaxCut".to_string(),
-                diversity: 0.0,
-                time_ms: time.as_millis(),
-                success: false,
-                solution: None,
-            });
+    if run_maxcut {
+        print!("  [3/10] MaxCut solver... ");
+        let start = Instant::now();
+        
+        match adj_solver_maxcut::solve_mdp_via_maxcut(data, 1000.0, maxcut_timeout) {
+            Ok((solution, div)) => record_success(&mut results, "MaxCut", div, solution, start, data.k),
+            Err(_) => record_timeout(&mut results, "MaxCut", start),
         }
     }
+    
 
     // 4. GRASP with timeout
-    print!("  [4/9] GRASP... ");
+    if run_grasp {
+        print!("  [4/10] GRASP... ");
     let start = Instant::now();
     let (solution, div) = run_grasp_with_timeout(data, grasp_timeout);
     let time = start.elapsed();
@@ -480,51 +563,31 @@ fn run_all_solvers_with_timeouts(data: &parser::MdpData) -> Vec<SolverResult> {
         success: true,
         solution: Some(solution),
     });
-
-    // 5. LS: First Improvement
-    print!("  [5/9] LS: First... ");
-    let start = Instant::now();
-    let (solution, div) = run_ls_with_timeout(data, LocalSearchMethod::FirstImprovement, ls_timeout);
-    let time = start.elapsed();
-    println!("✓ {:.2} ({:?})", div, time);
-    results.push(SolverResult {
-        name: "LS-First".to_string(),
-        diversity: div,
-        time_ms: time.as_millis(),
-        success: true,
-        solution: Some(solution),
-    });
-
-    // 6. LS: Best Improvement
-    print!("  [6/9] LS: Best... ");
-    let start = Instant::now();
-    let (solution, div) = run_ls_with_timeout(data, LocalSearchMethod::BestImprovement, ls_timeout);
-    let time = start.elapsed();
-    println!("✓ {:.2} ({:?})", div, time);
-    results.push(SolverResult {
-        name: "LS-Best".to_string(),
-        diversity: div,
-        time_ms: time.as_millis(),
-        success: true,
-        solution: Some(solution),
-    });
-
-    // 7. Tabu Search
-    print!("  [7/9] Tabu... ");
-    let start = Instant::now();
-    let (solution, div) = run_ls_with_timeout(data, LocalSearchMethod::TabuSearch { tabu_tenure: 10 }, tabu_timeout);
-    let time = start.elapsed();
-    println!("✓ {:.2} ({:?})", div, time);
-    results.push(SolverResult {
-        name: "Tabu".to_string(),
-        diversity: div,
-        time_ms: time.as_millis(),
-        success: true,
-        solution: Some(solution),
-    });
-
-    // 8. Genetic Algorithm
-    print!("  [8/9] GA... ");
+    }
+    
+    if run_ls {
+        // 5. Iterated Tabu Search (Replaces LS-First, LS-Best, and Standard Tabu)
+        print!("  [5/10] ITS... "); 
+        let start = Instant::now();
+        
+        // We use tabu_timeout (or ls_timeout) here
+        let (solution, div) = run_its_with_timeout(data, tabu_timeout);
+        
+        let time = start.elapsed();
+        println!("✓ {:.2} ({:?})", div, time);
+        
+        results.push(SolverResult {
+            name: "ITS".to_string(), // Name in the JSON output
+            diversity: div,
+            time_ms: time.as_millis(),
+            success: true,
+            solution: Some(solution),
+        });
+    }
+    
+    if run_ga {
+        // 8. Genetic Algorithm
+    print!("  [8/10] GA... ");
     let start = Instant::now();
     let (solution, div) = run_ga_with_timeout(data, ga_timeout);
     let time = start.elapsed();
@@ -536,9 +599,11 @@ fn run_all_solvers_with_timeouts(data: &parser::MdpData) -> Vec<SolverResult> {
         success: true,
         solution: Some(solution),
     });
-
-    // 9. OBMA (Opposition-Based Memetic Algorithm)
-    print!("  [9/9] OBMA... ");
+    }
+    
+    if run_obma {
+            // 9. OBMA (Opposition-Based Memetic Algorithm)
+    print!("  [9/10] OBMA... ");
     let start = Instant::now();
     let (solution, div) = run_obma_with_timeout(data, obma_timeout);
     let time = start.elapsed();
@@ -550,10 +615,54 @@ fn run_all_solvers_with_timeouts(data: &parser::MdpData) -> Vec<SolverResult> {
         success: true,
         solution: Some(solution),
     });
+    }
+    
+    if run_bp {
+        // 10. Breakpoint Algorithm
+        print!("  [10/10] Breakpoint... ");
+        let start = Instant::now();
+        let deadline = Instant::now() + Duration::from_secs_f64(bp_timeout);
+        
+        let config = BreakpointConfig {
+            max_lambda_iterations: 30,
+            ..Default::default()
+        };
+
+        // Note: You need to expose solve_breakpoint in the module as public
+        let (solution, div) = adj_solver_breakpoint::solve_breakpoint(data, &config, deadline);
+        
+        let time = start.elapsed();
+        println!("✓ {:.2} ({:?})", div, time);
+        
+        results.push(SolverResult {
+            name: "Breakpoint".to_string(),
+            diversity: div,
+            time_ms: time.as_millis(),
+            success: true,
+            solution: Some(solution),
+        });
+    }
+
+    // 11. MAMDP (New Memetic Algorithm)
+    if run_mamdp {
+        print!("  [11/10] MAMDP... ");
+        let start = Instant::now();
+        let (solution, div) = run_mamdp_with_timeout(data, mamdp_timeout);
+        let time = start.elapsed();
+        println!("✓ {:.2} ({:?})", div, time);
+        results.push(SolverResult {
+            name: "MAMDP".to_string(),
+            diversity: div,
+            time_ms: time.as_millis(),
+            success: true,
+            solution: Some(solution),
+        });
+    }
 
     println!();
     results
 }
+
 
 fn run_grasp_with_timeout(data: &parser::MdpData, timeout_secs: f64) -> (Vec<usize>, f64) {
     let deadline = Instant::now() + Duration::from_secs_f64(timeout_secs);
@@ -574,6 +683,15 @@ fn run_ls_with_timeout(data: &parser::MdpData, method: LocalSearchMethod, timeou
     solver_local_search::solve_local_search(data, &config, deadline)
 }
 
+fn run_its_with_timeout(data: &parser::MdpData, timeout_secs: f64) -> (Vec<usize>, f64) {
+    // Create config with the specific timeout
+    let config = ItsConfig {
+        timeout_secs,
+        ..ItsConfig::default() 
+    };
+    adj_solver_local_search_its::solve_its(data, &config)
+}
+
 fn run_ga_with_timeout(data: &parser::MdpData, timeout_secs: f64) -> (Vec<usize>, f64) {
     let deadline = Instant::now() + Duration::from_secs_f64(timeout_secs);
     let config = GeneticConfig {
@@ -591,10 +709,20 @@ fn run_obma_with_timeout(data: &parser::MdpData, timeout_secs: f64) -> (Vec<usiz
     let config = ObmaConfig {
         population_size: 10,
         max_iterations: usize::MAX,
-        tabu_max_iters: 50000,
-        use_opposition: true,
+        tabu_tenure: 15,
+        tabu_max_iters: 2000,
+        opposition_mining: true,
     };
-    solver_obma::solve_obma(data, &config, deadline)
+    adj_solver_obma::solve_obma(data, &config, deadline)
+}
+
+fn run_mamdp_with_timeout(data: &parser::MdpData, timeout_secs: f64) -> (Vec<usize>, f64) {
+    let config = adj_solver_population_ma::GeneticConfig {
+        generations: usize::MAX,
+        ..adj_solver_population_ma::GeneticConfig::default()
+    };
+    let deadline = Instant::now() + Duration::from_secs_f64(timeout_secs);
+    adj_solver_population_ma::solve_memetic_mamdp(data, &config, deadline)
 }
 
 fn discover_test_files(dir: &str) -> Result<Vec<String>, Box<dyn std::error::Error>> {

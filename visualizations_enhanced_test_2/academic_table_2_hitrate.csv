@@ -1,0 +1,7 @@
+category,BP,GRASP,"Hybrid Gurobi
+(MaxCut)","Hybrid Gurobi
+(QUBO)",ITS,MA,OBMA
+GKD,27,45,43,44,44,45,45
+MDG,0,0,5,14,4,5,7
+SOM,7,18,18,30,24,27,26
+Total,34,63,66,88,72,77,78

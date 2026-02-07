@@ -1,6 +1,7 @@
 # visualize_results_enhanced.py
 """
 Enhanced visualization with clear interpretations
+Includes Academic Tables (APD, Time, Hit Rate)
 """
 
 import json
@@ -9,6 +10,8 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import sys
+import glob
 
 sns.set_style("whitegrid")
 sns.set_palette("husl")
@@ -31,7 +34,7 @@ def create_performance_summary_table(df, output_dir):
     summary['Quality Rank'] = summary['Avg Diversity'].rank(ascending=False).astype(int)
     summary['Speed Rank'] = summary['Avg Time'].rank(ascending=True).astype(int)
     
-    # Save as CSV and image
+    # Save as CSV
     summary.to_csv(output_dir / 'performance_summary.csv')
     
     fig, ax = plt.subplots(figsize=(14, 6))
@@ -60,15 +63,280 @@ def create_performance_summary_table(df, output_dir):
               fontsize=14, fontweight='bold', pad=20)
     plt.savefig(output_dir / 'table_summary.png', dpi=300, bbox_inches='tight')
     print(f"✓ Saved: table_summary.png")
-    print(f"  Interpretation: Higher 'Avg Diversity' = Better quality")
-    print(f"                  Lower 'Avg Time' = Faster solver")
+    plt.close()
+
+    """
+    GENERATES THE REQUESTED ACADEMIC TABLES:
+    1. APD (Average Percentage Deviation) & Median Time
+    2. Hit Rate (Count of Best Solutions)
+    """
+    print("\n--- Generating Academic Tables (Paper Ready) ---")
+    
+    # Work on a copy to avoid affecting other plots
+    df_acad = df.copy()
+    
+    # 1. Rename Solvers to match Paper Terminology
+    name_map = {
+        'QUBO': 'Hybrid Gurobi \n(QUBO)',
+        'MaxCut': 'Hybrid Gurobi \n(MaxCut)',
+        'MAMDP': 'MA',
+        'Breakpoint': 'BP'
+    }
+    df_acad['solver'] = df_acad['solver'].replace(name_map)
+    
+    # 2. Calculate Statistics
+    # Find Best Known Value (BKV) per instance
+    best_known = df_acad.groupby('filename')['diversity'].transform('max')
+    df_acad['bkv'] = best_known
+    
+    # Calculate Percentage Deviation: (BKV - Val) / BKV * 100
+    df_acad['deviation_pct'] = (df_acad['bkv'] - df_acad['diversity']) / df_acad['bkv'] * 100
+    
+    # Flag Best Solutions (allowing for tiny float errors)
+    df_acad['is_best'] = df_acad['deviation_pct'] < 1e-5
+    
+    # Convert Time to Seconds
+    df_acad['time_s'] = df_acad['time_ms'] / 1000.0
+
+    # ---------------------------------------------------------
+    # TABLE A: APD & Median Time (Combined)
+    # ---------------------------------------------------------
+    grouped = df_acad.groupby(['category', 'solver']).agg({
+        'deviation_pct': 'mean',
+        'time_s': 'median'
+    })
+    
+    # Create text for the cell: "0.12% \n(28.4s)"
+    grouped['display'] = grouped.apply(
+        lambda x: f"{x['deviation_pct']:.2f}%\n({x['time_s']:.2f}s)", axis=1
+    )
+    
+    display_pivot = grouped['display'].unstack()
+    dev_pivot = grouped['deviation_pct'].unstack() # For coloring logic
+    
+    # Save CSV
+    grouped[['deviation_pct', 'time_s']].unstack().to_csv(output_dir / 'academic_table_1_data.csv')
+    
+    # Render
+    fig, ax = plt.subplots(figsize=(14, len(display_pivot) * 1.5 + 2))
+    ax.axis('off')
+    ax.axis('tight')
+    
+    table = ax.table(cellText=display_pivot.values,
+                     rowLabels=display_pivot.index,
+                     colLabels=display_pivot.columns,
+                     cellLoc='center',
+                     loc='center')
+    
+    table.auto_set_font_size(False)
+    table.set_fontsize(11)
+    table.scale(1, 2.8) # Tall cells for 2 lines
+    
+    # Highlight Best Quality (Lowest Dev) in Green
+    for i, cat in enumerate(display_pivot.index):
+        best_dev = dev_pivot.loc[cat].min()
+        for j, solver in enumerate(display_pivot.columns):
+            current_dev = dev_pivot.loc[cat, solver]
+            if abs(current_dev - best_dev) < 1e-6:
+                table[(i+1, j)].set_facecolor('#90EE90') # Green
+                table[(i+1, j)].set_text_props(weight='bold')
+
+    plt.title('Table 1: Average % Deviation & (Median Time s)',
+              fontweight='bold', pad=20)
+    
+    plt.savefig(output_dir / 'academic_table_1_apd_time.png', dpi=300, bbox_inches='tight')
+    print(f"✓ Saved: academic_table_1_apd_time.png")
+
+    # ---------------------------------------------------------
+    # TABLE B: Hit Rate (Number of Best Solutions)
+    # ---------------------------------------------------------
+    hit_counts = df_acad[df_acad['is_best']].groupby(['category', 'solver']).size().unstack(fill_value=0)
+    
+    # Ensure all solvers exist as columns
+    for s in df_acad['solver'].unique():
+        if s not in hit_counts.columns:
+            hit_counts[s] = 0
+            
+    # Add Total Row
+    hit_counts.loc['Total'] = hit_counts.sum()
+    
+    # Save CSV
+    hit_counts.to_csv(output_dir / 'academic_table_2_hitrate.csv')
+    
+    # Render
+    fig, ax = plt.subplots(figsize=(14, len(hit_counts) + 2))
+    ax.axis('off')
+    ax.axis('tight')
+    
+    table = ax.table(cellText=hit_counts.values,
+                     rowLabels=hit_counts.index,
+                     colLabels=hit_counts.columns,
+                     cellLoc='center',
+                     loc='center')
+    
+    table.auto_set_font_size(False)
+    table.set_fontsize(11)
+    table.scale(1, 2)
+    
+    # Highlight Winner (Most Hits) in Blue
+    for i, cat in enumerate(hit_counts.index):
+        row_vals = hit_counts.loc[cat]
+        max_hits = row_vals.max()
+        for j, solver in enumerate(hit_counts.columns):
+            if row_vals[solver] == max_hits:
+                table[(i+1, j)].set_facecolor('#ADD8E6') # Blue
+                table[(i+1, j)].set_text_props(weight='bold')
+
+    plt.title('Table 2: Number of Best Solutions Found (Hit Rate)\n'
+              'Higher count = Better robustness', 
+              fontweight='bold', pad=20)
+    
+    plt.savefig(output_dir / 'academic_table_2_hitrate.png', dpi=300, bbox_inches='tight')
+    print(f"✓ Saved: academic_table_2_hitrate.png")
+    plt.close()
+
+def create_academic_tables(df, output_dir):
+    """
+    GENERATES THE REQUESTED ACADEMIC TABLES:
+    1. APD (Average Percentage Deviation) & Median Time
+    2. Hit Rate (Count of Best Solutions)
+    """
+    print("\n--- Generating Academic Tables (Paper Ready) ---")
+    
+    # Work on a copy to avoid affecting other plots
+    df_acad = df.copy()
+    
+    # 1. Rename Solvers to match Paper Terminology
+    name_map = {
+        'QUBO': 'Hybrid Gurobi\n(QUBO)',
+        'MaxCut': 'Hybrid Gurobi\n(MaxCut)',
+        'MAMDP': 'MA',
+        'Breakpoint': 'BP'
+    }
+    df_acad['solver'] = df_acad['solver'].replace(name_map)
+    
+    # 2. Calculate Statistics
+    # Find Best Known Value (BKV) per instance
+    best_known = df_acad.groupby('filename')['diversity'].transform('max')
+    df_acad['bkv'] = best_known
+    
+    # Calculate Percentage Deviation: (BKV - Val) / BKV * 100
+    df_acad['deviation_pct'] = (df_acad['bkv'] - df_acad['diversity']) / df_acad['bkv'] * 100
+    
+    # Flag Best Solutions (allowing for tiny float errors)
+    df_acad['is_best'] = df_acad['deviation_pct'] < 1e-5
+    
+    # Convert Time to Seconds
+    df_acad['time_s'] = df_acad['time_ms'] / 1000.0
+
+    # ---------------------------------------------------------
+    # TABLE A: APD & Median Time (Combined)
+    # ---------------------------------------------------------
+    grouped = df_acad.groupby(['category', 'solver']).agg({
+        'deviation_pct': 'mean',
+        'time_s': 'median'
+    })
+    
+    # Create text for the cell: "0.1234% \n(28.4s)"
+    # NOW USES 4 DECIMAL PLACES
+    grouped['display'] = grouped.apply(
+        lambda x: f"{x['deviation_pct']:.4f}%\n({x['time_s']:.2f}s)", axis=1
+    )
+    
+    display_pivot = grouped['display'].unstack()
+    dev_pivot = grouped['deviation_pct'].unstack() # For coloring logic
+    
+    # Save CSV
+    grouped[['deviation_pct', 'time_s']].unstack().to_csv(output_dir / 'academic_table_1_data.csv')
+    
+    # Render
+    fig, ax = plt.subplots(figsize=(14, len(display_pivot) * 1.5 + 2))
+    ax.axis('off')
+    ax.axis('tight')
+    
+    table = ax.table(cellText=display_pivot.values,
+                     rowLabels=display_pivot.index,
+                     colLabels=display_pivot.columns,
+                     cellLoc='center',
+                     loc='center')
+    
+    table.auto_set_font_size(False)
+    table.set_fontsize(11)
+    table.scale(1, 2.8) # Tall cells for 2 lines
+    
+    # Highlight Best Quality (Lowest Dev) in Green
+    for i, cat in enumerate(display_pivot.index):
+        # Find the mathematical minimum
+        min_val_math = dev_pivot.loc[cat].min()
+        # Round it to 4 decimals (matching the display format)
+        min_val_rounded = round(min_val_math, 4)
+        
+        for j, solver in enumerate(display_pivot.columns):
+            current_val = dev_pivot.loc[cat, solver]
+            
+            # Highlight if the rounded value matches the best rounded value
+            if round(current_val, 4) == min_val_rounded:
+                table[(i+1, j)].set_facecolor('#90EE90') # Green
+                table[(i+1, j)].set_text_props(weight='bold')
+
+    plt.title('Table 1: Average % Deviation & (Median Time s)\n'
+              'Top value = Deviation (Lower is better) | Bottom = Time', 
+              fontweight='bold', pad=20)
+    
+    plt.savefig(output_dir / 'academic_table_1_apd_time.png', dpi=300, bbox_inches='tight')
+    print(f"✓ Saved: academic_table_1_apd_time.png")
+
+    # ---------------------------------------------------------
+    # TABLE B: Hit Rate (Number of Best Solutions)
+    # ---------------------------------------------------------
+    hit_counts = df_acad[df_acad['is_best']].groupby(['category', 'solver']).size().unstack(fill_value=0)
+    
+    # Ensure all solvers exist as columns
+    for s in df_acad['solver'].unique():
+        if s not in hit_counts.columns:
+            hit_counts[s] = 0
+            
+    # Add Total Row
+    hit_counts.loc['Total'] = hit_counts.sum()
+    
+    # Save CSV
+    hit_counts.to_csv(output_dir / 'academic_table_2_hitrate.csv')
+    
+    # Render
+    fig, ax = plt.subplots(figsize=(14, len(hit_counts) + 2))
+    ax.axis('off')
+    ax.axis('tight')
+    
+    table = ax.table(cellText=hit_counts.values,
+                     rowLabels=hit_counts.index,
+                     colLabels=hit_counts.columns,
+                     cellLoc='center',
+                     loc='center')
+    
+    table.auto_set_font_size(False)
+    table.set_fontsize(11)
+    table.scale(1, 2)
+    
+    # Highlight Winner (Most Hits) in Blue
+    for i, cat in enumerate(hit_counts.index):
+        row_vals = hit_counts.loc[cat]
+        max_hits = row_vals.max()
+        for j, solver in enumerate(hit_counts.columns):
+            if row_vals[solver] == max_hits:
+                table[(i+1, j)].set_facecolor('#ADD8E6') # Blue
+                table[(i+1, j)].set_text_props(weight='bold')
+
+    plt.title('Table 2: Number of Best Solutions Found (Hit Rate)\n'
+              'Higher count = Better robustness', 
+              fontweight='bold', pad=20)
+    
+    plt.savefig(output_dir / 'academic_table_2_hitrate.png', dpi=300, bbox_inches='tight')
+    print(f"✓ Saved: academic_table_2_hitrate.png")
     plt.close()
 
 def create_quality_comparison_bar(df, output_dir):
     """
-    CHART 1: Quality Comparison (Simple Bar Chart)
-    Shows: Which solver finds the best solutions on average
-    INTERPRETATION: Taller bar = Better quality
+    CHART 1: Quality Comparison
     """
     avg_diversity = df.groupby('solver')['diversity'].mean().sort_values(ascending=False)
     std_diversity = df.groupby('solver')['diversity'].std()
@@ -78,7 +346,6 @@ def create_quality_comparison_bar(df, output_dir):
                   yerr=std_diversity[avg_diversity.index],
                   capsize=5, alpha=0.8, edgecolor='black', linewidth=1.5)
     
-    # Color best solver differently
     bars[0].set_color('gold')
     bars[0].set_edgecolor('darkgoldenrod')
     bars[0].set_linewidth(2)
@@ -86,27 +353,17 @@ def create_quality_comparison_bar(df, output_dir):
     ax.set_xticks(range(len(avg_diversity)))
     ax.set_xticklabels(avg_diversity.index, rotation=45, ha='right')
     ax.set_ylabel('Average Diversity Score', fontsize=13, fontweight='bold')
-    ax.set_title('Solution Quality Comparison\n'
-                 '📊 Higher = Better Quality | Error bars show consistency',
-                 fontsize=14, fontweight='bold', pad=15)
+    ax.set_title('Solution Quality Comparison', fontsize=14, fontweight='bold', pad=15)
     ax.grid(axis='y', alpha=0.3)
-    
-    # Add value labels on bars
-    for i, (bar, val) in enumerate(zip(bars, avg_diversity.values)):
-        ax.text(bar.get_x() + bar.get_width()/2, val, 
-                f'{val:.1f}', ha='center', va='bottom', fontweight='bold')
     
     plt.tight_layout()
     plt.savefig(output_dir / 'chart1_quality_comparison.png', dpi=300, bbox_inches='tight')
     print(f"✓ Saved: chart1_quality_comparison.png")
-    print(f"  INTERPRETATION: {avg_diversity.index[0]} produces highest quality solutions")
     plt.close()
 
 def create_speed_comparison_bar(df, output_dir):
     """
     CHART 2: Speed Comparison
-    Shows: Which solver is fastest
-    INTERPRETATION: Shorter bar = Faster
     """
     median_time = df.groupby('solver')['time_ms'].median().sort_values()
     
@@ -114,21 +371,14 @@ def create_speed_comparison_bar(df, output_dir):
     bars = ax.barh(range(len(median_time)), median_time.values,
                    alpha=0.8, edgecolor='black', linewidth=1.5)
     
-    # Color fastest solver differently
     bars[0].set_color('lightgreen')
-    bars[0].set_edgecolor('darkgreen')
-    bars[0].set_linewidth(2)
     
     ax.set_yticks(range(len(median_time)))
     ax.set_yticklabels(median_time.index)
     ax.set_xlabel('Median Computation Time (ms)', fontsize=13, fontweight='bold')
     ax.set_xscale('log')
-    ax.set_title('Solver Speed Comparison\n'
-                 '⚡ Shorter bar = Faster | Log scale for clarity',
-                 fontsize=14, fontweight='bold', pad=15)
-    ax.grid(axis='x', alpha=0.3)
+    ax.set_title('Solver Speed Comparison (Log Scale)', fontsize=14, fontweight='bold', pad=15)
     
-    # Add value labels
     for i, (bar, val) in enumerate(zip(bars, median_time.values)):
         ax.text(val, bar.get_y() + bar.get_height()/2, 
                 f' {val:.1f}ms', va='center', fontweight='bold')
@@ -136,14 +386,80 @@ def create_speed_comparison_bar(df, output_dir):
     plt.tight_layout()
     plt.savefig(output_dir / 'chart2_speed_comparison.png', dpi=300, bbox_inches='tight')
     print(f"✓ Saved: chart2_speed_comparison.png")
-    print(f"  INTERPRETATION: {median_time.index[0]} is the fastest solver")
     plt.close()
+
+def create_quality_vs_speed_scatter_individual(df, output_dir):
+    """
+    CHART 3B: Quality vs Speed Tradeoff (3 Separate Files)
+    """
+    categories = sorted(df['category'].unique())
+    
+    # Consistent colors
+    solvers = sorted(df['solver'].unique())
+    colors = sns.color_palette("husl", n_colors=len(solvers))
+    solver_color_map = dict(zip(solvers, colors))
+    
+    for cat in categories:
+        # CREATE NEW FIGURE FOR EACH CATEGORY
+        fig, ax = plt.subplots(figsize=(10, 8))
+        
+        cat_df = df[df['category'] == cat]
+        
+        solver_stats = cat_df.groupby('solver').agg({
+            'diversity': 'mean',
+            'time_ms': 'median'
+        }).reset_index()
+        
+        # Pareto calculation
+        pareto_mask = []
+        for i, row in solver_stats.iterrows():
+            dominated = False
+            for j, other in solver_stats.iterrows():
+                if i != j:
+                    if (other['diversity'] >= row['diversity'] and 
+                        other['time_ms'] <= row['time_ms'] and
+                        (other['diversity'] > row['diversity'] or other['time_ms'] < row['time_ms'])):
+                        dominated = True
+                        break
+            pareto_mask.append(not dominated)
+        solver_stats['pareto'] = pareto_mask
+        
+        # Plot
+        for _, row in solver_stats.iterrows():
+            is_pareto = row['pareto']
+            solver_name = row['solver']
+            
+            color = solver_color_map[solver_name]
+            size = 300 if is_pareto else 150
+            marker = 'D' if is_pareto else 'o'
+            edgewidth = 2 if is_pareto else 1
+            
+            ax.scatter(row['time_ms'], row['diversity'], 
+                       s=size, alpha=0.9, color=color, 
+                       edgecolors='black', linewidths=edgewidth, marker=marker)
+            
+            # Smart annotation placement
+            ax.annotate(solver_name,
+                        (row['time_ms'], row['diversity']),
+                        xytext=(8, 8), textcoords='offset points',
+                        fontsize=12, fontweight='bold' if is_pareto else 'normal',
+                        bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.8, edgecolor='gray'))
+
+        ax.set_title(f'Quality vs Speed: {cat} Dataset', fontsize=16, fontweight='bold', pad=15)
+        ax.set_xlabel('Median Time (ms) [Log Scale] ← Faster', fontsize=13, fontweight='bold')
+        ax.set_ylabel('Average Diversity [Higher is Better]', fontsize=13, fontweight='bold')
+        ax.set_xscale('log')
+        ax.grid(True, alpha=0.3, which="both")
+        
+        plt.tight_layout()
+        filename = f'chart3_quality_vs_speed_{cat}.png'
+        plt.savefig(output_dir / filename, dpi=300)
+        print(f"✓ Saved: {filename}")
+        plt.close()
 
 def create_quality_vs_speed_scatter(df, output_dir):
     """
-    CHART 3: Quality vs Speed Tradeoff (CLEARER VERSION)
-    Shows: Which solver offers best balance
-    INTERPRETATION: Top-left corner = Best (high quality, low time)
+    CHART 3: Quality vs Speed Tradeoff
     """
     solver_stats = df.groupby('solver').agg({
         'diversity': 'mean',
@@ -152,7 +468,7 @@ def create_quality_vs_speed_scatter(df, output_dir):
     
     fig, ax = plt.subplots(figsize=(12, 8))
     
-    # Find Pareto optimal solvers
+    # Pareto calculation
     pareto_mask = []
     for i, row in solver_stats.iterrows():
         dominated = False
@@ -167,7 +483,6 @@ def create_quality_vs_speed_scatter(df, output_dir):
     
     solver_stats['pareto'] = pareto_mask
     
-    # Plot all solvers
     for _, row in solver_stats.iterrows():
         color = 'red' if row['pareto'] else 'gray'
         size = 300 if row['pareto'] else 150
@@ -175,41 +490,99 @@ def create_quality_vs_speed_scatter(df, output_dir):
         alpha = 1.0 if row['pareto'] else 0.5
         
         ax.scatter(row['time_ms'], row['diversity'], 
-                  s=size, alpha=alpha, color=color, 
-                  edgecolors='black', linewidths=2, marker=marker)
+                   s=size, alpha=alpha, color=color, 
+                   edgecolors='black', linewidths=2, marker=marker)
         
         ax.annotate(row['solver'],
-                   (row['time_ms'], row['diversity']),
-                   xytext=(10, 10), textcoords='offset points',
-                   fontsize=11, fontweight='bold' if row['pareto'] else 'normal',
-                   bbox=dict(boxstyle='round,pad=0.5', facecolor='yellow' if row['pareto'] else 'white', alpha=0.7))
+                    (row['time_ms'], row['diversity']),
+                    xytext=(10, 10), textcoords='offset points',
+                    fontsize=11, fontweight='bold' if row['pareto'] else 'normal',
+                    bbox=dict(boxstyle='round,pad=0.5', facecolor='yellow' if row['pareto'] else 'white', alpha=0.7))
     
     ax.set_xlabel('Median Time (ms) ← FASTER', fontsize=13, fontweight='bold')
     ax.set_ylabel('Average Diversity ↑ BETTER', fontsize=13, fontweight='bold')
     ax.set_xscale('log')
-    ax.set_title('Quality vs Speed Tradeoff Analysis\n'
-                 '🎯 Red squares = Pareto optimal (not dominated) | Best solvers are top-left',
-                 fontsize=14, fontweight='bold', pad=15)
+    ax.set_title('Quality vs Speed Tradeoff Analysis', fontsize=14, fontweight='bold', pad=15)
     ax.grid(True, alpha=0.3)
-    
-    # Add quadrant labels
-    ax.axvline(solver_stats['time_ms'].median(), color='gray', linestyle='--', alpha=0.3)
-    ax.axhline(solver_stats['diversity'].median(), color='gray', linestyle='--', alpha=0.3)
     
     plt.tight_layout()
     plt.savefig(output_dir / 'chart3_quality_vs_speed.png', dpi=300, bbox_inches='tight')
     print(f"✓ Saved: chart3_quality_vs_speed.png")
-    print(f"  INTERPRETATION: Solvers in top-left quadrant offer best tradeoff")
-    print(f"                  Pareto optimal = Cannot improve one metric without worsening other")
+    plt.close()
+
+    """
+    CHART 3B: Quality vs Speed Tradeoff (Split by Category)
+    """
+    categories = sorted(df['category'].unique())
+    n_cats = len(categories)
+    
+    fig, axes = plt.subplots(1, n_cats, figsize=(6 * n_cats, 6), constrained_layout=True)
+    if n_cats == 1: axes = [axes]
+    
+    # Consistent colors
+    solvers = sorted(df['solver'].unique())
+    colors = sns.color_palette("husl", n_colors=len(solvers))
+    solver_color_map = dict(zip(solvers, colors))
+    
+    for ax, cat in zip(axes, categories):
+        cat_df = df[df['category'] == cat]
+        
+        solver_stats = cat_df.groupby('solver').agg({
+            'diversity': 'mean',
+            'time_ms': 'median'
+        }).reset_index()
+        
+        # Pareto calculation
+        pareto_mask = []
+        for i, row in solver_stats.iterrows():
+            dominated = False
+            for j, other in solver_stats.iterrows():
+                if i != j:
+                    if (other['diversity'] >= row['diversity'] and 
+                        other['time_ms'] <= row['time_ms'] and
+                        (other['diversity'] > row['diversity'] or other['time_ms'] < row['time_ms'])):
+                        dominated = True
+                        break
+            pareto_mask.append(not dominated)
+        solver_stats['pareto'] = pareto_mask
+        
+        # Plot
+        for _, row in solver_stats.iterrows():
+            is_pareto = row['pareto']
+            solver_name = row['solver']
+            
+            color = solver_color_map[solver_name]
+            size = 200 if is_pareto else 100
+            marker = 'D' if is_pareto else 'o'
+            edgewidth = 2 if is_pareto else 1
+            
+            ax.scatter(row['time_ms'], row['diversity'], 
+                       s=size, alpha=0.8, color=color, 
+                       edgecolors='black', linewidths=edgewidth, marker=marker,
+                       label=solver_name if is_pareto else None)
+            
+            ax.annotate(solver_name,
+                        (row['time_ms'], row['diversity']),
+                        xytext=(5, 5), textcoords='offset points',
+                        fontsize=9, fontweight='bold' if is_pareto else 'normal',
+                        bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.6))
+
+        ax.set_title(f'Category: {cat}', fontsize=14, fontweight='bold')
+        ax.set_xlabel('Median Time (ms) [Log Scale]', fontsize=11)
+        if cat == categories[0]:
+            ax.set_ylabel('Average Diversity (Higher is Better)', fontsize=11)
+        ax.set_xscale('log')
+        ax.grid(True, alpha=0.3)
+    
+    plt.suptitle('Quality vs Speed Tradeoff by Instance Group', fontsize=16, fontweight='bold')
+    plt.savefig(output_dir / 'chart3_quality_vs_speed_SPLIT.png', dpi=300)
+    print(f"✓ Saved: chart3_quality_vs_speed_SPLIT.png")
     plt.close()
 
 def create_win_rate_analysis(df, output_dir):
     """
     CHART 4: Win Rate Chart
-    Shows: Which solver wins most often
-    INTERPRETATION: Taller bar = Wins more instances
     """
-    # Find winner for each instance
     winners = df.loc[df.groupby('filename')['diversity'].idxmax(), ['solver', 'filename']]
     win_counts = winners['solver'].value_counts().sort_values(ascending=False)
     
@@ -222,171 +595,107 @@ def create_win_rate_analysis(df, output_dir):
     ax.set_xticks(range(len(win_counts)))
     ax.set_xticklabels(win_counts.index, rotation=45, ha='right')
     ax.set_ylabel('Number of Instances Won', fontsize=13, fontweight='bold')
-    ax.set_title('Solver Win Frequency\n'
-                 '🏆 How often each solver finds the BEST solution',
-                 fontsize=14, fontweight='bold', pad=15)
-    ax.grid(axis='y', alpha=0.3)
+    ax.set_title('Solver Win Frequency', fontsize=14, fontweight='bold', pad=15)
     
-    # Add value labels and percentages
-    total = win_counts.sum()
-    for i, (bar, val) in enumerate(zip(bars, win_counts.values)):
-        pct = val / total * 100
-        ax.text(bar.get_x() + bar.get_width()/2, val, 
-                f'{val}\n({pct:.1f}%)', 
-                ha='center', va='bottom', fontweight='bold')
-    
-    # Add medal emojis for top 3
-    if len(win_counts) >= 1:
-        ax.text(0, win_counts.values[0] * 1.1, '🥇', ha='center', fontsize=30)
-    if len(win_counts) >= 2:
-        ax.text(1, win_counts.values[1] * 1.1, '🥈', ha='center', fontsize=30)
-    if len(win_counts) >= 3:
-        ax.text(2, win_counts.values[2] * 1.1, '🥉', ha='center', fontsize=30)
+    # Add medal emojis
+    if len(win_counts) >= 1: ax.text(0, win_counts.values[0] * 1.05, '🥇', ha='center', fontsize=20)
+    if len(win_counts) >= 2: ax.text(1, win_counts.values[1] * 1.05, '🥈', ha='center', fontsize=20)
+    if len(win_counts) >= 3: ax.text(2, win_counts.values[2] * 1.05, '🥉', ha='center', fontsize=20)
     
     plt.tight_layout()
     plt.savefig(output_dir / 'chart4_win_rate.png', dpi=300, bbox_inches='tight')
     print(f"✓ Saved: chart4_win_rate.png")
-    print(f"  INTERPRETATION: {win_counts.index[0]} finds best solution most frequently ({win_counts.values[0]}/{total} instances)")
     plt.close()
 
 def create_consistency_analysis(df, output_dir):
     """
     CHART 5: Consistency (Box Plot)
-    Shows: How consistent/reliable each solver is
-    INTERPRETATION: Smaller box = More consistent
     """
     fig, ax = plt.subplots(figsize=(14, 7))
     
-    # Sort by median for better readability
     solver_order = df.groupby('solver')['diversity'].median().sort_values(ascending=False).index
     
     bp = ax.boxplot([df[df['solver'] == solver]['diversity'].values for solver in solver_order],
                     labels=solver_order,
                     patch_artist=True,
-                    showmeans=True,
-                    meanprops=dict(marker='D', markerfacecolor='red', markersize=8))
+                    showmeans=True)
     
-    # Color boxes
     colors = plt.cm.viridis(np.linspace(0, 1, len(solver_order)))
     for patch, color in zip(bp['boxes'], colors):
         patch.set_facecolor(color)
         patch.set_alpha(0.7)
     
     ax.set_ylabel('Diversity Score', fontsize=13, fontweight='bold')
-    ax.set_xlabel('Solver', fontsize=13, fontweight='bold')
-    ax.set_title('Solver Consistency Analysis\n'
-                 '📊 Smaller box = More consistent | Diamond = Mean | Line = Median',
-                 fontsize=14, fontweight='bold', pad=15)
+    ax.set_title('Solver Consistency Analysis', fontsize=14, fontweight='bold', pad=15)
     plt.xticks(rotation=45, ha='right')
-    ax.grid(axis='y', alpha=0.3)
-    
-    # Add CV (Coefficient of Variation) annotations
-    for i, solver in enumerate(solver_order, 1):
-        solver_data = df[df['solver'] == solver]['diversity']
-        cv = solver_data.std() / solver_data.mean() * 100
-        ax.text(i, solver_data.max() * 1.02, f'CV={cv:.1f}%', 
-                ha='center', fontsize=8, bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
     
     plt.tight_layout()
     plt.savefig(output_dir / 'chart5_consistency.png', dpi=300, bbox_inches='tight')
     print(f"✓ Saved: chart5_consistency.png")
-    print(f"  INTERPRETATION: Lower CV% = More consistent/reliable solver")
     plt.close()
 
 def create_scalability_plot(df, output_dir):
     """
     CHART 6: Scalability Analysis
-    Shows: How solver performance degrades with problem size
-    INTERPRETATION: Flatter line = Better scalability
     """
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
     
     solvers = df['solver'].unique()
     colors = plt.cm.tab10(np.linspace(0, 1, len(solvers)))
     
-    # Plot 1: Time vs Size
     for solver, color in zip(solvers, colors):
         solver_data = df[df['solver'] == solver].groupby('n').agg({
-            'time_ms': ['mean', 'std']
-        }).reset_index()
-        
-        ax1.plot(solver_data['n'], solver_data['time_ms']['mean'], 
-                marker='o', label=solver, color=color, linewidth=2, markersize=8)
-        ax1.fill_between(solver_data['n'],
-                         solver_data['time_ms']['mean'] - solver_data['time_ms']['std'],
-                         solver_data['time_ms']['mean'] + solver_data['time_ms']['std'],
-                         alpha=0.2, color=color)
-    
-    ax1.set_xlabel('Problem Size (n)', fontsize=12, fontweight='bold')
-    ax1.set_ylabel('Average Time (ms)', fontsize=12, fontweight='bold')
-    ax1.set_title('Time Scalability\n(Log scale)', fontsize=13, fontweight='bold')
-    ax1.set_yscale('log')
-    ax1.legend()
-    ax1.grid(True, alpha=0.3)
-    
-    # Plot 2: Quality vs Size
-    for solver, color in zip(solvers, colors):
-        solver_data = df[df['solver'] == solver].groupby('n').agg({
+            'time_ms': ['mean', 'std'],
             'diversity': ['mean', 'std']
         }).reset_index()
         
+        # Time Plot
+        ax1.plot(solver_data['n'], solver_data['time_ms']['mean'], 
+                 marker='o', label=solver, color=color, linewidth=2)
+        ax1.fill_between(solver_data['n'],
+                         solver_data['time_ms']['mean'] - solver_data['time_ms']['std'],
+                         solver_data['time_ms']['mean'] + solver_data['time_ms']['std'],
+                         alpha=0.1, color=color)
+                         
+        # Quality Plot
         ax2.plot(solver_data['n'], solver_data['diversity']['mean'], 
-                marker='s', label=solver, color=color, linewidth=2, markersize=8)
-        ax2.fill_between(solver_data['n'],
-                         solver_data['diversity']['mean'] - solver_data['diversity']['std'],
-                         solver_data['diversity']['mean'] + solver_data['diversity']['std'],
-                         alpha=0.2, color=color)
+                 marker='s', label=solver, color=color, linewidth=2)
     
-    ax2.set_xlabel('Problem Size (n)', fontsize=12, fontweight='bold')
-    ax2.set_ylabel('Average Diversity', fontsize=12, fontweight='bold')
-    ax2.set_title('Quality Scalability\n(Higher = Better)', fontsize=13, fontweight='bold')
-    ax2.legend()
-    ax2.grid(True, alpha=0.3)
+    ax1.set_xlabel('Problem Size (n)')
+    ax1.set_ylabel('Time (ms)')
+    ax1.set_yscale('log')
+    ax1.set_title('Time Scalability')
+    ax1.legend()
     
-    plt.suptitle('Scalability Analysis: How Performance Changes with Problem Size\n'
-                 '⬆️ Steeper slope = Worse scalability',
-                 fontsize=14, fontweight='bold', y=1.02)
+    ax2.set_xlabel('Problem Size (n)')
+    ax2.set_ylabel('Diversity')
+    ax2.set_title('Quality Scalability')
+    
     plt.tight_layout()
     plt.savefig(output_dir / 'chart6_scalability.png', dpi=300, bbox_inches='tight')
     print(f"✓ Saved: chart6_scalability.png")
-    print(f"  INTERPRETATION: Look for solvers with flat lines (scale well to large problems)")
     plt.close()
 
 def create_performance_by_category(df, output_dir):
     """
     CHART 7: Performance by Instance Category
-    Shows: Which solver works best for which problem type
-    INTERPRETATION: Darker color = Better performance
     """
     pivot = df.groupby(['category', 'solver'])['diversity'].mean().unstack(fill_value=0)
     
     fig, ax = plt.subplots(figsize=(12, 8))
     sns.heatmap(pivot, annot=True, fmt='.1f', cmap='RdYlGn', 
-                cbar_kws={'label': 'Average Diversity (Higher = Better)'},
-                linewidths=0.5, ax=ax, vmin=pivot.min().min(), vmax=pivot.max().max())
+                linewidths=0.5, ax=ax)
     
-    ax.set_title('Solver Performance by Instance Category\n'
-                 '🎨 Green = Best | Yellow = Medium | Red = Worst',
-                 fontsize=14, fontweight='bold', pad=15)
-    ax.set_xlabel('Solver', fontsize=12, fontweight='bold')
-    ax.set_ylabel('Instance Category', fontsize=12, fontweight='bold')
-    
-    # Find best solver per category
-    for i, category in enumerate(pivot.index):
-        best_solver = pivot.loc[category].idxmax()
-        best_value = pivot.loc[category].max()
-        ax.text(list(pivot.columns).index(best_solver) + 0.5, i + 0.5, 
-                '⭐', ha='center', va='center', fontsize=20)
+    ax.set_title('Solver Performance by Instance Category', fontsize=14, fontweight='bold', pad=15)
     
     plt.tight_layout()
     plt.savefig(output_dir / 'chart7_category_performance.png', dpi=300, bbox_inches='tight')
     print(f"✓ Saved: chart7_category_performance.png")
-    print(f"  INTERPRETATION: Stars show best solver for each problem type")
     plt.close()
 
 def create_executive_summary(df, output_dir):
     """
-    Generate text summary for presentation
+    Generate text summary
     """
     summary_text = []
     summary_text.append("=" * 80)
@@ -404,30 +713,8 @@ def create_executive_summary(df, output_dir):
     fastest_time = df.groupby('solver')['time_ms'].median().min()
     summary_text.append(f"⚡ FASTEST: {fastest} (Median: {fastest_time:.2f}ms)")
     
-    # Most consistent
-    cvs = df.groupby('solver')['diversity'].apply(lambda x: x.std() / x.mean() * 100)
-    most_consistent = cvs.idxmin()
-    summary_text.append(f"📊 MOST CONSISTENT: {most_consistent} (CV: {cvs.min():.2f}%)")
-    
-    # Win rate
-    winners = df.loc[df.groupby('filename')['diversity'].idxmax(), 'solver']
-    win_champion = winners.value_counts().idxmax()
-    win_count = winners.value_counts().max()
-    win_pct = win_count / len(df['filename'].unique()) * 100
-    summary_text.append(f"🎯 MOST WINS: {win_champion} ({win_count} instances, {win_pct:.1f}%)")
-    
-    summary_text.append("")
-    summary_text.append("RECOMMENDATIONS:")
-    summary_text.append(f"  • For best quality: Use {best_quality}")
-    summary_text.append(f"  • For speed: Use {fastest}")
-    summary_text.append(f"  • For reliability: Use {most_consistent}")
-    
-    summary_text.append("")
-    summary_text.append("=" * 80)
-    
     summary_str = "\n".join(summary_text)
     
-    # Save to file
     with open(output_dir / 'EXECUTIVE_SUMMARY.txt', 'w') as f:
         f.write(summary_str)
     
@@ -435,9 +722,6 @@ def create_executive_summary(df, output_dir):
     print(f"\n✓ Saved: EXECUTIVE_SUMMARY.txt")
 
 def main():
-    import sys
-    import glob
-    
     if len(sys.argv) < 2:
         print("Usage: python visualize_results_enhanced.py results_*.json")
         sys.exit(1)
@@ -473,28 +757,32 @@ def main():
             })
     
     df = pd.DataFrame(rows)
-    df = df[df['success'] == True]  # Only successful runs
+    df = df[df['success'] == True]
     
-    print(f"Loaded {len(df)} successful results from {len(instances)} instances")
-    print(f"Solvers: {', '.join(df['solver'].unique())}\n")
+    print(f"Loaded {len(df)} successful results")
     
-    output_dir = Path('visualizations_enhanced')
+    output_dir = Path('visualizations_enhanced_test_2')
     output_dir.mkdir(exist_ok=True)
     
     print(f"Generating enhanced visualizations in: {output_dir}/\n")
     
+    # --- Generate Basic Plots ---
     create_performance_summary_table(df, output_dir)
     create_quality_comparison_bar(df, output_dir)
     create_speed_comparison_bar(df, output_dir)
     create_quality_vs_speed_scatter(df, output_dir)
+    create_quality_vs_speed_scatter_split(df, output_dir)
     create_win_rate_analysis(df, output_dir)
     create_consistency_analysis(df, output_dir)
     create_scalability_plot(df, output_dir)
     create_performance_by_category(df, output_dir)
+    
+    # --- Generate NEW Academic Tables ---
+    create_academic_tables(df, output_dir)
+    
     create_executive_summary(df, output_dir)
     
-    print(f"\n✅ All visualizations and summary generated!")
-    print(f"   Check {output_dir}/ for results")
+    print(f"\n✅ All visualizations generated!")
 
 if __name__ == '__main__':
     main()
