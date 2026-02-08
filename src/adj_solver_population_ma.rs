@@ -113,7 +113,6 @@ fn initialize_population(data: &MdpData, size: usize, rng: &mut impl Rng) -> Vec
 }
 
 /// Cardinality-constrained uniform crossover
-/// Section 4.1.1: "retains all common elements... remaining elements alternately selected"
 /// CORRECTED: Now strictly alternates between Parent 1's distinct elements and Parent 2's.
 fn crossover(p1: &[usize], p2: &[usize], k: usize, rng: &mut impl Rng) -> Vec<usize> {
     let set1: HashSet<_> = p1.iter().cloned().collect();
@@ -309,7 +308,6 @@ fn tabu_search_constrained(
 }
 
 /// Population Update Strategy: Quality and Diversity
-/// "offspring is first inserted... then a quality-and-distance scoring function is used to identify the worst solution... deleted"
 fn update_population(population: &mut Vec<Individual>, offspring: Individual, data: &MdpData) {
     // 1. Insert Offspring
     population.push(offspring);

@@ -2,18 +2,18 @@ use crate::parser::MdpData;
 use rand::prelude::*;
 use std::time::{Instant, Duration};
 
-/// Configuration for Iterated Tabu Search based on Palubeckis (2007) parameters.
+/// Configuration for Iterated Tabu Search 
 pub struct ItsConfig {
     pub timeout_secs: f64,
-    /// "A good strategy is to fix T at 20" [cite: 205]
+    /// "A good strategy is to fix T at 20" 
     pub tabu_tenure: usize,
-    /// Size of the candidate list in GSP (b). "Best results... when b in [5, 10]" [cite: 254]
+    /// Size of the candidate list in GSP (b). "Best results... when b in [5, 10]" 
     pub gsp_candidate_list_size: usize,
     /// Minimum perturbation strength (alpha_1).
     pub alpha_1: usize,
-    /// Maximum perturbation factor (alpha_2). p drawn from [alpha_1, alpha_2 * n] [cite: 236]
+    /// Maximum perturbation factor (alpha_2). p drawn from [alpha_1, alpha_2 * n] 
     pub alpha_2: f64,
-    /// Iteration limit for the inner Tabu Search (c_bar) [cite: 209]
+    /// Iteration limit for the inner Tabu Search (c_bar) 
     pub ts_max_iters_factor: usize, 
 }
 
@@ -76,7 +76,7 @@ pub fn solve_its(data: &MdpData, config: &ItsConfig) -> (Vec<usize>, f64) {
             let mut best_move_gain = f64::NEG_INFINITY;
 
             // Search Neighborhood: Swaps (assuming m1=m2=k)
-            // "Short-term memory tabu list without aspiration criterion" [cite: 173]
+            // "Short-term memory tabu list without aspiration criterion" 
             for &u in &in_sol {
                 for &v in &out_sol {
                     // Check Tabu status
@@ -100,12 +100,12 @@ pub fn solve_its(data: &MdpData, config: &ItsConfig) -> (Vec<usize>, f64) {
                 current_obj += best_move_gain;
 
                 // Update Tabu Tenure
-                // "Decrement by one... If r < 0 set T_q := T" [cite: 201-202]
+                // "Decrement by one... If r < 0 set T_q := T" 
                 // We use absolute iteration counts for efficiency.
                 tabu_list[u] = total_iter + config.tabu_tenure;
                 tabu_list[v] = total_iter + config.tabu_tenure;
 
-                // "In the case of finding... a solution x that is better than x*, a local search... is executed" [cite: 177]
+                // "In the case of finding... a solution x that is better than x*, a local search... is executed" 
                 if current_obj > best_obj + 1e-6 {
                      // Perform LS ascent
                      steepest_ascent_ls(data, &mut current_solution, &mut d_vals, &mut current_obj);
@@ -123,10 +123,10 @@ pub fn solve_its(data: &MdpData, config: &ItsConfig) -> (Vec<usize>, f64) {
         }
 
         // 3. Solution Perturbation (GSP) 
-        // "Check if stopping criterion is met... Otherwise proceed to 4. Apply GSP" [cite: 162-164]
+        // "Check if stopping criterion is met... Otherwise proceed to 4. Apply GSP" 
         
         // Determine p (perturbation strength)
-        // "p is an integer number randomly and uniformly drawn from [alpha_1, floor(alpha_2 * n)]" [cite: 164]
+        // "p is an integer number randomly and uniformly drawn from [alpha_1, floor(alpha_2 * n)]" 
         let max_p = (config.alpha_2 * data.n as f64).floor() as usize;
         let p = rng.gen_range(config.alpha_1..=max_p.max(config.alpha_1));
 
@@ -135,7 +135,7 @@ pub fn solve_its(data: &MdpData, config: &ItsConfig) -> (Vec<usize>, f64) {
         // Recalculate obj after perturbation to be safe
         current_obj = calculate_objective_from_d(&current_solution, &d_vals);
         
-        // "The perturbed 0-1 vector x... serves as a starting point for the tabu search" [cite: 233]
+        // "The perturbed 0-1 vector x... serves as a starting point for the tabu search" 
         // Reset tabu list to allow free movement in new region
         tabu_list.fill(0); 
     }
@@ -143,12 +143,10 @@ pub fn solve_its(data: &MdpData, config: &ItsConfig) -> (Vec<usize>, f64) {
     (best_solution, best_obj)
 }
 
-// ==============================================================================
 // STA (Steepest Ascent) Initialization 
-// ==============================================================================
 
 fn sta_initialization(data: &MdpData) -> Vec<usize> {
-    // Reformulation: f(x) = g(y)/n^2 where y_i in {0, n} [cite: 97-101]
+    // Reformulation: f(x) = g(y)/n^2 where y_i in {0, n} 
     // Start with y^0 = (m, m, ..., m)
     
     let m_val = data.k as f64; // m in paper
@@ -174,16 +172,16 @@ fn sta_initialization(data: &MdpData) -> Vec<usize> {
 
     let mut rng = rand::thread_rng();
 
-    // Main Loop STA [cite: 126-141]
+    // Main Loop STA
     while !w_set.is_empty() {
         // Compute gradients Delta_i(0) and Delta_i(n) for all i in W
-        // Delta_i(a) = (a - m)(m * d_tilde_i + n * d_fixed_i) [cite: 111]
+        // Delta_i(a) = (a - m)(m * d_tilde_i + n * d_fixed_i)
         
         let mut best_k = None;
         let mut max_lambda = f64::NEG_INFINITY;
         let mut best_action_is_n = false; // true if fixing to n (select), false if 0 (reject)
 
-        // Find k with max Lambda_k = max(Delta_k(0), Delta_k(n)) [cite: 129]
+        // Find k with max Lambda_k = max(Delta_k(0), Delta_k(n)) 
         for &i in &w_set {
             // Option 0: Fix y_i = 0
             // Delta_i(0) = (0 - m) * (...) = -m * (m * d_tilde[i] + n * d_fixed[i])
@@ -206,7 +204,7 @@ fn sta_initialization(data: &MdpData) -> Vec<usize> {
                 best_k = Some(i);
                 best_action_is_n = is_n;
             } else if (lambda_i - max_lambda).abs() < 1e-6 {
-                // Tie breaking random [cite: 131]
+                // Tie breaking random 
                 if rng.gen_bool(0.5) {
                     best_k = Some(i);
                     best_action_is_n = is_n;
@@ -216,7 +214,7 @@ fn sta_initialization(data: &MdpData) -> Vec<usize> {
 
         let k = best_k.unwrap();
 
-        // 3. Fix y_k [cite: 130-132]
+        // 3. Fix y_k 
         // Remove k from W
         if let Some(pos) = w_set.iter().position(|&x| x == k) {
             w_set.swap_remove(pos);
@@ -224,7 +222,7 @@ fn sta_initialization(data: &MdpData) -> Vec<usize> {
 
         if best_action_is_n {
             u_set.push(k);
-            // 4. Update d values [cite: 133]
+            // 4. Update d values 
             // For each i in W: d_tilde_i -= d_ik; d_fixed_i += d_ik
             for &i in &w_set {
                 let dist = data.get_dist(i, k);
@@ -241,7 +239,7 @@ fn sta_initialization(data: &MdpData) -> Vec<usize> {
             }
         }
 
-        // 5. Check constraints [cite: 134-135]
+        // 5. Check constraints
         if u_set.len() == data.k {
             // If we have selected enough, force remaining W to 0
             break;
@@ -260,9 +258,7 @@ fn sta_initialization(data: &MdpData) -> Vec<usize> {
     u_set
 }
 
-// ==============================================================================
-// GSP (Get Start Point) Perturbation [cite: 239-248]
-// ==============================================================================
+// GSP (Get Start Point) Perturbation 
 
 fn gsp_perturbation(
     data: &MdpData,
@@ -279,8 +275,8 @@ fn gsp_perturbation(
         let (in_sol, out_sol): (Vec<usize>, Vec<usize>) = (0..data.n).partition(|&i| solution.contains(&i));
         
         // Construct Candidate List S'
-        // "Form a subset S'... pick the b largest values z_i" [cite: 244]
-        // z_i = d_k - d_j - d_jk (Move gain) [cite: 243]
+        // "Form a subset S'... pick the b largest values z_i" 
+        // z_i = d_k - d_j - d_jk (Move gain) 
         
         let mut candidates = Vec::with_capacity(in_sol.len() * out_sol.len());
 
@@ -300,21 +296,19 @@ fn gsp_perturbation(
         let limit = std::cmp::min(b_size, candidates.len());
         if limit == 0 { break; } 
 
-        // "Randomly select s_i in S'" [cite: 245]
+        // "Randomly select s_i in S'" 
         let pick_idx = rng.gen_range(0..limit);
         let (_, u, v) = candidates[pick_idx]; // u is in sol (to remove), v is out (to add)
 
         // Apply swap
         apply_swap(data, solution, u, v, d_vals);
         
-        // "p := p + 2" (Since we swapped a pair, we flipped 2 variables) [cite: 246]
+        // "p := p + 2" (Since we swapped a pair, we flipped 2 variables) 
         p_count += 2;
     }
 }
 
-// ==============================================================================
-// Standard Local Search (Steepest Ascent) [cite: 215-225]
-// ==============================================================================
+// Standard Local Search (Steepest Ascent) 
 
 fn steepest_ascent_ls(
     data: &MdpData, 
@@ -350,9 +344,7 @@ fn steepest_ascent_ls(
     }
 }
 
-// ==============================================================================
 // Helper: Efficient Updates
-// ==============================================================================
 
 /// Perform swap and update D-values incrementally in O(N)
 fn apply_swap(
@@ -368,7 +360,7 @@ fn apply_swap(
     }
     
     // Update D-values (Contribution of every node to the set S)
-    // For any node k: New_D[k] = Old_D[k] - dist(k, u) + dist(k, v) [cite: 133, 141]
+    // For any node k: New_D[k] = Old_D[k] - dist(k, u) + dist(k, v) 
     for k in 0..data.n {
         let dist_ku = data.get_dist(k, u);
         let dist_kv = data.get_dist(k, v);

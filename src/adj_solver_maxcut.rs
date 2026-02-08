@@ -56,7 +56,6 @@ pub fn mdp_to_qubo(data: &MdpData, penalty: f64) -> QuboInstance {
 
 /// Step 2: Convert QUBO to MaxCut
 /// 
-/// Uses the Barahona et al. reduction with a SINGLE auxiliary node.
 /// Transformation: x_i = (s_i + 1) / 2
 /// 
 /// Weights W derived from expansion of x^T Q x:
@@ -177,7 +176,7 @@ pub fn solve_mdp_via_maxcut(
     // 1. MDP -> QUBO
     let qubo = mdp_to_qubo(data, penalty);
     
-    // 2. QUBO -> MaxCut (Barahona Single Auxiliary Node)
+    // 2. QUBO -> MaxCut 
     let maxcut_graph = qubo_to_maxcut(&qubo);
     
     // 3. Solve MaxCut
@@ -226,9 +225,7 @@ pub fn solve_mdp_via_maxcut(
     Ok((selected, diversity))
 }
 
-// ---------------------------------------------------------
 // Helper functions for repair (same as before)
-// ---------------------------------------------------------
 
 fn repair_solution(data: &MdpData, mut selected: Vec<usize>) -> Vec<usize> {
     let k = data.k;

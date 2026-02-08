@@ -92,9 +92,7 @@ pub fn solve_obma(
     (best_solution, best_fitness)
 }
 
-// ==============================================================================
 // 1. OPPOSITION-BASED LEARNING
-// ==============================================================================
 
 /// Generates the "Opposite" solution.
 /// For MDP, the opposite of a set S is the set of k items in (V \ S) 
@@ -121,9 +119,7 @@ fn calculate_opposite(solution: &[usize], data: &MdpData) -> Vec<usize> {
     candidates.iter().take(data.k).map(|(idx, _)| *idx).collect()
 }
 
-// ==============================================================================
 // 2. TABU SEARCH (Fixed: Attribute-Based)
-// ==============================================================================
 
 fn tabu_search(
     data: &MdpData,
@@ -205,9 +201,7 @@ fn tabu_search(
     (best_sol, best_fitness)
 }
 
-// ==============================================================================
 // 3. RBQD POPULATION UPDATE
-// ==============================================================================
 
 fn update_population_rbqd(
     population: &mut Vec<Individual>, 
@@ -282,9 +276,7 @@ fn hamming_distance(sol1: &[usize], sol2: &[usize]) -> f64 {
     diff as f64
 }
 
-// ==============================================================================
 // HELPERS (Init, Crossover, Math)
-// ==============================================================================
 
 fn initialize_population(data: &MdpData, config: &ObmaConfig, deadline: Instant) -> Vec<Individual> {
     let mut population = Vec::new();
